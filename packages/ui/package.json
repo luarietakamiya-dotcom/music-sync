@@ -1,0 +1,48 @@
+{
+  "name": "@music-sync/ui",
+  "version": "0.15.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "description": "Music Sync DOM/canvas waveform helpers and design tokens",
+  "author": "Music Sync contributors",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "docs"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tokens.css": "./dist/tokens.css"
+  },
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@music-sync/shared": "0.15.0"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "keywords": [
+    "audio",
+    "music-sync",
+    "local-first",
+    "esm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luarietakamiya-dotcom/music-sync.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://github.com/luarietakamiya-dotcom/music-sync#readme",
+  "bugs": {
+    "url": "https://github.com/luarietakamiya-dotcom/music-sync/issues"
+  }
+}

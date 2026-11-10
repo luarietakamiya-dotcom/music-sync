@@ -1,0 +1,29 @@
+Music Sync Web optional MP3 encoder
+
+Component: @breezystack/lamejs 1.2.7, a JavaScript port of LAME.
+Upstream: https://github.com/gideonstele/lamejs
+LAME: https://lame.sourceforge.io/
+Package: https://www.npmjs.com/package/@breezystack/lamejs/v/1.2.7
+License: GNU Lesser General Public License version 3 (LGPL-3.0),
+which incorporates GNU General Public License version 3 (GPL-3.0).
+Both full license texts and the upstream license notice are included here.
+
+lamejs.js is copied byte-for-byte from the package's dist/lamejs.js.
+The encoder remains a separate, replaceable ES module; Music Sync's own code
+imports it at runtime only when MP3 is requested. It is not part of Music Sync
+Core or a compiled bundle of application code. Replace this file with an
+interface-compatible Mp3Encoder implementation to use a modified encoder.
+Music Sync does not prevent reverse engineering for debugging modifications
+to this LGPL-covered component.
+
+Corresponding source: lamejs-1.2.7-source.tar.gz in this directory.
+The npm package identifies Git commit:
+1fb0ef5fa177413107e2e107d054a9b994e3f79c
+Source archive URL:
+https://codeload.github.com/gideonstele/lamejs/tar.gz/1fb0ef5fa177413107e2e107d054a9b994e3f79c
+The archive includes upstream source and build configuration. No changes have
+been made to this encoder by Music Sync contributors. The npm dependency is
+pinned for reproducible development; browser users receive the separate file.
+
+These license terms apply to the encoder, not to audio created with it.
+Music Sync's independently authored application/Core code retains its MIT license.

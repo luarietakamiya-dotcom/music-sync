@@ -1,0 +1,23 @@
+{
+  "name": "@music-sync/web",
+  "version": "0.15.2",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "@breezystack/lamejs": "1.2.7",
+    "@music-sync/core": "0.15.0",
+    "@music-sync/shared": "0.15.0",
+    "@music-sync/ui": "0.15.0",
+    "fflate": "0.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luarietakamiya-dotcom/music-sync.git",
+    "directory": "apps/web"
+  },
+  "homepage": "https://github.com/luarietakamiya-dotcom/music-sync#readme",
+  "bugs": {
+    "url": "https://github.com/luarietakamiya-dotcom/music-sync/issues"
+  }
+}

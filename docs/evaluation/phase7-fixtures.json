@@ -1,0 +1,5205 @@
+{
+  "algorithm": "perceptual-v1",
+  "fixtures": [
+    {
+      "name": "balanced",
+      "expected": "No corrective EQ or multiband",
+      "mode": "AUTO",
+      "seconds": 0.49246870000000004,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.05998506171772558,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -35.844157582569636,
+            "rangeDb": 2.400000000000002
+          },
+          "low": {
+            "mean": 0.18001218515174153,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -31.07163751863706,
+            "rangeDb": 2.280000000000002
+          },
+          "lowMid": {
+            "mean": 0.1400007107069001,
+            "p50": 0.14,
+            "p90": 0.14,
+            "excessFraction": 0,
+            "rmsDb": -32.16333531054822,
+            "rangeDb": 2.280000000000002
+          },
+          "mid": {
+            "mean": 0.1700005609869257,
+            "p50": 0.17,
+            "p90": 0.17,
+            "excessFraction": 0,
+            "rmsDb": -31.320134255512563,
+            "rangeDb": 2.280000000000002
+          },
+          "upperMid": {
+            "mean": 0.18000059265437535,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -31.071898450434908,
+            "rangeDb": 2.280000000000002
+          },
+          "presence": {
+            "mean": 0.13000042790201066,
+            "p50": 0.13,
+            "p90": 0.13,
+            "excessFraction": 0,
+            "rmsDb": -32.48518998323466,
+            "rangeDb": 2.400000000000002
+          },
+          "high": {
+            "mean": 0.10000032923305353,
+            "p50": 0.1,
+            "p90": 0.1,
+            "excessFraction": 0,
+            "rmsDb": -33.62462350259612,
+            "rangeDb": 2.280000000000002
+          },
+          "air": {
+            "mean": 0.040000131647267644,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.6040235948913,
+            "rangeDb": 2.399999999999989
+          }
+        },
+        "centroidHz": 2029.0607139658669,
+        "rolloffHz": 3304.6875,
+        "flux": 0.0016726515868680095,
+        "crestDb": 11.8809685263487,
+        "sideRatio": 0.02200495255579405,
+        "lowSideRatio": 0.022005176674241907,
+        "correlation": 0.9559905214190298,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.620002041112772,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.275238741053948,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.02200495255579405,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.977995047444206,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.10070297153347643,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.8992970284665236,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [],
+            "decisions": [],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": []
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.059985061732329405,
+                "p50": 0.06,
+                "p90": 0.06,
+                "excessFraction": 0,
+                "rmsDb": -32.21575940109594,
+                "rangeDb": 2.400000000000002
+              },
+              "low": {
+                "mean": 0.18001218513709916,
+                "p50": 0.18,
+                "p90": 0.18,
+                "excessFraction": 0,
+                "rmsDb": -27.443239338396733,
+                "rangeDb": 2.400000000000002
+              },
+              "lowMid": {
+                "mean": 0.1400007107128087,
+                "p50": 0.14,
+                "p90": 0.14,
+                "excessFraction": 0,
+                "rmsDb": -28.534937129935265,
+                "rangeDb": 2.400000000000002
+              },
+              "mid": {
+                "mean": 0.1700005609527745,
+                "p50": 0.17,
+                "p90": 0.17,
+                "excessFraction": 0,
+                "rmsDb": -27.691736075800634,
+                "rangeDb": 2.400000000000002
+              },
+              "upperMid": {
+                "mean": 0.18000059269134522,
+                "p50": 0.18,
+                "p90": 0.18,
+                "excessFraction": 0,
+                "rmsDb": -27.443500269104387,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.13000042788528512,
+                "p50": 0.13,
+                "p90": 0.13,
+                "excessFraction": 0,
+                "rmsDb": -28.856791803393676,
+                "rangeDb": 2.400000000000002
+              },
+              "high": {
+                "mean": 0.10000032921057014,
+                "p50": 0.1,
+                "p90": 0.1,
+                "excessFraction": 0,
+                "rmsDb": -29.996225322928083,
+                "rangeDb": 2.280000000000002
+              },
+              "air": {
+                "mean": 0.040000131677788126,
+                "p50": 0.04,
+                "p90": 0.04,
+                "excessFraction": 0,
+                "rmsDb": -33.97562541072809,
+                "rangeDb": 2.280000000000002
+              }
+            },
+            "centroidHz": 2029.0607141264554,
+            "rolloffHz": 3304.6875,
+            "flux": 0.0016726518271263217,
+            "crestDb": 11.88096855438642,
+            "sideRatio": 0.02200495257170461,
+            "lowSideRatio": 0.022005176726586723,
+            "correlation": 0.9559905213885919,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.6200020411532607,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.2752387421754568,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.02200495257170461,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9779950474282953,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.10070297154302275,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.8992970284569772,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "bass-heavy",
+      "expected": "lowEndBuildup",
+      "mode": "AUTO",
+      "seconds": 0.25430459999999994,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.19995283436093755,
+            "p50": 0.2,
+            "p90": 0.2,
+            "excessFraction": 0,
+            "rmsDb": -30.61634344570606,
+            "rangeDb": 2.280000000000002
+          },
+          "low": {
+            "mean": 0.6400444831936835,
+            "p50": 0.64,
+            "p90": 0.64,
+            "excessFraction": 1,
+            "rmsDb": -25.56358402302829,
+            "rangeDb": 2.280000000000002
+          },
+          "lowMid": {
+            "mean": 0.04000135863548084,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.60492018841965,
+            "rangeDb": 2.399999999999989
+          },
+          "mid": {
+            "mean": 0.03000033197588044,
+            "p50": 0.03,
+            "p90": 0.03,
+            "excessFraction": 0,
+            "rmsDb": -38.854407495115275,
+            "rangeDb": 2.400000000000002
+          },
+          "upperMid": {
+            "mean": 0.030000330624799048,
+            "p50": 0.03,
+            "p90": 0.03,
+            "excessFraction": 0,
+            "rmsDb": -38.85440769172704,
+            "rangeDb": 2.400000000000002
+          },
+          "presence": {
+            "mean": 0.025000275506594238,
+            "p50": 0.025,
+            "p90": 0.025,
+            "excessFraction": 0,
+            "rmsDb": -39.646220154914836,
+            "rangeDb": 2.400000000000002
+          },
+          "high": {
+            "mean": 0.020000220402332358,
+            "p50": 0.02,
+            "p90": 0.02,
+            "excessFraction": 0,
+            "rmsDb": -40.615320286257706,
+            "rangeDb": 2.400000000000002
+          },
+          "air": {
+            "mean": 0.015000165300293614,
+            "p50": 0.015,
+            "p90": 0.015,
+            "excessFraction": 0,
+            "rmsDb": -41.86470765371126,
+            "rangeDb": 2.280000000000002
+          }
+        },
+        "centroidHz": 544.7600380272809,
+        "rolloffHz": 281.25,
+        "flux": 0.0013852712509558013,
+        "crestDb": 10.582987137604585,
+        "sideRatio": 0.022005098838541223,
+        "lowSideRatio": 0.022005162948678714,
+        "correlation": 0.9559806780266468,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0.7521583922063316,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.11000121226278657,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.2233194855041834,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.022005098838541223,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.9779949011614588,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.14445305930312471,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.8555469406968753,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "lowEndBuildup",
+                "severity": 0.7521583922063316,
+                "confidence": 0.9,
+                "band": "low",
+                "temporal": "persistent",
+                "evidence": [
+                  "feature=0.752",
+                  "band p50/p90=0.64/0.64",
+                  "excess occupancy=1.000",
+                  "centroid=545 Hz; rolloff=281 Hz"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "eq",
+                "targetIssue": "lowEndBuildup",
+                "reason": "feature=0.752; band p50/p90=0.64/0.64; excess occupancy=1.000; centroid=545 Hz; rolloff=281 Hz",
+                "metricBefore": 0.7521583922063316
+              }
+            ],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "eq",
+              "frequencyHz": 110,
+              "q": 0.7,
+              "gainDb": -1.353885105971397
+            }
+          ],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": [
+              {
+                "issue": "lowEndBuildup",
+                "before": 0.7521583922063316,
+                "after": 0.6739945834429233,
+                "improved": true
+              }
+            ]
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.22764704443757613,
+                "p50": 0.228,
+                "p90": 0.228,
+                "excessFraction": 0,
+                "rmsDb": -26.14472206843508,
+                "rangeDb": 2.280000000000002
+              },
+              "low": {
+                "mean": 0.5797200896320094,
+                "p50": 0.58,
+                "p90": 0.58,
+                "excessFraction": 1,
+                "rmsDb": -22.085188012546148,
+                "rangeDb": 2.2799999999999887
+              },
+              "lowMid": {
+                "mean": 0.044986238715250336,
+                "p50": 0.045,
+                "p90": 0.045,
+                "excessFraction": 0,
+                "rmsDb": -33.18657691797017,
+                "rangeDb": 2.400000000000002
+              },
+              "mid": {
+                "mean": 0.036443462619267813,
+                "p50": 0.036,
+                "p90": 0.036,
+                "excessFraction": 0,
+                "rmsDb": -34.101176977809814,
+                "rangeDb": 2.280000000000002
+              },
+              "upperMid": {
+                "mean": 0.03700241280407606,
+                "p50": 0.037,
+                "p90": 0.037,
+                "excessFraction": 0,
+                "rmsDb": -34.03507248462152,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.030906563819515807,
+                "p50": 0.031,
+                "p90": 0.031,
+                "excessFraction": 0,
+                "rmsDb": -34.8168656277237,
+                "rangeDb": 2.280000000000002
+              },
+              "high": {
+                "mean": 0.024738733544590778,
+                "p50": 0.025,
+                "p90": 0.025,
+                "excessFraction": 0,
+                "rmsDb": -35.783598214673596,
+                "rangeDb": 2.280000000000002
+              },
+              "air": {
+                "mean": 0.018555454427714363,
+                "p50": 0.019,
+                "p90": 0.019,
+                "excessFraction": 0,
+                "rmsDb": -37.032656893912176,
+                "rangeDb": 2.399999999999989
+              }
+            },
+            "centroidHz": 647.7864479867142,
+            "rolloffHz": 292.96875,
+            "flux": 0.0014401896093825491,
+            "crestDb": 10.894410125210536,
+            "sideRatio": 0.02189701060612119,
+            "lowSideRatio": 0.021865646273452246,
+            "correlation": 0.9561976110367558,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0.6739945834429233,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0.004178986832072688,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.13581795324718374,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.2357764050084214,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.02189701060612119,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9781029893938789,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.1443882063636727,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.8556117936363273,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "muddy",
+      "expected": "muddiness",
+      "mode": "AUTO",
+      "seconds": 0.23837810000000012,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.029991310660322762,
+            "p50": 0.03,
+            "p90": 0.03,
+            "excessFraction": 0,
+            "rmsDb": -38.854209137481504,
+            "rangeDb": 2.400000000000002
+          },
+          "low": {
+            "mean": 0.05000719380957432,
+            "p50": 0.05,
+            "p90": 0.05,
+            "excessFraction": 0,
+            "rmsDb": -36.63390155334894,
+            "rangeDb": 2.399999999999989
+          },
+          "lowMid": {
+            "mean": 0.7200011699296455,
+            "p50": 0.72,
+            "p90": 0.72,
+            "excessFraction": 1,
+            "rmsDb": -25.05086882181386,
+            "rangeDb": 2.400000000000002
+          },
+          "mid": {
+            "mean": 0.06000010390103,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -35.842680838802906,
+            "rangeDb": 2.400000000000002
+          },
+          "upperMid": {
+            "mean": 0.060000095062982026,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -35.84268147808475,
+            "rangeDb": 2.400000000000002
+          },
+          "presence": {
+            "mean": 0.0400000633479296,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.60359407186153,
+            "rangeDb": 2.399999999999989
+          },
+          "high": {
+            "mean": 0.025000039547125496,
+            "p50": 0.025,
+            "p90": 0.025,
+            "excessFraction": 0,
+            "rmsDb": -39.644793906703455,
+            "rangeDb": 2.400000000000002
+          },
+          "air": {
+            "mean": 0.015000023741391078,
+            "p50": 0.015,
+            "p90": 0.015,
+            "excessFraction": 0,
+            "rmsDb": -41.86328139863987,
+            "rangeDb": 2.400000000000002
+          }
+        },
+        "centroidHz": 815.4553282814165,
+        "rolloffHz": 656.25,
+        "flux": 0.001334103385971923,
+        "crestDb": 10.30766472803651,
+        "sideRatio": 0.02200492099965887,
+        "lowSideRatio": 0.02200533430121387,
+        "correlation": 0.955994996452367,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0.8414392417230578,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0.4731461404005549,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0.1807992146685735,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.20000031682182323,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.21230658912146042,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.02200492099965887,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.9779950790003411,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.12986961926646198,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.870130380733538,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0.5356187262795832,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "muddiness",
+                "severity": 0.8414392417230578,
+                "confidence": 0.9,
+                "band": "lowMid",
+                "temporal": "persistent",
+                "evidence": [
+                  "feature=0.841",
+                  "band p50/p90=0.72/0.72",
+                  "excess occupancy=1.000",
+                  "centroid=815 Hz; rolloff=656 Hz"
+                ]
+              },
+              {
+                "issue": "boxiness",
+                "severity": 0.4731461404005549,
+                "confidence": 0.9,
+                "band": "mid",
+                "temporal": "persistent",
+                "evidence": [
+                  "feature=0.473",
+                  "band p50/p90=0.06/0.06",
+                  "excess occupancy=0.000",
+                  "centroid=815 Hz; rolloff=656 Hz"
+                ]
+              },
+              {
+                "issue": "dullness",
+                "severity": 0.1807992146685735,
+                "confidence": 0.9,
+                "band": "high",
+                "temporal": "persistent",
+                "evidence": [
+                  "feature=0.181",
+                  "band p50/p90=0.025/0.025",
+                  "excess occupancy=0.000",
+                  "centroid=815 Hz; rolloff=656 Hz"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "eq",
+                "targetIssue": "muddiness",
+                "reason": "feature=0.841; band p50/p90=0.72/0.72; excess occupancy=1.000; centroid=815 Hz; rolloff=656 Hz",
+                "metricBefore": 0.8414392417230578
+              },
+              {
+                "stage": "eq",
+                "targetIssue": "boxiness",
+                "reason": "feature=0.473; band p50/p90=0.06/0.06; excess occupancy=0.000; centroid=815 Hz; rolloff=656 Hz",
+                "metricBefore": 0.4731461404005549
+              }
+            ],
+            "skippedProcessing": [
+              "dullness: mild issue or insufficient confidence (0.18 / 0.90)",
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "eq",
+              "frequencyHz": 650,
+              "q": 0.7,
+              "gainDb": -0.8516630527209988
+            },
+            {
+              "kind": "eq",
+              "frequencyHz": 280,
+              "q": 0.7,
+              "gainDb": -1.5145906351015042
+            }
+          ],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": [
+              {
+                "issue": "muddiness",
+                "before": 0.8414392417230578,
+                "after": 0.729416421292271,
+                "improved": true
+              },
+              {
+                "issue": "boxiness",
+                "before": 0.4731461404005549,
+                "after": 0.28629943530695695,
+                "improved": true
+              }
+            ]
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.04070576875889508,
+                "p50": 0.041,
+                "p90": 0.041,
+                "excessFraction": 0,
+                "rmsDb": -33.70636338128476,
+                "rangeDb": 2.400000000000002
+              },
+              "low": {
+                "mean": 0.06127851761796327,
+                "p50": 0.061,
+                "p90": 0.061,
+                "excessFraction": 0,
+                "rmsDb": -31.92990100062915,
+                "rangeDb": 2.280000000000002
+              },
+              "lowMid": {
+                "mean": 0.6526612373049763,
+                "p50": 0.653,
+                "p90": 0.653,
+                "excessFraction": 1,
+                "rmsDb": -21.65606459801208,
+                "rangeDb": 2.399999999999989
+              },
+              "mid": {
+                "mean": 0.05995286459135822,
+                "p50": 0.06,
+                "p90": 0.06,
+                "excessFraction": 0,
+                "rmsDb": -32.02484940846226,
+                "rangeDb": 2.400000000000002
+              },
+              "upperMid": {
+                "mean": 0.0761237347654699,
+                "p50": 0.076,
+                "p90": 0.076,
+                "excessFraction": 0,
+                "rmsDb": -30.987749691381538,
+                "rangeDb": 2.280000000000002
+              },
+              "presence": {
+                "mean": 0.05418131565180085,
+                "p50": 0.054,
+                "p90": 0.054,
+                "excessFraction": 0,
+                "rmsDb": -32.46445487669726,
+                "rangeDb": 2.400000000000002
+              },
+              "high": {
+                "mean": 0.0344067350353167,
+                "p50": 0.034,
+                "p90": 0.034,
+                "excessFraction": 0,
+                "rmsDb": -34.43651562216071,
+                "rangeDb": 2.280000000000002
+              },
+              "air": {
+                "mean": 0.020689826274219707,
+                "p50": 0.021,
+                "p90": 0.021,
+                "excessFraction": 0,
+                "rmsDb": -36.64538179729093,
+                "rangeDb": 2.399999999999989
+              }
+            },
+            "centroidHz": 999.2679162929317,
+            "rolloffHz": 1593.75,
+            "flux": 0.0014121760065186402,
+            "crestDb": 10.765225590836394,
+            "sideRatio": 0.02194443014806452,
+            "lowSideRatio": 0.0217656778675845,
+            "correlation": 0.9561158926090015,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0.729416421292271,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0.28629943530695695,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.2606101008345415,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.23060902363345576,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.02194443014806452,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9780555698519355,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.12983332475550535,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.8701666752444946,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0.39079604063000933,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "harsh",
+      "expected": "harshness",
+      "mode": "AUTO",
+      "seconds": 0.2272000999999998,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.029991310432125193,
+            "p50": 0.03,
+            "p90": 0.03,
+            "excessFraction": 0,
+            "rmsDb": -38.854184927660604,
+            "rangeDb": 2.280000000000002
+          },
+          "low": {
+            "mean": 0.050007165645118985,
+            "p50": 0.05,
+            "p90": 0.05,
+            "excessFraction": 0,
+            "rmsDb": -36.63387972878213,
+            "rangeDb": 2.399999999999989
+          },
+          "lowMid": {
+            "mean": 0.04000013401258388,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.60356204917618,
+            "rangeDb": 2.399999999999989
+          },
+          "mid": {
+            "mean": 0.060000095144246805,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -35.84265717177992,
+            "rangeDb": 2.400000000000002
+          },
+          "upperMid": {
+            "mean": 0.18000028426150444,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -31.07144465235571,
+            "rangeDb": 2.280000000000002
+          },
+          "presence": {
+            "mean": 0.580000915797066,
+            "p50": 0.58,
+            "p90": 0.58,
+            "excessFraction": 1,
+            "rmsDb": -25.989889769060774,
+            "rangeDb": 2.400000000000002
+          },
+          "high": {
+            "mean": 0.04000006314029423,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.60356979359075,
+            "rangeDb": 2.399999999999989
+          },
+          "air": {
+            "mean": 0.0200000315670598,
+            "p50": 0.02,
+            "p90": 0.02,
+            "excessFraction": 0,
+            "rmsDb": -40.61386975051199,
+            "rangeDb": 2.400000000000002
+          }
+        },
+        "centroidHz": 2759.05839438626,
+        "rolloffHz": 3304.6875,
+        "flux": 0.0014296625862468386,
+        "crestDb": 11.049404891336568,
+        "sideRatio": 0.02200492103105409,
+        "lowSideRatio": 0.02200530047158368,
+        "correlation": 0.9559912900842313,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0.7007265827114636,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 1,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.24197619565346273,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.02200492103105409,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.9779950789689459,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.013202952618632453,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.9867970473813675,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "harshness",
+                "severity": 0.7007265827114636,
+                "confidence": 0.9,
+                "band": "presence",
+                "temporal": "persistent",
+                "evidence": [
+                  "feature=0.701",
+                  "band p50/p90=0.58/0.58",
+                  "excess occupancy=1.000",
+                  "centroid=2759 Hz; rolloff=3305 Hz"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "eq",
+                "targetIssue": "harshness",
+                "reason": "feature=0.701; band p50/p90=0.58/0.58; excess occupancy=1.000; centroid=2759 Hz; rolloff=3305 Hz",
+                "metricBefore": 0.7007265827114636
+              }
+            ],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "eq",
+              "frequencyHz": 3200,
+              "q": 0.7,
+              "gainDb": -1.2613078488806344
+            }
+          ],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": [
+              {
+                "issue": "harshness",
+                "before": 0.7007265827114636,
+                "after": 0.6241569576728234,
+                "improved": true
+              }
+            ]
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.03619971094922183,
+                "p50": 0.036,
+                "p90": 0.036,
+                "excessFraction": 0,
+                "rmsDb": -35.71969644629806,
+                "rangeDb": 2.400000000000002
+              },
+              "low": {
+                "mean": 0.06032635168308103,
+                "p50": 0.06,
+                "p90": 0.06,
+                "excessFraction": 0,
+                "rmsDb": -33.501739753643086,
+                "rangeDb": 2.280000000000002
+              },
+              "lowMid": {
+                "mean": 0.048089904171962926,
+                "p50": 0.048,
+                "p90": 0.048,
+                "excessFraction": 0,
+                "rmsDb": -34.486245571134674,
+                "rangeDb": 2.400000000000002
+              },
+              "mid": {
+                "mean": 0.07086757156965254,
+                "p50": 0.071,
+                "p90": 0.071,
+                "excessFraction": 0,
+                "rmsDb": -32.80230917916504,
+                "rangeDb": 2.400000000000002
+              },
+              "upperMid": {
+                "mean": 0.19129896277995498,
+                "p50": 0.191,
+                "p90": 0.191,
+                "excessFraction": 0,
+                "rmsDb": -28.489658141814047,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.5240154035483304,
+                "p50": 0.524,
+                "p90": 0.524,
+                "excessFraction": 1,
+                "rmsDb": -24.113343072687428,
+                "rangeDb": 2.280000000000002
+              },
+              "high": {
+                "mean": 0.04510919474444179,
+                "p50": 0.045,
+                "p90": 0.045,
+                "excessFraction": 0,
+                "rmsDb": -34.76413356969145,
+                "rangeDb": 2.400000000000002
+              },
+              "air": {
+                "mean": 0.02409290055335398,
+                "p50": 0.024,
+                "p90": 0.024,
+                "excessFraction": 0,
+                "rmsDb": -37.487893441085454,
+                "rangeDb": 2.399999999999989
+              }
+            },
+            "centroidHz": 2683.8818914811163,
+            "rolloffHz": 3304.6875,
+            "flux": 0.0014804431602239146,
+            "crestDb": 11.283399207884262,
+            "sideRatio": 0.022001023987497703,
+            "lowSideRatio": 0.022003949089988227,
+            "correlation": 0.9559990048136346,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0.6241569576728234,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 1,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.2513359683153705,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.022001023987497703,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9779989760125023,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.027486328678212907,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.9725136713217871,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "bright",
+      "expected": "brightness",
+      "mode": "AUTO",
+      "seconds": 0.21394809999999984,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.009997744595601248,
+            "p50": 0.01,
+            "p90": 0.01,
+            "excessFraction": 0,
+            "rmsDb": -43.6249928929351,
+            "rangeDb": 2.400000000000002
+          },
+          "low": {
+            "mean": 0.0400016660318812,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.60330621406575,
+            "rangeDb": 2.399999999999989
+          },
+          "lowMid": {
+            "mean": 0.040000077057869295,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.603462258753915,
+            "rangeDb": 2.399999999999989
+          },
+          "mid": {
+            "mean": 0.050000028481007625,
+            "p50": 0.05,
+            "p90": 0.05,
+            "excessFraction": 0,
+            "rmsDb": -36.63436804848868,
+            "rangeDb": 2.399999999999989
+          },
+          "upperMid": {
+            "mean": 0.06000003376539757,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -35.84255561889395,
+            "rangeDb": 2.400000000000002
+          },
+          "presence": {
+            "mean": 0.0800000450092737,
+            "p50": 0.08,
+            "p90": 0.08,
+            "excessFraction": 0,
+            "rmsDb": -34.593168253450045,
+            "rangeDb": 2.280000000000002
+          },
+          "high": {
+            "mean": 0.6000003375298234,
+            "p50": 0.6,
+            "p90": 0.6,
+            "excessFraction": 1,
+            "rmsDb": -25.842555619405015,
+            "rangeDb": 2.400000000000002
+          },
+          "air": {
+            "mean": 0.12000006752914608,
+            "p50": 0.12,
+            "p90": 0.12,
+            "excessFraction": 0,
+            "rmsDb": -32.83225566172523,
+            "rangeDb": 2.400000000000002
+          }
+        },
+        "centroidHz": 5928.657368936266,
+        "rolloffHz": 7007.8125,
+        "flux": 0.0014201741812517859,
+        "crestDb": 10.525737756284599,
+        "sideRatio": 0.022004900409081932,
+        "lowSideRatio": 0.022005127682327805,
+        "correlation": 0.955990770485439,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0.6861822319952728,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.28000015754934254,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.22102951025138393,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.022004900409081932,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.977995099590918,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.013202940245449159,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.9867970597545508,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "brightness",
+                "severity": 0.6861822319952728,
+                "confidence": 0.9,
+                "band": "high",
+                "temporal": "persistent",
+                "evidence": [
+                  "feature=0.686",
+                  "band p50/p90=0.6/0.6",
+                  "excess occupancy=1.000",
+                  "centroid=5929 Hz; rolloff=7008 Hz"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "eq",
+                "targetIssue": "brightness",
+                "reason": "feature=0.686; band p50/p90=0.6/0.6; excess occupancy=1.000; centroid=5929 Hz; rolloff=7008 Hz",
+                "metricBefore": 0.6861822319952728
+              }
+            ],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "eq",
+              "frequencyHz": 7500,
+              "q": 0.7,
+              "gainDb": -1.2351280175914912
+            }
+          ],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": [
+              {
+                "issue": "brightness",
+                "before": 0.6861822319952728,
+                "after": 0.6218645734901564,
+                "improved": true
+              }
+            ]
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.011783257911369402,
+                "p50": 0.012,
+                "p90": 0.012,
+                "excessFraction": 0,
+                "rmsDb": -42.81417167344876,
+                "rangeDb": 2.280000000000002
+              },
+              "low": {
+                "mean": 0.04714342016138552,
+                "p50": 0.047,
+                "p90": 0.047,
+                "excessFraction": 0,
+                "rmsDb": -36.79268840436559,
+                "rangeDb": 2.399999999999989
+              },
+              "lowMid": {
+                "mean": 0.04712759991233788,
+                "p50": 0.047,
+                "p90": 0.047,
+                "excessFraction": 0,
+                "rmsDb": -36.794129561084084,
+                "rangeDb": 2.399999999999989
+              },
+              "mid": {
+                "mean": 0.05881865519736393,
+                "p50": 0.059,
+                "p90": 0.059,
+                "excessFraction": 0,
+                "rmsDb": -35.83173191091945,
+                "rangeDb": 2.400000000000002
+              },
+              "upperMid": {
+                "mean": 0.06989138096421654,
+                "p50": 0.07,
+                "p90": 0.07,
+                "excessFraction": 0,
+                "rmsDb": -35.08264659969011,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.08928965023197559,
+                "p50": 0.089,
+                "p90": 0.089,
+                "excessFraction": 0,
+                "rmsDb": -34.01887157262663,
+                "rangeDb": 2.400000000000002
+              },
+              "high": {
+                "mean": 0.5376626111032268,
+                "p50": 0.538,
+                "p90": 0.538,
+                "excessFraction": 1,
+                "rmsDb": -26.2217838700428,
+                "rangeDb": 2.400000000000002
+              },
+              "air": {
+                "mean": 0.13828342451812448,
+                "p50": 0.138,
+                "p90": 0.138,
+                "excessFraction": 0,
+                "rmsDb": -32.11918171271512,
+                "rangeDb": 2.400000000000002
+              }
+            },
+            "centroidHz": 5748.476850992629,
+            "rolloffHz": 7007.8125,
+            "flux": 0.0014697511783197778,
+            "crestDb": 10.758764775807965,
+            "sideRatio": 0.02200193865233914,
+            "lowSideRatio": 0.02200499420894608,
+            "correlation": 0.9559967293213506,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0.6218645734901564,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.3183620623923843,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.23035059103231859,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.02200193865233914,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9779980613476609,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.013201163191403483,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.9867988368085965,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "dull",
+      "expected": "dullness",
+      "mode": "AUTO",
+      "seconds": 0.3453309999999999,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.06998029172855612,
+            "p50": 0.07,
+            "p90": 0.07,
+            "excessFraction": 0,
+            "rmsDb": -35.174790323091884,
+            "rangeDb": 2.280000000000002
+          },
+          "low": {
+            "mean": 0.1300165583419082,
+            "p50": 0.13,
+            "p90": 0.13,
+            "excessFraction": 0,
+            "rmsDb": -32.48462396054054,
+            "rangeDb": 2.400000000000002
+          },
+          "lowMid": {
+            "mean": 0.16000077448063413,
+            "p50": 0.16,
+            "p90": 0.16,
+            "excessFraction": 0,
+            "rmsDb": -31.58336576028266,
+            "rangeDb": 2.280000000000002
+          },
+          "mid": {
+            "mean": 0.42000155895130975,
+            "p50": 0.42,
+            "p90": 0.42,
+            "excessFraction": 0,
+            "rmsDb": -27.392077654489864,
+            "rangeDb": 2.280000000000002
+          },
+          "upperMid": {
+            "mean": 0.21000077940337333,
+            "p50": 0.21,
+            "p90": 0.21,
+            "excessFraction": 0,
+            "rmsDb": -30.40237761265917,
+            "rangeDb": 2.400000000000002
+          },
+          "presence": {
+            "mean": 0.009000033379373712,
+            "p50": 0.009,
+            "p90": 0.009,
+            "excessFraction": 0,
+            "rmsDb": -44.082145477424035,
+            "rangeDb": 2.400000000000002
+          },
+          "high": {
+            "mean": 0.0008000029710151041,
+            "p50": 0.001,
+            "p90": 0.001,
+            "excessFraction": 0,
+            "rmsDb": -54.593670673383116,
+            "rangeDb": 2.280000000000002
+          },
+          "air": {
+            "mean": 0.00020000074383366178,
+            "p50": 0,
+            "p90": 0,
+            "excessFraction": 0,
+            "rmsDb": -60.61427057421245,
+            "rangeDb": 2.280000000000002
+          }
+        },
+        "centroidHz": 708.5566707472019,
+        "rolloffHz": 1593.75,
+        "flux": 0.0013866431865661932,
+        "crestDb": 11.216922049787957,
+        "sideRatio": 0.022004962491976622,
+        "lowSideRatio": 0.02200527684212841,
+        "correlation": 0.9559915005297355,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0.5679127814865034,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.4380016255654941,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0.19723247845198555,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.24867688199151827,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.022004962491976622,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.9779950375080234,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.11745829664412213,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.8825417033558779,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0.3944621977434448,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "dullness",
+                "severity": 0.5679127814865034,
+                "confidence": 0.9,
+                "band": "high",
+                "temporal": "persistent",
+                "evidence": [
+                  "feature=0.568",
+                  "band p50/p90=0.001/0.001",
+                  "excess occupancy=0.000",
+                  "centroid=709 Hz; rolloff=1594 Hz"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "eq",
+                "targetIssue": "dullness",
+                "reason": "feature=0.568; band p50/p90=0.001/0.001; excess occupancy=0.000; centroid=709 Hz; rolloff=1594 Hz",
+                "metricBefore": 0.5679127814865034
+              }
+            ],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "eq",
+              "frequencyHz": 6500,
+              "q": 0.7,
+              "gainDb": 0.7
+            }
+          ],
+          "objectives": {
+            "accepted": false,
+            "reasons": [
+              "dullness: 狙った補正の効果を確認できません。"
+            ],
+            "objectives": [
+              {
+                "issue": "dullness",
+                "before": 0.5679127814865034,
+                "after": 0.5670660416604975,
+                "improved": false
+              }
+            ]
+          },
+          "safety": {
+            "accepted": false,
+            "reasons": [
+              "dullness: 狙った補正の効果を確認できません。"
+            ]
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.06971142531759958,
+                "p50": 0.07,
+                "p90": 0.07,
+                "excessFraction": 0,
+                "rmsDb": -31.20033110616427,
+                "rangeDb": 2.280000000000002
+              },
+              "low": {
+                "mean": 0.12952294026432987,
+                "p50": 0.13,
+                "p90": 0.13,
+                "excessFraction": 0,
+                "rmsDb": -28.509966555877348,
+                "rangeDb": 2.400000000000002
+              },
+              "lowMid": {
+                "mean": 0.1594392686655436,
+                "p50": 0.159,
+                "p90": 0.159,
+                "excessFraction": 0,
+                "rmsDb": -27.60745657278261,
+                "rangeDb": 2.280000000000002
+              },
+              "mid": {
+                "mean": 0.4191566168460069,
+                "p50": 0.419,
+                "p90": 0.419,
+                "excessFraction": 0,
+                "rmsDb": -23.409646315842387,
+                "rangeDb": 2.2799999999999887
+              },
+              "upperMid": {
+                "mean": 0.21159347847007523,
+                "p50": 0.212,
+                "p90": 0.212,
+                "excessFraction": 0,
+                "rmsDb": -26.378386805465084,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.009444376153713048,
+                "p50": 0.009,
+                "p90": 0.009,
+                "excessFraction": 0,
+                "rmsDb": -39.88167687853864,
+                "rangeDb": 2.400000000000002
+              },
+              "high": {
+                "mean": 0.00093118213337874,
+                "p50": 0.001,
+                "p90": 0.001,
+                "excessFraction": 0,
+                "rmsDb": -49.943063587235756,
+                "rangeDb": 2.280000000000002
+              },
+              "air": {
+                "mean": 0.00020071214935656965,
+                "p50": 0,
+                "p90": 0,
+                "excessFraction": 0,
+                "rmsDb": -56.6076729311626,
+                "rangeDb": 2.400000000000002
+              }
+            },
+            "centroidHz": 712.7259240697982,
+            "rolloffHz": 1593.75,
+            "flux": 0.0013887818637526906,
+            "crestDb": 11.21710723155366,
+            "sideRatio": 0.02200591804225635,
+            "lowSideRatio": 0.02200539333054704,
+            "correlation": 0.95598961400443,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0.5670660416604975,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.44207570924757655,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0.19907163159342342,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.24868428926214642,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.02200591804225635,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9779940819577436,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.11745886997428996,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.88254113002571,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0.3949783986278248,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        },
+        {
+          "iteration": 2,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "dullness",
+                "severity": 0.5679127814865034,
+                "confidence": 0.9,
+                "band": "high",
+                "temporal": "persistent",
+                "evidence": [
+                  "feature=0.568",
+                  "band p50/p90=0.001/0.001",
+                  "excess occupancy=0.000",
+                  "centroid=709 Hz; rolloff=1594 Hz"
+                ]
+              }
+            ],
+            "decisions": [],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": []
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.06998029172548441,
+                "p50": 0.07,
+                "p90": 0.07,
+                "excessFraction": 0,
+                "rmsDb": -33.174790324292424,
+                "rangeDb": 2.400000000000002
+              },
+              "low": {
+                "mean": 0.13001655841729118,
+                "p50": 0.13,
+                "p90": 0.13,
+                "excessFraction": 0,
+                "rmsDb": -30.484623959456233,
+                "rangeDb": 2.280000000000002
+              },
+              "lowMid": {
+                "mean": 0.16000077449586866,
+                "p50": 0.16,
+                "p90": 0.16,
+                "excessFraction": 0,
+                "rmsDb": -29.583365761138737,
+                "rangeDb": 2.400000000000002
+              },
+              "mid": {
+                "mean": 0.42000155892550334,
+                "p50": 0.42,
+                "p90": 0.42,
+                "excessFraction": 0,
+                "rmsDb": -25.39207765594802,
+                "rangeDb": 2.400000000000002
+              },
+              "upperMid": {
+                "mean": 0.21000077934975328,
+                "p50": 0.21,
+                "p90": 0.21,
+                "excessFraction": 0,
+                "rmsDb": -28.40237761497324,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.009000033366136978,
+                "p50": 0.009,
+                "p90": 0.009,
+                "excessFraction": 0,
+                "rmsDb": -42.08214548426274,
+                "rangeDb": 2.400000000000002
+              },
+              "high": {
+                "mean": 0.0008000029743423667,
+                "p50": 0.001,
+                "p90": 0.001,
+                "excessFraction": 0,
+                "rmsDb": -52.593670655938,
+                "rangeDb": 2.399999999999989
+              },
+              "air": {
+                "mean": 0.00020000074562366227,
+                "p50": 0,
+                "p90": 0,
+                "excessFraction": 0,
+                "rmsDb": -58.61427053589524,
+                "rangeDb": 2.400000000000002
+              }
+            },
+            "centroidHz": 708.5566706555006,
+            "rolloffHz": 1593.75,
+            "flux": 0.0013866436812146122,
+            "crestDb": 11.216921953916845,
+            "sideRatio": 0.02200496247862966,
+            "lowSideRatio": 0.022005276858080736,
+            "correlation": 0.9559915005531958,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0.5679127813623523,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.4380016254317805,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0.19723247726684703,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.2486768781566738,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.02200496247862966,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9779950375213703,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.11745829663611396,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.882541703363886,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0.3944621955839447,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "narrow",
+      "expected": "Low side energy; no automatic widening",
+      "mode": "AUTO",
+      "seconds": 0.2026556999999998,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.059984735932998336,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -35.940814886991,
+            "rangeDb": 2.400000000000002
+          },
+          "low": {
+            "mean": 0.1800124564500806,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -31.168266292206084,
+            "rangeDb": 2.400000000000002
+          },
+          "lowMid": {
+            "mean": 0.14000072630037189,
+            "p50": 0.14,
+            "p90": 0.14,
+            "excessFraction": 0,
+            "rmsDb": -32.25996973150781,
+            "rangeDb": 2.400000000000002
+          },
+          "mid": {
+            "mean": 0.17000057139507738,
+            "p50": 0.17,
+            "p90": 0.17,
+            "excessFraction": 0,
+            "rmsDb": -31.416768897279344,
+            "rangeDb": 2.400000000000002
+          },
+          "upperMid": {
+            "mean": 0.1800006039960807,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -31.16853308538516,
+            "rangeDb": 2.400000000000002
+          },
+          "presence": {
+            "mean": 0.1300004362381943,
+            "p50": 0.13,
+            "p90": 0.13,
+            "excessFraction": 0,
+            "rmsDb": -32.581824611626224,
+            "rangeDb": 2.400000000000002
+          },
+          "high": {
+            "mean": 0.10000033546248192,
+            "p50": 0.1,
+            "p90": 0.1,
+            "excessFraction": 0,
+            "rmsDb": -33.72125813884613,
+            "rangeDb": 2.280000000000002
+          },
+          "air": {
+            "mean": 0.04000013422471489,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.70065822231268,
+            "rangeDb": 2.2799999999999887
+          }
+        },
+        "centroidHz": 2028.906808725378,
+        "rolloffHz": 3304.6875,
+        "flux": 0.0016636295160951265,
+        "crestDb": 10.807992178303998,
+        "sideRatio": 0,
+        "lowSideRatio": 0,
+        "correlation": 1,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.62000208046855,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.23231968713215992,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 1,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.0875,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.9125,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [],
+            "decisions": [],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": []
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.059984735942812055,
+                "p50": 0.06,
+                "p90": 0.06,
+                "excessFraction": 0,
+                "rmsDb": -32.215070672929365,
+                "rangeDb": 2.400000000000002
+              },
+              "low": {
+                "mean": 0.18001245638104124,
+                "p50": 0.18,
+                "p90": 0.18,
+                "excessFraction": 0,
+                "rmsDb": -27.44252208109337,
+                "rangeDb": 2.400000000000002
+              },
+              "lowMid": {
+                "mean": 0.14000072632398258,
+                "p50": 0.14,
+                "p90": 0.14,
+                "excessFraction": 0,
+                "rmsDb": -28.534225517770466,
+                "rangeDb": 2.400000000000002
+              },
+              "mid": {
+                "mean": 0.17000057143966274,
+                "p50": 0.17,
+                "p90": 0.17,
+                "excessFraction": 0,
+                "rmsDb": -27.691024683142786,
+                "rangeDb": 2.400000000000002
+              },
+              "upperMid": {
+                "mean": 0.18000060400754264,
+                "p50": 0.18,
+                "p90": 0.18,
+                "excessFraction": 0,
+                "rmsDb": -27.44278887174831,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.13000043621465704,
+                "p50": 0.13,
+                "p90": 0.13,
+                "excessFraction": 0,
+                "rmsDb": -28.85608039942486,
+                "rangeDb": 2.400000000000002
+              },
+              "high": {
+                "mean": 0.10000033548932885,
+                "p50": 0.1,
+                "p90": 0.1,
+                "excessFraction": 0,
+                "rmsDb": -29.99551392440943,
+                "rangeDb": 2.280000000000002
+              },
+              "air": {
+                "mean": 0.04000013420097319,
+                "p50": 0.04,
+                "p90": 0.04,
+                "excessFraction": 0,
+                "rmsDb": -33.97491401196942,
+                "rangeDb": 2.280000000000002
+              }
+            },
+            "centroidHz": 2028.9068086213913,
+            "rolloffHz": 3304.6875,
+            "flux": 0.0016636299691425137,
+            "crestDb": 10.807992290276363,
+            "sideRatio": 0,
+            "lowSideRatio": 0,
+            "correlation": 1,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.6200020804443993,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.23231969161105454,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 1,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.0875,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.9125,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "excessive-stereo",
+      "expected": "phaseRisk / lowSpread",
+      "mode": "AUTO",
+      "seconds": 0.23393280000000005,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.05999658002530377,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -28.950237102676176,
+            "rangeDb": 2.280000000000002
+          },
+          "low": {
+            "mean": 0.18000259434639174,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -24.178725922136856,
+            "rangeDb": 2.400000000000002
+          },
+          "lowMid": {
+            "mean": 0.14000015830130005,
+            "p50": 0.14,
+            "p90": 0.14,
+            "excessFraction": 0,
+            "rmsDb": -25.270224030216628,
+            "rangeDb": 2.400000000000002
+          },
+          "mid": {
+            "mean": 0.17000019411808245,
+            "p50": 0.17,
+            "p90": 0.17,
+            "excessFraction": 0,
+            "rmsDb": -24.42701514142881,
+            "rangeDb": 2.400000000000002
+          },
+          "upperMid": {
+            "mean": 0.18000018932849918,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -24.1787796945086,
+            "rangeDb": 2.400000000000002
+          },
+          "presence": {
+            "mean": 0.13000013669935814,
+            "p50": 0.13,
+            "p90": 0.13,
+            "excessFraction": 0,
+            "rmsDb": -25.592071224111194,
+            "rangeDb": 2.280000000000002
+          },
+          "high": {
+            "mean": 0.10000010514185136,
+            "p50": 0.1,
+            "p90": 0.1,
+            "excessFraction": 0,
+            "rmsDb": -26.73150474731935,
+            "rangeDb": 2.400000000000002
+          },
+          "air": {
+            "mean": 0.0400000420392135,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -30.710904835240683,
+            "rangeDb": 2.280000000000002
+          }
+        },
+        "centroidHz": 2034.5021049144682,
+        "rolloffHz": 3316.40625,
+        "flux": 0.001670382104362053,
+        "crestDb": 13.321894489162478,
+        "sideRatio": 0.8000004651703914,
+        "lowSideRatio": 0.8000021317040459,
+        "correlation": -0.6000109170969632,
+        "ambienceClass": "Moderate",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.6200006520557146,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.3328757795664991,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.8000004651703914,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 1,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.19999953482960864,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 1,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.5074512594943916,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.4925487405056084,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "lowSpread",
+                "band": "low",
+                "severity": 1,
+                "confidence": 0.9,
+                "temporal": "persistent",
+                "evidence": [
+                  "low side=0.800",
+                  "total side=0.800"
+                ]
+              },
+              {
+                "issue": "phaseRisk",
+                "band": "low",
+                "severity": 1,
+                "confidence": 0.9,
+                "temporal": "persistent",
+                "evidence": [
+                  "correlation=-0.600",
+                  "negative windows=1.000"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "bass-center",
+                "targetIssue": "lowSpread",
+                "reason": "low side=0.800; total side=0.800",
+                "metricBefore": 0.8000021317040459
+              }
+            ],
+            "skippedProcessing": [
+              "phaseRisk: correction budget / overlapping band",
+              "Transient emphasis / broadband compression: no sufficiently confident need"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "bass-center",
+              "amount": 0.784,
+              "crossoverHz": 150
+            }
+          ],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": [
+              {
+                "issue": "lowSpread",
+                "before": 0.8000021317040459,
+                "after": 0.7449073275682515,
+                "improved": true
+              }
+            ]
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.046317298257028086,
+                "p50": 0.046,
+                "p90": 0.046,
+                "excessFraction": 0,
+                "rmsDb": -33.50435178677023,
+                "rangeDb": 2.280000000000002
+              },
+              "low": {
+                "mean": 0.15581142828388425,
+                "p50": 0.156,
+                "p90": 0.156,
+                "excessFraction": 0,
+                "rmsDb": -28.235814865878016,
+                "rangeDb": 2.280000000000002
+              },
+              "lowMid": {
+                "mean": 0.1396529106161162,
+                "p50": 0.14,
+                "p90": 0.14,
+                "excessFraction": 0,
+                "rmsDb": -28.711305028876467,
+                "rangeDb": 2.280000000000002
+              },
+              "mid": {
+                "mean": 0.17866603962783983,
+                "p50": 0.179,
+                "p90": 0.179,
+                "excessFraction": 0,
+                "rmsDb": -27.64138385461013,
+                "rangeDb": 2.280000000000002
+              },
+              "upperMid": {
+                "mean": 0.1915609910755836,
+                "p50": 0.192,
+                "p90": 0.192,
+                "excessFraction": 0,
+                "rmsDb": -27.338732838064644,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.13862672827485242,
+                "p50": 0.139,
+                "p90": 0.139,
+                "excessFraction": 0,
+                "rmsDb": -28.743333791792132,
+                "rangeDb": 2.400000000000002
+              },
+              "high": {
+                "mean": 0.10668697224984547,
+                "p50": 0.107,
+                "p90": 0.107,
+                "excessFraction": 0,
+                "rmsDb": -29.88068961054216,
+                "rangeDb": 2.280000000000002
+              },
+              "air": {
+                "mean": 0.04267763161485022,
+                "p50": 0.043,
+                "p90": 0.043,
+                "excessFraction": 0,
+                "rmsDb": -33.859800405807576,
+                "rangeDb": 2.280000000000002
+              }
+            },
+            "centroidHz": 2159.9521594753714,
+            "rolloffHz": 3316.40625,
+            "flux": 0.0016708913281966605,
+            "crestDb": 13.390183842180466,
+            "sideRatio": 0.7851575404667139,
+            "lowSideRatio": 0.7449073275682515,
+            "correlation": -0.5703304111527384,
+            "ambienceClass": "Moderate",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0.01511478227522168,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.660375438700872,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.3356073536872186,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.7851575404667139,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 1,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.21484245953328607,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0.9703150809334279,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.4985455046721852,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.5014544953278148,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "transient-heavy",
+      "expected": "High punch; no attack boost",
+      "mode": "IMPACT",
+      "seconds": 0.2989267999999997,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 57,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.06678453269136407,
+            "p50": 0.06,
+            "p90": 0.089,
+            "excessFraction": 0,
+            "rmsDb": -46.273138282672875,
+            "rangeDb": 79.44
+          },
+          "low": {
+            "mean": 0.17522668056353458,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -43.14727061930526,
+            "rangeDb": 77.75999999999999
+          },
+          "lowMid": {
+            "mean": 0.13753070824660726,
+            "p50": 0.14,
+            "p90": 0.14,
+            "excessFraction": 0,
+            "rmsDb": -44.08019548339824,
+            "rangeDb": 78
+          },
+          "mid": {
+            "mean": 0.16893143959246845,
+            "p50": 0.17,
+            "p90": 0.17,
+            "excessFraction": 0,
+            "rmsDb": -43.05465631447739,
+            "rangeDb": 78.11999999999999
+          },
+          "upperMid": {
+            "mean": 0.17955116741687113,
+            "p50": 0.18,
+            "p90": 0.182,
+            "excessFraction": 0,
+            "rmsDb": -42.74905396927154,
+            "rangeDb": 78.11999999999999
+          },
+          "presence": {
+            "mean": 0.1303080096999114,
+            "p50": 0.13,
+            "p90": 0.133,
+            "excessFraction": 0,
+            "rmsDb": -44.104148931525614,
+            "rangeDb": 78.12
+          },
+          "high": {
+            "mean": 0.10105999907838649,
+            "p50": 0.1,
+            "p90": 0.106,
+            "excessFraction": 0,
+            "rmsDb": -45.14861798698155,
+            "rangeDb": 78.24000000000001
+          },
+          "air": {
+            "mean": 0.0406074627108564,
+            "p50": 0.04,
+            "p90": 0.043,
+            "excessFraction": 0,
+            "rmsDb": -49.07635327790871,
+            "rangeDb": 76.56
+          }
+        },
+        "centroidHz": 2047.745526922099,
+        "rolloffHz": 3542.1463815789475,
+        "flux": 0.07651399498736777,
+        "crestDb": 24.04881754162643,
+        "sideRatio": 0.020997204536793348,
+        "lowSideRatio": 0.019883702347800368,
+        "correlation": 0.9581704811007238,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.6197183542335651,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0.03125,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0.2682549432135643,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.7341274716067822,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.020997204536793348,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.9790027954632067,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.012598322722076009,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.9874016772779239,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [],
+            "decisions": [],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": []
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 60,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.06644254204282414,
+                "p50": 0.06,
+                "p90": 0.083,
+                "excessFraction": 0,
+                "rmsDb": -40.49590220603407,
+                "rangeDb": 84.36
+              },
+              "low": {
+                "mean": 0.1754705756249111,
+                "p50": 0.18,
+                "p90": 0.18,
+                "excessFraction": 0,
+                "rmsDb": -37.37003457808744,
+                "rangeDb": 82.91999999999999
+              },
+              "lowMid": {
+                "mean": 0.13765362001663803,
+                "p50": 0.14,
+                "p90": 0.14,
+                "excessFraction": 0,
+                "rmsDb": -38.302959438411285,
+                "rangeDb": 83.16
+              },
+              "mid": {
+                "mean": 0.1689843463735424,
+                "p50": 0.17,
+                "p90": 0.17,
+                "excessFraction": 0,
+                "rmsDb": -37.27742026240658,
+                "rangeDb": 83.39999999999999
+              },
+              "upperMid": {
+                "mean": 0.17957305278894006,
+                "p50": 0.18,
+                "p90": 0.181,
+                "excessFraction": 0,
+                "rmsDb": -36.97181792433083,
+                "rangeDb": 83.39999999999999
+              },
+              "presence": {
+                "mean": 0.1302922073114683,
+                "p50": 0.13,
+                "p90": 0.132,
+                "excessFraction": 0,
+                "rmsDb": -38.32691290078799,
+                "rangeDb": 83.39999999999999
+              },
+              "high": {
+                "mean": 0.1010066900229542,
+                "p50": 0.1,
+                "p90": 0.106,
+                "excessFraction": 0,
+                "rmsDb": -39.371381950101465,
+                "rangeDb": 83.39999999999999
+              },
+              "air": {
+                "mean": 0.040576965818721625,
+                "p50": 0.04,
+                "p90": 0.043,
+                "excessFraction": 0,
+                "rmsDb": -43.29911726757119,
+                "rangeDb": 82.55999999999999
+              }
+            },
+            "centroidHz": 2046.804870234325,
+            "rolloffHz": 3530.2734375,
+            "flux": 0.07269932161755836,
+            "crestDb": 24.048817357115652,
+            "sideRatio": 0.020997204703852034,
+            "lowSideRatio": 0.019883702439088182,
+            "correlation": 0.9581704807830926,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.6197305202008168,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0.03125,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0.26825494398899025,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.7341274719944951,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.020997204703852034,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.979002795296148,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.01259832282231122,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.9874016771776888,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "overcompressed",
+      "expected": "Higher dynamic density than transient-heavy",
+      "mode": "AUTO",
+      "seconds": 0.2294434000000001,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.05500105479868222,
+            "p50": 0.055,
+            "p90": 0.059,
+            "excessFraction": 0,
+            "rmsDb": -30.143396370799845,
+            "rangeDb": 0.6000000000000005
+          },
+          "low": {
+            "mean": 0.1698260762239012,
+            "p50": 0.172,
+            "p90": 0.176,
+            "excessFraction": 0,
+            "rmsDb": -25.24632250369526,
+            "rangeDb": 0.4800000000000004
+          },
+          "lowMid": {
+            "mean": 0.12897911648300314,
+            "p50": 0.131,
+            "p90": 0.133,
+            "excessFraction": 0,
+            "rmsDb": -26.44164758714394,
+            "rangeDb": 0.3600000000000003
+          },
+          "mid": {
+            "mean": 0.16530577407577834,
+            "p50": 0.164,
+            "p90": 0.173,
+            "excessFraction": 0,
+            "rmsDb": -25.363725367964275,
+            "rangeDb": 0.3600000000000003
+          },
+          "upperMid": {
+            "mean": 0.18354839139336981,
+            "p50": 0.179,
+            "p90": 0.197,
+            "excessFraction": 0,
+            "rmsDb": -24.90858190153524,
+            "rangeDb": 0.4800000000000004
+          },
+          "presence": {
+            "mean": 0.13757629691027295,
+            "p50": 0.137,
+            "p90": 0.141,
+            "excessFraction": 0,
+            "rmsDb": -26.160924624392226,
+            "rangeDb": 0.2400000000000002
+          },
+          "high": {
+            "mean": 0.11562549068190496,
+            "p50": 0.115,
+            "p90": 0.122,
+            "excessFraction": 0,
+            "rmsDb": -26.91636699253663,
+            "rangeDb": 0.3600000000000003
+          },
+          "air": {
+            "mean": 0.044137799433087335,
+            "p50": 0.044,
+            "p90": 0.046,
+            "excessFraction": 0,
+            "rmsDb": -31.098527813439198,
+            "rangeDb": 0.2400000000000002
+          }
+        },
+        "centroidHz": 2219.2268447313854,
+        "rolloffHz": 6380.222486413043,
+        "flux": 0.04741230859393969,
+        "crestDb": 3.5592152338623233,
+        "sideRatio": 0.018221288345258532,
+        "lowSideRatio": 0.01598060174575107,
+        "correlation": 0.9635244275879837,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0.0016807396904101812,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.6422493766072855,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0.9201121094482395,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.018221288345258532,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.9817787116547415,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.010932773007155118,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.9890672269928449,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [],
+            "decisions": [],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": []
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.05500105482825199,
+                "p50": 0.055,
+                "p90": 0.059,
+                "excessFraction": 0,
+                "rmsDb": -32.73221757183437,
+                "rangeDb": 0.7200000000000006
+              },
+              "low": {
+                "mean": 0.16982607607692696,
+                "p50": 0.172,
+                "p90": 0.176,
+                "excessFraction": 0,
+                "rmsDb": -27.835143710887515,
+                "rangeDb": 0.3600000000000003
+              },
+              "lowMid": {
+                "mean": 0.12897911648512891,
+                "p50": 0.131,
+                "p90": 0.133,
+                "excessFraction": 0,
+                "rmsDb": -29.030468790469833,
+                "rangeDb": 0.3600000000000003
+              },
+              "mid": {
+                "mean": 0.1653057740279139,
+                "p50": 0.164,
+                "p90": 0.173,
+                "excessFraction": 0,
+                "rmsDb": -27.952546572625764,
+                "rangeDb": 0.3600000000000003
+              },
+              "upperMid": {
+                "mean": 0.18354839142370755,
+                "p50": 0.179,
+                "p90": 0.197,
+                "excessFraction": 0,
+                "rmsDb": -27.497403104272102,
+                "rangeDb": 0.4800000000000004
+              },
+              "presence": {
+                "mean": 0.13757629700380677,
+                "p50": 0.137,
+                "p90": 0.141,
+                "excessFraction": 0,
+                "rmsDb": -28.749745824870118,
+                "rangeDb": 0.2400000000000002
+              },
+              "high": {
+                "mean": 0.11562549073663785,
+                "p50": 0.115,
+                "p90": 0.122,
+                "excessFraction": 0,
+                "rmsDb": -29.505188193896558,
+                "rangeDb": 0.4800000000000004
+              },
+              "air": {
+                "mean": 0.04413779941762609,
+                "p50": 0.044,
+                "p90": 0.046,
+                "excessFraction": 0,
+                "rmsDb": -33.68734901836773,
+                "rangeDb": 0.2400000000000002
+              }
+            },
+            "centroidHz": 2219.2268452896847,
+            "rolloffHz": 6380.222486413043,
+            "flux": 0.047412308550099404,
+            "crestDb": 3.559215184303936,
+            "sideRatio": 0.018221288346983007,
+            "lowSideRatio": 0.015980601779368893,
+            "correlation": 0.9635244275829485,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0.0016807398756385572,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.6422493768550286,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0.9201121165280092,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.018221288346983007,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.981778711653017,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.010932773008189805,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.9890672269918102,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "wet",
+      "expected": "Wet tendency; reduced LIVE addition",
+      "mode": "LIVE",
+      "seconds": 0.2543624999999997,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.06014306799034417,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -35.455901628652946,
+            "rangeDb": 7.919999999999994
+          },
+          "low": {
+            "mean": 0.17957330760065157,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -30.7097143974589,
+            "rangeDb": 8.040000000000006
+          },
+          "lowMid": {
+            "mean": 0.13975871254984762,
+            "p50": 0.14,
+            "p90": 0.14,
+            "excessFraction": 0,
+            "rmsDb": -31.796696831908807,
+            "rangeDb": 8.040000000000006
+          },
+          "mid": {
+            "mean": 0.16997211468239834,
+            "p50": 0.17,
+            "p90": 0.17,
+            "excessFraction": 0,
+            "rmsDb": -30.94418769877427,
+            "rangeDb": 8.040000000000006
+          },
+          "upperMid": {
+            "mean": 0.18013638939153423,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -30.690659510422456,
+            "rangeDb": 8.040000000000006
+          },
+          "presence": {
+            "mean": 0.13015321666173624,
+            "p50": 0.13,
+            "p90": 0.13,
+            "excessFraction": 0,
+            "rmsDb": -32.10157764396138,
+            "rangeDb": 7.920000000000007
+          },
+          "high": {
+            "mean": 0.10018723012686939,
+            "p50": 0.1,
+            "p90": 0.1,
+            "excessFraction": 0,
+            "rmsDb": -33.23711910714359,
+            "rangeDb": 7.919999999999994
+          },
+          "air": {
+            "mean": 0.04007596099661814,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.21636977509934,
+            "rangeDb": 7.919999999999994
+          }
+        },
+        "centroidHz": 2034.9979488226518,
+        "rolloffHz": 3317.4252717391305,
+        "flux": 0.014834766820793075,
+        "crestDb": 16.166294012384732,
+        "sideRatio": 0.44679798566007056,
+        "lowSideRatio": 0.44628857449736165,
+        "correlation": 0.10651798462974467,
+        "ambienceClass": "Wet",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.620579212106541,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0.3125,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0.33965132215777605,
+            "confidence": 0.9
+          },
+          "punch": {
+            "value": 0.6164774215742773,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0.8823352490476122,
+            "confidence": 0.9
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.44679798566007056,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.5532020143399294,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0.29359597132014115,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.9584897503001519,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.04151024969984807,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "lowSpread",
+                "band": "low",
+                "severity": 0.2925771489947233,
+                "confidence": 0.9,
+                "temporal": "persistent",
+                "evidence": [
+                  "low side=0.446",
+                  "total side=0.447"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "bass-center",
+                "targetIssue": "lowSpread",
+                "reason": "low side=0.446; total side=0.447",
+                "metricBefore": 0.44628857449736165
+              }
+            ],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "bass-center",
+              "amount": 0.9368033358171397,
+              "crossoverHz": 150
+            },
+            {
+              "kind": "live",
+              "parameters": {
+                "venue": "intimate-room",
+                "wet": 0.008400000000000001,
+                "highpassHz": 200,
+                "decaySeconds": 0.38,
+                "preDelayMs": 22
+              }
+            }
+          ],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": [
+              {
+                "issue": "lowSpread",
+                "before": 0.44628857449736165,
+                "after": 0.42464431958252247,
+                "improved": true
+              }
+            ]
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.057777887880810674,
+                "p50": 0.058,
+                "p90": 0.058,
+                "excessFraction": 0,
+                "rmsDb": -32.65296800596829,
+                "rangeDb": 7.919999999999994
+              },
+              "low": {
+                "mean": 0.1754540277201003,
+                "p50": 0.176,
+                "p90": 0.176,
+                "excessFraction": 0,
+                "rmsDb": -27.83394819071153,
+                "rangeDb": 8.040000000000006
+              },
+              "lowMid": {
+                "mean": 0.13958525408674663,
+                "p50": 0.14,
+                "p90": 0.14,
+                "excessFraction": 0,
+                "rmsDb": -28.825575010500415,
+                "rangeDb": 7.920000000000007
+              },
+              "mid": {
+                "mean": 0.17166678945367742,
+                "p50": 0.172,
+                "p90": 0.172,
+                "excessFraction": 0,
+                "rmsDb": -27.92567487211202,
+                "rangeDb": 8.040000000000006
+              },
+              "upperMid": {
+                "mean": 0.18221971660374334,
+                "p50": 0.182,
+                "p90": 0.182,
+                "excessFraction": 0,
+                "rmsDb": -27.66486164879931,
+                "rangeDb": 7.920000000000007
+              },
+              "presence": {
+                "mean": 0.1313848481079814,
+                "p50": 0.131,
+                "p90": 0.131,
+                "excessFraction": 0,
+                "rmsDb": -29.083828837812472,
+                "rangeDb": 7.920000000000007
+              },
+              "high": {
+                "mean": 0.1013691882445026,
+                "p50": 0.101,
+                "p90": 0.101,
+                "excessFraction": 0,
+                "rmsDb": -30.21032197259292,
+                "rangeDb": 8.040000000000006
+              },
+              "air": {
+                "mean": 0.040542287902437656,
+                "p50": 0.04,
+                "p90": 0.041,
+                "excessFraction": 0,
+                "rmsDb": -34.19012953443927,
+                "rangeDb": 7.919999999999994
+              }
+            },
+            "centroidHz": 2056.260696511606,
+            "rolloffHz": 3318.444293478261,
+            "flux": 0.014899340402527328,
+            "crestDb": 16.155441110506207,
+            "sideRatio": 0.4400988278146259,
+            "lowSideRatio": 0.42464431958252247,
+            "correlation": 0.1199180467396514,
+            "ambienceClass": "Wet",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.6272091294234494,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0.3125,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0.3394809393015082,
+                "confidence": 0.9
+              },
+              "punch": {
+                "value": 0.6159581140710024,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0.8825060924900175,
+                "confidence": 0.9
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.4400988278146259,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.5599011721853742,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0.2801976556292518,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.954470255592885,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.04552974440711499,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "intermittent-harsh",
+      "expected": "Temporal band contrast; Dynamic EQ",
+      "mode": "AUTO",
+      "seconds": 0.2338744999999999,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.045274679820251025,
+            "p50": 0.06,
+            "p90": 0.06,
+            "excessFraction": 0,
+            "rmsDb": -35.79940511189743,
+            "rangeDb": 2.400000000000002
+          },
+          "low": {
+            "mean": 0.13587177678722487,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -31.026168495852367,
+            "rangeDb": 2.400000000000002
+          },
+          "lowMid": {
+            "mean": 0.1056551386063955,
+            "p50": 0.14,
+            "p90": 0.14,
+            "excessFraction": 0,
+            "rmsDb": -32.11919317712099,
+            "rangeDb": 2.400000000000002
+          },
+          "mid": {
+            "mean": 0.12833337309370904,
+            "p50": 0.17,
+            "p90": 0.17,
+            "excessFraction": 0,
+            "rmsDb": -31.27360328636076,
+            "rangeDb": 2.400000000000002
+          },
+          "upperMid": {
+            "mean": 0.1358558077636048,
+            "p50": 0.18,
+            "p90": 0.18,
+            "excessFraction": 0,
+            "rmsDb": -31.026917917426722,
+            "rangeDb": 2.400000000000002
+          },
+          "presence": {
+            "mean": 0.3433381178076092,
+            "p50": 0.13,
+            "p90": 0.789,
+            "excessFraction": 0.32608695652173914,
+            "rmsDb": -23.007746821583368,
+            "rangeDb": 15.96
+          },
+          "high": {
+            "mean": 0.07547964975157806,
+            "p50": 0.1,
+            "p90": 0.1,
+            "excessFraction": 0,
+            "rmsDb": -33.579171088856455,
+            "rangeDb": 2.280000000000002
+          },
+          "air": {
+            "mean": 0.03019145636962794,
+            "p50": 0.04,
+            "p90": 0.04,
+            "excessFraction": 0,
+            "rmsDb": -37.55871406408788,
+            "rangeDb": 2.399999999999989
+          }
+        },
+        "centroidHz": 2340.774566216973,
+        "rolloffHz": 3304.8148777173915,
+        "flux": 0.005195656639793092,
+        "crestDb": 13.082153882310978,
+        "sideRatio": 0.02200603327675334,
+        "lowSideRatio": 0.02200719740993944,
+        "correlation": 0.9560036048470663,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0.24141829918193078,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.958387851142428,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0.03125,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0.21333392516036528,
+            "confidence": 0.18000000000000002
+          },
+          "punch": {
+            "value": 0.42995311787262175,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0,
+            "confidence": 0.18000000000000002
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.02200603327675334,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.9779939667232467,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.058855793879095473,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.9411442061209045,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "harshness",
+                "severity": 0.8385,
+                "confidence": 0.9,
+                "band": "presence",
+                "temporal": "intermittent",
+                "evidence": [
+                  "feature=0.241",
+                  "band p50/p90=0.13/0.789",
+                  "excess occupancy=0.326",
+                  "centroid=2341 Hz; rolloff=3305 Hz"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "dynamic-eq",
+                "targetIssue": "harshness",
+                "reason": "feature=0.241; band p50/p90=0.13/0.789; excess occupancy=0.326; centroid=2341 Hz; rolloff=3305 Hz",
+                "metricBefore": 0.789
+              }
+            ],
+            "skippedProcessing": [
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "dynamic-eq",
+              "bands": [
+                {
+                  "frequencyHz": 3200,
+                  "q": 0.8,
+                  "thresholdDb": -21.007746821583368,
+                  "maxReductionDb": 1.5093,
+                  "attackMs": 8,
+                  "releaseMs": 120
+                }
+              ]
+            }
+          ],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": [
+              {
+                "issue": "harshness",
+                "before": 0.789,
+                "after": 0.732,
+                "improved": true
+              }
+            ]
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.04702533094011849,
+                "p50": 0.06,
+                "p90": 0.06,
+                "excessFraction": 0,
+                "rmsDb": -34.85925080255258,
+                "rangeDb": 2.400000000000002
+              },
+              "low": {
+                "mean": 0.1411149146882907,
+                "p50": 0.18,
+                "p90": 0.182,
+                "excessFraction": 0,
+                "rmsDb": -30.086743779990034,
+                "rangeDb": 2.400000000000002
+              },
+              "lowMid": {
+                "mean": 0.10966705202293338,
+                "p50": 0.14,
+                "p90": 0.141,
+                "excessFraction": 0,
+                "rmsDb": -31.184209096287248,
+                "rangeDb": 2.400000000000002
+              },
+              "mid": {
+                "mean": 0.13279313020128863,
+                "p50": 0.17,
+                "p90": 0.171,
+                "excessFraction": 0,
+                "rmsDb": -30.362449981527618,
+                "rangeDb": 2.400000000000002
+              },
+              "upperMid": {
+                "mean": 0.13765990585639076,
+                "p50": 0.18,
+                "p90": 0.18,
+                "excessFraction": 0,
+                "rmsDb": -30.27695021269421,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.3229614172003185,
+                "p50": 0.13,
+                "p90": 0.732,
+                "excessFraction": 0.32608695652173914,
+                "rmsDb": -23.4137903616682,
+                "rangeDb": 14.52
+              },
+              "high": {
+                "mean": 0.0774293507136089,
+                "p50": 0.1,
+                "p90": 0.1,
+                "excessFraction": 0,
+                "rmsDb": -32.73426644490008,
+                "rangeDb": 2.400000000000002
+              },
+              "air": {
+                "mean": 0.03134889837705096,
+                "p50": 0.04,
+                "p90": 0.04,
+                "excessFraction": 0,
+                "rmsDb": -36.62114322977886,
+                "rangeDb": 2.399999999999989
+              }
+            },
+            "centroidHz": 2307.4677932907334,
+            "rolloffHz": 3304.8148777173915,
+            "flux": 0.005177965103289308,
+            "crestDb": 13.07281386175591,
+            "sideRatio": 0.02200678283683232,
+            "lowSideRatio": 0.02200674107953237,
+            "correlation": 0.9559948352839001,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0.21240129315337158,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.9212426461134186,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "punch": {
+                "value": 0.3229125544702363,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0,
+                "confidence": 0.18000000000000002
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.02200678283683232,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9779932171631677,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.04363885231079504,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.956361147689205,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "low-bursts",
+      "expected": "Low band range greater than mid; selective dynamics",
+      "mode": "AUTO",
+      "seconds": 0.3104144000000006,
+      "status": "accepted",
+      "reasons": [],
+      "before": {
+        "version": 1,
+        "windows": 92,
+        "confidence": 0.9,
+        "bands": {
+          "sub": {
+            "mean": 0.05361878288078542,
+            "p50": 0.073,
+            "p90": 0.073,
+            "excessFraction": 0,
+            "rmsDb": -35.57055442650807,
+            "rangeDb": 2.400000000000002
+          },
+          "low": {
+            "mean": 0.27780122928769874,
+            "p50": 0.005,
+            "p90": 0.846,
+            "excessFraction": 0.32608695652173914,
+            "rmsDb": -21.947633471900794,
+            "rangeDb": 32.28
+          },
+          "lowMid": {
+            "mean": 0.12334337685898675,
+            "p50": 0.17,
+            "p90": 0.17,
+            "excessFraction": 0,
+            "rmsDb": -32.05179028379863,
+            "rangeDb": 2.400000000000002
+          },
+          "mid": {
+            "mean": 0.14951084821305113,
+            "p50": 0.206,
+            "p90": 0.206,
+            "excessFraction": 0,
+            "rmsDb": -31.22878443496175,
+            "rangeDb": 2.400000000000002
+          },
+          "upperMid": {
+            "mean": 0.1583011158870396,
+            "p50": 0.218,
+            "p90": 0.218,
+            "excessFraction": 0,
+            "rmsDb": -30.980925636120435,
+            "rangeDb": 2.400000000000002
+          },
+          "presence": {
+            "mean": 0.11432087593599134,
+            "p50": 0.158,
+            "p90": 0.158,
+            "excessFraction": 0,
+            "rmsDb": -32.39496679490585,
+            "rangeDb": 2.400000000000002
+          },
+          "high": {
+            "mean": 0.08793286847019575,
+            "p50": 0.121,
+            "p90": 0.121,
+            "excessFraction": 0,
+            "rmsDb": -33.5351751793152,
+            "rangeDb": 2.400000000000002
+          },
+          "air": {
+            "mean": 0.03517090246625197,
+            "p50": 0.049,
+            "p90": 0.049,
+            "excessFraction": 0,
+            "rmsDb": -37.51525079515682,
+            "rangeDb": 2.399999999999989
+          }
+        },
+        "centroidHz": 1797.5109024095048,
+        "rolloffHz": 4734.757133152174,
+        "flux": 0.005362739997664232,
+        "crestDb": 12.792692508347125,
+        "sideRatio": 0.022010508579511437,
+        "lowSideRatio": 0.022003225571948094,
+        "correlation": 0.9559692767968531,
+        "ambienceClass": "Dry",
+        "features": {
+          "lowEndBuildup": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "muddiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "boxiness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "harshness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "brightness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "dullness": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "presence": {
+            "value": 0.5452439836460619,
+            "confidence": 0.9
+          },
+          "vocalCongestion": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          },
+          "transientDensity": {
+            "value": 0.125,
+            "confidence": 0.9
+          },
+          "attack": {
+            "value": 0.23542009149887438,
+            "confidence": 0.9
+          },
+          "punch": {
+            "value": 0.42941774608332217,
+            "confidence": 0.9
+          },
+          "transientConsistency": {
+            "value": 0.973712907586213,
+            "confidence": 0.9
+          },
+          "dynamicDensity": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "stereoWidth": {
+            "value": 0.022010508579511437,
+            "confidence": 0.9
+          },
+          "stereoInstability": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "centerDominance": {
+            "value": 0.9779894914204885,
+            "confidence": 0.9
+          },
+          "sideDominance": {
+            "value": 0,
+            "confidence": 0.9
+          },
+          "ambience": {
+            "value": 0.070349162290564,
+            "confidence": 0.7200000000000001
+          },
+          "dryTendency": {
+            "value": 0.929650837709436,
+            "confidence": 0.54
+          },
+          "masking": {
+            "value": 0,
+            "confidence": 0.5850000000000001
+          }
+        }
+      },
+      "attempts": [
+        {
+          "iteration": 1,
+          "plan": {
+            "detectedIssues": [
+              {
+                "issue": "lowEndBuildup",
+                "severity": 1,
+                "confidence": 0.9,
+                "band": "low",
+                "temporal": "intermittent",
+                "evidence": [
+                  "feature=0.000",
+                  "band p50/p90=0.005/0.846",
+                  "excess occupancy=0.326",
+                  "centroid=1798 Hz; rolloff=4735 Hz"
+                ]
+              },
+              {
+                "issue": "lowDynamics",
+                "band": "low",
+                "severity": 1,
+                "confidence": 0.9,
+                "temporal": "intermittent",
+                "evidence": [
+                  "band range=32.3 dB",
+                  "reference range=2.4 dB",
+                  "ratio spread=0.84"
+                ]
+              }
+            ],
+            "decisions": [
+              {
+                "stage": "multiband",
+                "targetIssue": "lowDynamics",
+                "reason": "band range=32.3 dB; reference range=2.4 dB; ratio spread=0.84",
+                "metricBefore": 0.538
+              }
+            ],
+            "skippedProcessing": [
+              "lowEndBuildup: correction budget / overlapping band",
+              "Transient emphasis / broadband compression: no sufficiently confident need",
+              "Stereo: preserve original width; no automatic widening"
+            ]
+          },
+          "stages": [
+            {
+              "kind": "multiband",
+              "parameters": {
+                "lowHz": 180,
+                "highHz": 3500,
+                "attackMs": 15,
+                "releaseMs": 120,
+                "bands": [
+                  {
+                    "thresholdDb": -18.947633471900794,
+                    "maxReductionDb": 1.2
+                  },
+                  {
+                    "thresholdDb": -18.947633471900794,
+                    "maxReductionDb": 0
+                  },
+                  {
+                    "thresholdDb": -18.947633471900794,
+                    "maxReductionDb": 0
+                  }
+                ]
+              }
+            }
+          ],
+          "objectives": {
+            "accepted": true,
+            "reasons": [],
+            "objectives": [
+              {
+                "issue": "lowDynamics",
+                "before": 0.538,
+                "after": 0.526,
+                "improved": true
+              }
+            ]
+          },
+          "safety": {
+            "accepted": true,
+            "reasons": []
+          },
+          "after": {
+            "version": 1,
+            "windows": 92,
+            "confidence": 0.9,
+            "bands": {
+              "sub": {
+                "mean": 0.0525781848509959,
+                "p50": 0.073,
+                "p90": 0.073,
+                "excessFraction": 0,
+                "rmsDb": -35.5792160360482,
+                "rangeDb": 2.5200000000000022
+              },
+              "low": {
+                "mean": 0.27123221844470835,
+                "p50": 0.005,
+                "p90": 0.824,
+                "excessFraction": 0.32608695652173914,
+                "rmsDb": -22.362227798670133,
+                "rangeDb": 31.560000000000002
+              },
+              "lowMid": {
+                "mean": 0.12382133103247463,
+                "p50": 0.17,
+                "p90": 0.17,
+                "excessFraction": 0,
+                "rmsDb": -31.800254617057174,
+                "rangeDb": 2.400000000000002
+              },
+              "mid": {
+                "mean": 0.15122440673627446,
+                "p50": 0.206,
+                "p90": 0.207,
+                "excessFraction": 0,
+                "rmsDb": -30.895339969116314,
+                "rangeDb": 2.400000000000002
+              },
+              "upperMid": {
+                "mean": 0.16043374357793952,
+                "p50": 0.218,
+                "p90": 0.219,
+                "excessFraction": 0,
+                "rmsDb": -30.62612203502773,
+                "rangeDb": 2.400000000000002
+              },
+              "presence": {
+                "mean": 0.11589814639800079,
+                "p50": 0.158,
+                "p90": 0.158,
+                "excessFraction": 0,
+                "rmsDb": -32.036702451766374,
+                "rangeDb": 2.400000000000002
+              },
+              "high": {
+                "mean": 0.08915276754262157,
+                "p50": 0.121,
+                "p90": 0.122,
+                "excessFraction": 0,
+                "rmsDb": -33.176077166612366,
+                "rangeDb": 2.400000000000002
+              },
+              "air": {
+                "mean": 0.03565920141698492,
+                "p50": 0.049,
+                "p90": 0.049,
+                "excessFraction": 0,
+                "rmsDb": -37.1560299259458,
+                "rangeDb": 2.399999999999989
+              }
+            },
+            "centroidHz": 1820.5270660588199,
+            "rolloffHz": 4780.485733695652,
+            "flux": 0.005397823434165659,
+            "crestDb": 12.781593612738833,
+            "sideRatio": 0.022098615976453264,
+            "lowSideRatio": 0.022139220035218333,
+            "correlation": 0.9557951768809301,
+            "ambienceClass": "Dry",
+            "features": {
+              "lowEndBuildup": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "muddiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "boxiness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "harshness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "brightness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "dullness": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "presence": {
+                "value": 0.5526637799518807,
+                "confidence": 0.9
+              },
+              "vocalCongestion": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              },
+              "transientDensity": {
+                "value": 0.09375,
+                "confidence": 0.9
+              },
+              "attack": {
+                "value": 0.2419133846072903,
+                "confidence": 0.9
+              },
+              "punch": {
+                "value": 0.43222043681319844,
+                "confidence": 0.9
+              },
+              "transientConsistency": {
+                "value": 0.9871452701577265,
+                "confidence": 0.9
+              },
+              "dynamicDensity": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "stereoWidth": {
+                "value": 0.022098615976453264,
+                "confidence": 0.9
+              },
+              "stereoInstability": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "centerDominance": {
+                "value": 0.9779013840235468,
+                "confidence": 0.9
+              },
+              "sideDominance": {
+                "value": 0,
+                "confidence": 0.9
+              },
+              "ambience": {
+                "value": 0.04242583625253862,
+                "confidence": 0.7200000000000001
+              },
+              "dryTendency": {
+                "value": 0.9575741637474614,
+                "confidence": 0.54
+              },
+              "masking": {
+                "value": 0,
+                "confidence": 0.5850000000000001
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

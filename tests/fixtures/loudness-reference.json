@@ -1,0 +1,68 @@
+{
+  "reference": "pyloudnorm DeMan / numpy 2.0.2; float32 input",
+  "cases": [
+    {
+      "sampleRate": 44100,
+      "frequency": 60,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -26.60439225679214
+    },
+    {
+      "sampleRate": 44100,
+      "frequency": 1000,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -23.00088126309294
+    },
+    {
+      "sampleRate": 44100,
+      "frequency": 8000,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -19.657810112216414
+    },
+    {
+      "sampleRate": 48000,
+      "frequency": 60,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -26.608214852043513
+    },
+    {
+      "sampleRate": 48000,
+      "frequency": 1000,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -23.00363736455252
+    },
+    {
+      "sampleRate": 48000,
+      "frequency": 8000,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -19.661894663957106
+    },
+    {
+      "sampleRate": 96000,
+      "frequency": 60,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -26.629837733943116
+    },
+    {
+      "sampleRate": 96000,
+      "frequency": 1000,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -23.020941112835136
+    },
+    {
+      "sampleRate": 96000,
+      "frequency": 8000,
+      "amplitude": 0.1,
+      "seconds": 1,
+      "lufs": -19.684711575564837
+    }
+  ]
+}

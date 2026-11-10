@@ -1,0 +1,2133 @@
+{
+  "version": "2.0.0-alpha.16.5-impact.67",
+  "archive_sha256": "cab57e43e6d638297dd40c6c3840b9c4af39881b7def3f2b2381207a59b4b7a9",
+  "exe_sha256": "022e175c2f3fb7b29ae91ac0ada02d70e797b71b32dc5847fceb877266dc5c80",
+  "matches_local_build_exe": true,
+  "git_repository": false,
+  "files": [
+    {
+      "path": "app.py",
+      "sha256": "af8c36565f6b7427f5b2c1c17b2c2cd95eaa542ca5cf34f16294524d75d0a616",
+      "bytes": 301790,
+      "imports": [
+        "PIL",
+        "__future__",
+        "datetime",
+        "json",
+        "native_core.air_polish",
+        "native_core.artifact_repair",
+        "native_core.audio_preview",
+        "native_core.configuration_search",
+        "native_core.drum_tail_repair",
+        "native_core.dynamic_sculpt",
+        "native_core.export_preflight",
+        "native_core.final_guard",
+        "native_core.harmonic_color",
+        "native_core.high_end_repair",
+        "native_core.intent",
+        "native_core.io",
+        "native_core.live_venue",
+        "native_core.masking",
+        "native_core.parameters",
+        "native_core.product_features",
+        "native_core.punch_designer",
+        "native_core.report",
+        "native_core.retro_audio",
+        "native_core.review_learning",
+        "native_core.sound_effects",
+        "native_core.stability_guard",
+        "native_core.stem_session",
+        "native_core.stereo_stage",
+        "native_core.sync_balance",
+        "native_core.validation_lab",
+        "native_core.workflow_status",
+        "native_core.write_guard",
+        "numpy",
+        "pathlib",
+        "queue",
+        "random",
+        "review_player_ui",
+        "runtime_support",
+        "threading",
+        "time",
+        "tkinter",
+        "tkinterdnd2"
+      ],
+      "classes": [
+        "NeonImageButton",
+        "MusicSyncV2App"
+      ],
+      "functions": []
+    },
+    {
+      "path": "launcher.py",
+      "sha256": "cf73b78d3ad98c44fdbefc507c6cfb722ee1c49433b4d20b42cccd6639f3bddc",
+      "bytes": 3024,
+      "imports": [
+        "__future__",
+        "app",
+        "json",
+        "native_core.retro_audio",
+        "native_core.stem_session",
+        "numpy",
+        "os",
+        "pathlib",
+        "pyloudnorm",
+        "runtime_support",
+        "scipy",
+        "soundfile",
+        "tkinterdnd2"
+      ],
+      "classes": [],
+      "functions": [
+        "_portable_self_test"
+      ]
+    },
+    {
+      "path": "MusicSync.spec",
+      "sha256": "bc2aadc0fd94fd14e7f31d8e3d41caa583ce9a2e5fc0ee6315a2e034b54535b3",
+      "bytes": 2238
+    },
+    {
+      "path": "native_core/__init__.py",
+      "sha256": "f4dc11f8ed112be456b4a93759e101c5d3ab6550fa3dedbeee682f0598ca750d",
+      "bytes": 838,
+      "imports": [
+        "commander",
+        "configuration_search",
+        "intent",
+        "section_commander",
+        "stem_session"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "path": "native_core/air_polish.py",
+      "sha256": "8f826f7adc2f6320a29b58377652114a27e9bcb5f3a2bf4d91a82b0a04254911",
+      "bytes": 35339,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "intent",
+        "module",
+        "numpy",
+        "parameters",
+        "scipy",
+        "scipy.ndimage",
+        "typing"
+      ],
+      "classes": [
+        "AirPolishAnalysis",
+        "AirPolishRuntime",
+        "AirCandidateMetrics",
+        "AirCandidateEvaluation",
+        "AirPolishResult",
+        "AirPolish"
+      ],
+      "functions": [
+        "_stereo_correlation",
+        "_spectral_summary",
+        "_band_energy",
+        "_grain_smoother"
+      ]
+    },
+    {
+      "path": "native_core/analysis.py",
+      "sha256": "ee2506119471d6670b8a4540b58ba93e20ab5a6d2b41ef9a289d350340c45d3e",
+      "bytes": 9043,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "numpy",
+        "scipy"
+      ],
+      "classes": [
+        "SpectrumProfile",
+        "SectionProfile",
+        "SectionedAnalysis"
+      ],
+      "functions": [
+        "_band_mean",
+        "_stereo_metrics",
+        "_welch_power",
+        "_band_levels",
+        "analyze_spectrum",
+        "_section_starts",
+        "analyze_sections",
+        "issue_confidence"
+      ]
+    },
+    {
+      "path": "native_core/artifact_repair.py",
+      "sha256": "6e9f9458f00c141e2e1538a0ec860b65911fafb74d9ebdd93f4e1367e84f9219",
+      "bytes": 8059,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "numpy",
+        "scipy.ndimage",
+        "scipy.signal"
+      ],
+      "classes": [
+        "ArtifactRepairReport"
+      ],
+      "functions": [
+        "preserve_short_term_energy",
+        "repair_ai_artifacts"
+      ]
+    },
+    {
+      "path": "native_core/audio_preview.py",
+      "sha256": "cd76c54f1a528340a62b5463abd3eb48d0994ae42ebc5b998c3d0d0128ee01ae",
+      "bytes": 12411,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "numpy",
+        "sounddevice",
+        "threading"
+      ],
+      "classes": [
+        "PreviewSnapshot",
+        "AudioPreview"
+      ],
+      "functions": []
+    },
+    {
+      "path": "native_core/commander.py",
+      "sha256": "7e8320534a53bc5c0174818c12927468f91b84308acaedce5a3f6f67c6b2a42c",
+      "bytes": 17741,
+      "imports": [
+        "__future__",
+        "analysis",
+        "dataclasses",
+        "dsp",
+        "intent",
+        "numpy",
+        "typing"
+      ],
+      "classes": [
+        "CommanderDirective",
+        "CommanderPlan",
+        "GlobalCandidate",
+        "GlobalQualityResult",
+        "IntentCommander",
+        "GlobalQualityJudge"
+      ],
+      "functions": []
+    },
+    {
+      "path": "native_core/configuration_search.py",
+      "sha256": "ae831cc0903d56ca9555e01ae9bd4998ffe4514c89a1815d15d0ffea01793b72",
+      "bytes": 20252,
+      "imports": [
+        "__future__",
+        "commander",
+        "dataclasses",
+        "dsp",
+        "intent",
+        "itertools",
+        "numpy",
+        "time",
+        "typing"
+      ],
+      "classes": [
+        "ModuleConfiguration",
+        "ConfigurationEvaluation",
+        "ConfigurationSearchResult",
+        "ConfigurationSearchEngine"
+      ],
+      "functions": []
+    },
+    {
+      "path": "native_core/drum_tail_repair.py",
+      "sha256": "18ca28a08e6578e5bb36f85ae82c922d0f028b5d75117e14e9755946a1cd11d2",
+      "bytes": 7282,
+      "imports": [
+        "__future__",
+        "dsp",
+        "numpy",
+        "typing",
+        "uuid"
+      ],
+      "classes": [],
+      "functions": [
+        "detect_drum_tail_candidates",
+        "detect_reference_mismatch_candidates",
+        "apply_drum_tail_repairs"
+      ]
+    },
+    {
+      "path": "native_core/dsp.py",
+      "sha256": "47f888931e865b5db3ee9cc46d08826d5d06daad1607caa16ac8d54bb19fae12",
+      "bytes": 12626,
+      "imports": [
+        "__future__",
+        "math",
+        "numpy",
+        "pyloudnorm",
+        "scipy",
+        "scipy.ndimage",
+        "typing"
+      ],
+      "classes": [],
+      "functions": [
+        "ensure_stereo",
+        "mid_side_encode",
+        "mid_side_decode",
+        "db_to_gain",
+        "gain_to_db",
+        "peak_db",
+        "rms_db",
+        "measure_lufs",
+        "match_rms",
+        "smooth_envelope",
+        "_safe_filtfilt",
+        "_safe_sosfiltfilt",
+        "_rbj_coefficients",
+        "static_eq",
+        "highpass",
+        "bandpass",
+        "_apply_target",
+        "blend_processed",
+        "static_eq_targeted",
+        "highpass_targeted",
+        "_dynamic_band_cut_core",
+        "dynamic_band_cut",
+        "true_peak_db",
+        "lookahead_limiter"
+      ]
+    },
+    {
+      "path": "native_core/dynamic_sculpt.py",
+      "sha256": "08d7eacee3414cebe42ae2b122b0a54bdc1040dbc5aadfc6119a58bcf5f7d9d5",
+      "bytes": 32677,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "intent",
+        "module",
+        "numpy",
+        "parameters",
+        "scipy",
+        "scipy.ndimage",
+        "typing"
+      ],
+      "classes": [
+        "DynamicsBandDefinition",
+        "DynamicsBandAnalysis",
+        "DynamicsBandRuntime",
+        "DynamicCandidateMetrics",
+        "DynamicCandidateEvaluation",
+        "DynamicSculptAnalysis",
+        "DynamicSculptResult",
+        "DynamicSculpt"
+      ],
+      "functions": [
+        "_safe_sosfiltfilt",
+        "_extract_band",
+        "_frame_envelope",
+        "_percentile_stats",
+        "_global_variability",
+        "_stereo_correlation",
+        "_transient_retention",
+        "_smooth_gain_frames",
+        "_role_targets"
+      ]
+    },
+    {
+      "path": "native_core/export_preflight.py",
+      "sha256": "9719c9dcc0307b84ef5b1c3872f6bee6cb24221f16b058d7ad06b1f06724f4fc",
+      "bytes": 4057,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "numpy",
+        "pathlib"
+      ],
+      "classes": [
+        "ExportPreflightResult"
+      ],
+      "functions": [
+        "inspect_export"
+      ]
+    },
+    {
+      "path": "native_core/final_guard.py",
+      "sha256": "0f07243f983cb46e442ed3b46d7a163b17e787c3eb7864a003de50209654aff5",
+      "bytes": 29876,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "numpy",
+        "scipy",
+        "scipy.ndimage",
+        "typing"
+      ],
+      "classes": [
+        "FinalGuardAttempt",
+        "FinalGuardResult"
+      ],
+      "functions": [
+        "_crest_db",
+        "_macro_dynamics",
+        "_remove_dc",
+        "_musical_mastering_polish",
+        "_oversampled_two_stage_limiter",
+        "_preserve_short_term_envelope",
+        "_representative_mastering_excerpt",
+        "_render_attempt",
+        "finalize",
+        "finalize_gain_off_uniform"
+      ]
+    },
+    {
+      "path": "native_core/fingerprint.py",
+      "sha256": "b9896b74a5aeb8fd284e7f66ba989f27636356b139e742bfbdafd78d58960f08",
+      "bytes": 2569,
+      "imports": [
+        "__future__",
+        "dsp",
+        "hashlib",
+        "numpy",
+        "struct"
+      ],
+      "classes": [],
+      "functions": [
+        "audio_content_fingerprint"
+      ]
+    },
+    {
+      "path": "native_core/harmonic_color.py",
+      "sha256": "85dd03107fab10fd6f450b56b867122263a64b3ea88a5856f85fc9fbfaaed25c",
+      "bytes": 30097,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "intent",
+        "module",
+        "numpy",
+        "parameters",
+        "scipy",
+        "typing"
+      ],
+      "classes": [
+        "HarmonicBandDefinition",
+        "HarmonicAnalysis",
+        "HarmonicRuntime",
+        "HarmonicCandidateMetrics",
+        "HarmonicCandidateEvaluation",
+        "HarmonicColorResult",
+        "HarmonicColor"
+      ],
+      "functions": [
+        "_stereo_correlation",
+        "_spectrum_metrics",
+        "_band_energy",
+        "_safe_lowpass",
+        "_split_bands",
+        "_dc_block",
+        "_memory_curve",
+        "_shape",
+        "_oversampled_shape"
+      ]
+    },
+    {
+      "path": "native_core/high_end_repair.py",
+      "sha256": "1905b1d4709638050039d8fab5bf1de4910e5cc235f14aa20a82b3d9577ead2b",
+      "bytes": 5960,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "numpy",
+        "scipy.ndimage",
+        "scipy.signal"
+      ],
+      "classes": [
+        "HighEndRepairReport"
+      ],
+      "functions": [
+        "process_high_end"
+      ]
+    },
+    {
+      "path": "native_core/intent.py",
+      "sha256": "02fa560e547ee29b869c8d09e767bb6b8304afdcd15c55004ff6af5870ec77c7",
+      "bytes": 856,
+      "imports": [
+        "__future__",
+        "dataclasses"
+      ],
+      "classes": [
+        "IntentState"
+      ],
+      "functions": []
+    },
+    {
+      "path": "native_core/io.py",
+      "sha256": "6e84d6bd9ba6448142fe6ef71f9221656294ac7b0893f658ca41cdb84ea3e4e2",
+      "bytes": 6559,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "numpy",
+        "os",
+        "pathlib",
+        "scipy",
+        "soundfile",
+        "struct",
+        "uuid"
+      ],
+      "classes": [
+        "AudioMetadata"
+      ],
+      "functions": [
+        "load_audio",
+        "resample",
+        "write_wav",
+        "safe_export_stem",
+        "_synchsafe",
+        "_id3_text_frame",
+        "_cover_mime",
+        "_write_mp3_id3",
+        "_riff_info_chunk",
+        "_write_wav_info",
+        "write_audio"
+      ]
+    },
+    {
+      "path": "native_core/live_venue.py",
+      "sha256": "c98d6c7f2669e47a0557abacd986c20c886fccf3f70f181ec5f50e4a7c72e5c0",
+      "bytes": 4730,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "numpy",
+        "scipy.signal"
+      ],
+      "classes": [
+        "LiveVenueReport"
+      ],
+      "functions": [
+        "_venue_ir",
+        "apply_live_venue"
+      ]
+    },
+    {
+      "path": "native_core/masking.py",
+      "sha256": "c013eab87a106a4d398842a7769598f334d447d33ef4e623d5414637b789cd47",
+      "bytes": 36429,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "math",
+        "numpy",
+        "scipy",
+        "scipy.ndimage",
+        "typing"
+      ],
+      "classes": [
+        "MaskingTrackView",
+        "MaskingActionOverride",
+        "ActionRule",
+        "AdaptiveBandSearchResult",
+        "MaskingCandidateAudit",
+        "MaskingActionReport",
+        "MaskingEngineResult",
+        "MaskingActionEngine"
+      ],
+      "functions": [
+        "action_key",
+        "_band_edges",
+        "_selected_domain_mono",
+        "_adaptive_nperseg",
+        "_stft_power",
+        "_contiguous_peak_width",
+        "search_masking_frequency",
+        "_mono_detector",
+        "_rms_envelope",
+        "_activation_envelope",
+        "_target_band",
+        "apply_sidechain_duck",
+        "_normalized_band_envelope",
+        "masking_overlap",
+        "_masked_rms_change",
+        "_rule_for",
+        "_pair_conflict_score",
+        "_confidence",
+        "_allowed_max",
+        "_candidate_score"
+      ]
+    },
+    {
+      "path": "native_core/module.py",
+      "sha256": "2293233aeadfbf95e29e219ad73111f9c1cba4a49035c6bda0a06e0abeba005b",
+      "bytes": 4210,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "json",
+        "numpy",
+        "parameters",
+        "typing"
+      ],
+      "classes": [
+        "ModuleStatus",
+        "ModuleIdentity",
+        "NativeModule"
+      ],
+      "functions": []
+    },
+    {
+      "path": "native_core/parameters.py",
+      "sha256": "bd904a4a12ec1fcc38a54c9b237a5ba7985d3a72269355bfaf65cbafbba6b419",
+      "bytes": 2803,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "enum",
+        "typing"
+      ],
+      "classes": [
+        "ControlMode",
+        "ParameterSpec",
+        "Parameter"
+      ],
+      "functions": []
+    },
+    {
+      "path": "native_core/product_features.py",
+      "sha256": "bbde5c03ded33f00587453e384a0cfa03a161d86578eba4d50350c3140123543",
+      "bytes": 7774,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "dsp",
+        "io",
+        "json",
+        "numpy",
+        "os",
+        "pathlib",
+        "shutil",
+        "uuid"
+      ],
+      "classes": [
+        "UserPresetStore",
+        "ProjectLibrary",
+        "ReferenceComparison"
+      ],
+      "functions": [
+        "_atomic_json",
+        "friendly_error",
+        "compare_audio_files"
+      ]
+    },
+    {
+      "path": "native_core/punch_designer.py",
+      "sha256": "830312d902f455b6f30aa4aaea020c6e01c552b8bab4903e7babbf49452f67d1",
+      "bytes": 33328,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "intent",
+        "module",
+        "numpy",
+        "parameters",
+        "scipy",
+        "scipy.ndimage",
+        "typing"
+      ],
+      "classes": [
+        "PunchAnalysis",
+        "PunchRuntime",
+        "PunchCandidateMetrics",
+        "PunchCandidateEvaluation",
+        "PunchDesignerResult",
+        "PunchDesigner"
+      ],
+      "functions": [
+        "_moving_rms",
+        "_transient_curve",
+        "_detect_events",
+        "_event_levels",
+        "_event_variability",
+        "_timing_consistency",
+        "_stereo_correlation",
+        "_transient_retention",
+        "_smooth_db",
+        "_compress_gain",
+        "_apply_transient_shape",
+        "_apply_groove_stability"
+      ]
+    },
+    {
+      "path": "native_core/quality.py",
+      "sha256": "ed5abbbe31c1b1a244beefcf6a86f47f6eebebb9f11406f41007d292f87bbf75",
+      "bytes": 8524,
+      "imports": [
+        "__future__",
+        "analysis",
+        "dataclasses",
+        "dsp",
+        "numpy"
+      ],
+      "classes": [
+        "QualityMetrics",
+        "CandidateEvaluation"
+      ],
+      "functions": [
+        "_issues",
+        "_invalid",
+        "evaluate_candidate",
+        "select_candidate"
+      ]
+    },
+    {
+      "path": "native_core/render_cache.py",
+      "sha256": "c1049d65ad6e7ad31b62e06a997f15b94aa7b6dec2bd40eda2693c817ed1dfe2",
+      "bytes": 4019,
+      "imports": [
+        "__future__",
+        "collections",
+        "dataclasses",
+        "numpy",
+        "threading",
+        "typing"
+      ],
+      "classes": [
+        "RenderCacheStats",
+        "RenderResultCache"
+      ],
+      "functions": [
+        "estimate_result_bytes"
+      ]
+    },
+    {
+      "path": "native_core/report.py",
+      "sha256": "6413f4d565c14c2800307d040364d6c9174097b3e3a786da43f26519330b30f0",
+      "bytes": 13583,
+      "imports": [
+        "__future__",
+        "datetime",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "classes": [],
+      "functions": [
+        "_number",
+        "_module_lines",
+        "write_reports"
+      ]
+    },
+    {
+      "path": "native_core/retro_audio.py",
+      "sha256": "61b87c70921a6a1d959e504d3da050c76abb6417f6558f97fbdbd455255335ea",
+      "bytes": 6639,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "numpy",
+        "scipy"
+      ],
+      "classes": [
+        "RetroAudioReport"
+      ],
+      "functions": [
+        "_stereo",
+        "apply_retro_audio"
+      ]
+    },
+    {
+      "path": "native_core/review_learning.py",
+      "sha256": "0e656b4af90e5edafaf640f8d638f15a81f5381fdd546db4cecb3e51c4590c1c",
+      "bytes": 24741,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "json",
+        "numpy",
+        "pathlib",
+        "typing",
+        "uuid"
+      ],
+      "classes": [
+        "ReviewMarker",
+        "MixReview",
+        "LearningCandidate",
+        "PersonalTasteProfile",
+        "LearningGovernance",
+        "LearningSnapshot",
+        "ReviewLearningState"
+      ],
+      "functions": [
+        "flatten_issue_catalog"
+      ]
+    },
+    {
+      "path": "native_core/section_commander.py",
+      "sha256": "ce0bab284f2aaec2282e140e0245bc3ed3c28511210c6a42531017e10c24a6ba",
+      "bytes": 29359,
+      "imports": [
+        "__future__",
+        "analysis",
+        "configuration_search",
+        "dataclasses",
+        "dsp",
+        "intent",
+        "numpy",
+        "typing"
+      ],
+      "classes": [
+        "SectionDescriptor",
+        "SectionConfigurationCandidate",
+        "SectionDecision",
+        "SectionCommanderPlan",
+        "SectionDetector"
+      ],
+      "functions": [
+        "intent_for_section",
+        "configuration_distance",
+        "choose_coherent_configurations",
+        "raised_cosine_window",
+        "_preferred_strength",
+        "section_family_needs",
+        "score_section_configuration",
+        "smart_section_configuration_candidates"
+      ]
+    },
+    {
+      "path": "native_core/sound_effects.py",
+      "sha256": "7d10e783668e02b660fa9d8c8155c4d4a2e0533dc0111850ed92a59c9ec390d0",
+      "bytes": 4334,
+      "imports": [
+        "__future__",
+        "audioop",
+        "pathlib",
+        "sounddevice",
+        "soundfile",
+        "tempfile",
+        "wave",
+        "winsound"
+      ],
+      "classes": [
+        "SoundEffects"
+      ],
+      "functions": []
+    },
+    {
+      "path": "native_core/stability_guard.py",
+      "sha256": "36b511bfaeaf2566fff2129cfa00de2ee94aa64c627a5caaa00d2936fe9bcbe2",
+      "bytes": 15413,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "numpy",
+        "scipy.ndimage",
+        "scipy.signal"
+      ],
+      "classes": [
+        "StemAnomalyGuardReport",
+        "LevelStabilityReport"
+      ],
+      "functions": [
+        "stabilize_stem_reconstruction",
+        "enforce_true_peak_ceiling",
+        "guard_isolated_stem_artifacts",
+        "stabilize_short_term_level"
+      ]
+    },
+    {
+      "path": "native_core/stem_session.py",
+      "sha256": "d7e0c0e175ea882fbf552b183e5885664074c5bd46dbb7413d3dc730094de2ed",
+      "bytes": 125267,
+      "imports": [
+        "__future__",
+        "air_polish",
+        "analysis",
+        "artifact_repair",
+        "commander",
+        "concurrent.futures",
+        "configuration_search",
+        "dataclasses",
+        "drum_tail_repair",
+        "dsp",
+        "dynamic_sculpt",
+        "harmonic_color",
+        "hashlib",
+        "intent",
+        "io",
+        "json",
+        "masking",
+        "math",
+        "numpy",
+        "os",
+        "pathlib",
+        "punch_designer",
+        "render_cache",
+        "review_learning",
+        "section_commander",
+        "stability_guard",
+        "stereo_stage",
+        "sync_balance",
+        "time",
+        "typing",
+        "uuid"
+      ],
+      "classes": [
+        "RoleGuess",
+        "MaskingConflict",
+        "StemTrack",
+        "TrackRenderReport",
+        "SessionMixResult",
+        "StemSession"
+      ],
+      "functions": [
+        "_blend_module",
+        "_audio_role_guess",
+        "guess_role",
+        "_pan_stereo",
+        "_human_double",
+        "_guitar_double",
+        "_human_double_delay",
+        "_role_intent"
+      ]
+    },
+    {
+      "path": "native_core/stereo_stage.py",
+      "sha256": "a0afb44205b4fb7160e8eacb4e2ed88b695c0784b804f271ae83d6cfb542485f",
+      "bytes": 24873,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "dsp",
+        "intent",
+        "module",
+        "numpy",
+        "parameters",
+        "scipy",
+        "typing"
+      ],
+      "classes": [
+        "StereoStageAnalysis",
+        "StereoStageRuntime",
+        "StereoCandidateMetrics",
+        "StereoCandidateEvaluation",
+        "StereoStageResult",
+        "StereoStage"
+      ],
+      "functions": [
+        "_ms",
+        "_lr",
+        "_correlation",
+        "_side_mid_db",
+        "_mono_loss_db",
+        "_sos_lowpass",
+        "_low_side_db",
+        "_split_side",
+        "_delay_add",
+        "_room_wet"
+      ]
+    },
+    {
+      "path": "native_core/sync_balance.py",
+      "sha256": "66bc9163650b6473371bb57db5f3a7daa6bfe722acb0f6346afb4f25db965033",
+      "bytes": 34405,
+      "imports": [
+        "__future__",
+        "analysis",
+        "dataclasses",
+        "dsp",
+        "fingerprint",
+        "intent",
+        "module",
+        "numpy",
+        "parameters",
+        "quality",
+        "typing"
+      ],
+      "classes": [
+        "BandDefinition",
+        "BandRuntime",
+        "SyncBalanceAnalysis",
+        "SyncBalanceResult",
+        "SyncBalance"
+      ],
+      "functions": []
+    },
+    {
+      "path": "native_core/validation_lab.py",
+      "sha256": "d70b39cf0bc23173af9d0b73f13d0c35e936a9d6289bd6fdb531ddc6d7400b59",
+      "bytes": 13833,
+      "imports": [
+        "__future__",
+        "csv",
+        "dataclasses",
+        "dsp",
+        "final_guard",
+        "json",
+        "numpy",
+        "pathlib",
+        "stem_session",
+        "time",
+        "typing"
+      ],
+      "classes": [
+        "AudioMetrics",
+        "ValidationReport",
+        "BatchValidationItem",
+        "BatchValidationReport"
+      ],
+      "functions": [
+        "_match_rms",
+        "_delta_ratio",
+        "_boundary_added_jump",
+        "validate_sessions",
+        "validate_session_files",
+        "validate_session"
+      ]
+    },
+    {
+      "path": "native_core/workflow_status.py",
+      "sha256": "7916e84e4f6b36d33daf927883f445f4163ce8f90b696d3ab80b904f3009bb30",
+      "bytes": 5067,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "enum"
+      ],
+      "classes": [
+        "WorkflowState",
+        "WorkflowPresentation"
+      ],
+      "functions": [
+        "state_for_quality_decision"
+      ]
+    },
+    {
+      "path": "native_core/write_guard.py",
+      "sha256": "d012e7136c88e7af86a106d81277bcceb6a7186bc7e4f30e78374b6c0af8ef11",
+      "bytes": 1712,
+      "imports": [
+        "__future__",
+        "os",
+        "pathlib"
+      ],
+      "classes": [
+        "WriteBoundaryError"
+      ],
+      "functions": [
+        "managed_workspace_dir",
+        "is_within",
+        "require_managed_write"
+      ]
+    },
+    {
+      "path": "pyinstaller_hooks/hook-tkinter.py",
+      "sha256": "1f8507faf8c030056d1e137cc2cf708aa5744c27fe502307b12d1ce5e42df3ae",
+      "bytes": 376,
+      "imports": [
+        "PyInstaller.utils.hooks"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "path": "pyinstaller_hooks/pyi_rth_musicsync_tk.py",
+      "sha256": "69ab57485ce646950cf024ff2a28053a36b16d239b36e7734819f087ac9bb7fa",
+      "bytes": 263,
+      "imports": [
+        "__future__",
+        "os",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": []
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "977af9e14734bbc3ff6e870325496e60a4735190e29e84325ccb2592c8b7b711",
+      "bytes": 108
+    },
+    {
+      "path": "review_player_ui.py",
+      "sha256": "17b85f813e96ed1eeac7ffa9341f384492d2ee1d01887fce1e8b8504ba48c75e",
+      "bytes": 30582,
+      "imports": [
+        "__future__",
+        "native_core.review_learning",
+        "native_core.write_guard",
+        "pathlib",
+        "random",
+        "tkinter",
+        "typing"
+      ],
+      "classes": [
+        "MixReviewDialog",
+        "LearningManagerDialog"
+      ],
+      "functions": []
+    },
+    {
+      "path": "run_extended_validation.py",
+      "sha256": "c298c71817957da9f2d777968043a7045bd9ebc328322d0f3dcdbf7efc56c8bc",
+      "bytes": 2460,
+      "imports": [
+        "__future__",
+        "argparse",
+        "json",
+        "os",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "time"
+      ],
+      "classes": [],
+      "functions": [
+        "main"
+      ]
+    },
+    {
+      "path": "runtime_support.py",
+      "sha256": "c7d930b6e08b191da59fded6a0f748b988a0df0f5d31e5b20b411ade9e2c69c4",
+      "bytes": 4914,
+      "imports": [
+        "__future__",
+        "datetime",
+        "json",
+        "native_core.write_guard",
+        "os",
+        "pathlib",
+        "platform",
+        "shutil",
+        "subprocess",
+        "sys",
+        "threading",
+        "tkinter",
+        "traceback",
+        "typing"
+      ],
+      "classes": [],
+      "functions": [
+        "user_data_dir",
+        "crash_log_dir",
+        "workspace_dir",
+        "authenticode_status",
+        "write_crash_log",
+        "install_crash_handlers",
+        "startup_diagnostics"
+      ]
+    },
+    {
+      "path": "tests/test_adaptive_frequency_search.py",
+      "sha256": "0614e256772cfbdb57758fda2c6d4081be992f92593d6a18b27c2ffb710af529",
+      "bytes": 4253,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.masking",
+        "numpy",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "stereo",
+        "gated_tone",
+        "rule",
+        "assert_near",
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_air_polish.py",
+      "sha256": "8dea88ba1a088efe3e560e796fbf87f351ac78230ced664c39c1b99029f20f44",
+      "bytes": 4195,
+      "imports": [
+        "__future__",
+        "native_core.air_polish",
+        "native_core.intent",
+        "native_core.parameters",
+        "numpy",
+        "scipy"
+      ],
+      "classes": [],
+      "functions": [
+        "_sibilant_vocal",
+        "test_air_polish_deess_and_gain_match",
+        "test_air_polish_grain_smoothing_and_state_roundtrip",
+        "test_manual_air_setting_overrides_stale_quality_rollback",
+        "test_air_polish_all_sample_rates_finite"
+      ]
+    },
+    {
+      "path": "tests/test_air_polish_session.py",
+      "sha256": "8a1dbeaf1b001d788c86358470ad59f081217e30385745026a7613ae715e3773",
+      "bytes": 1652,
+      "imports": [
+        "__future__",
+        "native_core.intent",
+        "native_core.stem_session",
+        "pathlib"
+      ],
+      "classes": [],
+      "functions": [
+        "test_session_air_polish_and_roundtrip"
+      ]
+    },
+    {
+      "path": "tests/test_alpha10_full_chain.py",
+      "sha256": "fec01d728e086e27d05200505c5c8457998205e1efb8f791730f4807653f8cdb",
+      "bytes": 1188,
+      "imports": [
+        "native_core.intent",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib"
+      ],
+      "classes": [],
+      "functions": [
+        "test_alpha10_full_chain_finite_and_safe"
+      ]
+    },
+    {
+      "path": "tests/test_alpha16_3_ranking_rollback.py",
+      "sha256": "2832271e894a7ad7310b7c58d6aac861f0481eff3d8c913c639c7ace0c7cb803",
+      "bytes": 5876,
+      "imports": [
+        "__future__",
+        "native_core.audio_preview",
+        "native_core.commander",
+        "native_core.intent",
+        "native_core.review_learning",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "unittest"
+      ],
+      "classes": [
+        "AudioPreviewCandidateTests",
+        "MultiCandidateReviewTests",
+        "LearningRollbackTests",
+        "GlobalQualityCandidateTests",
+        "SessionLearningRoundtripTests"
+      ],
+      "functions": []
+    },
+    {
+      "path": "tests/test_alpha7_full_chain.py",
+      "sha256": "d719bc0c30cb1584f0f9e73ee7e8a82a39c50a736c0ae7a333eebc7c79d2bc5f",
+      "bytes": 2479,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.intent",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_alpha8_full_chain.py",
+      "sha256": "476f3db203c531c47932812f1e49f647cbd2b412643ef3a2da0e75db8f737b97",
+      "bytes": 3119,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.intent",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_alpha9_full_chain.py",
+      "sha256": "0ba9d9f520448ad51b185ee6457a94aae1068dbe3b82b8ff362f59335e59e55e",
+      "bytes": 2238,
+      "imports": [
+        "json",
+        "native_core.dsp",
+        "native_core.intent",
+        "native_core.stem_session",
+        "native_core.stereo_stage",
+        "numpy",
+        "pathlib"
+      ],
+      "classes": [],
+      "functions": [
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_artifact_repair.py",
+      "sha256": "e4f6ffbbcd1aba55f6133ad526e56cd9453bd9effaa38d8ee57438e24b08dad1",
+      "bytes": 6759,
+      "imports": [
+        "native_core.artifact_repair",
+        "native_core.stem_session",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_metallic_test_audio",
+        "test_modes_preserve_shape_level_and_peak",
+        "test_strong_reduces_more_than_standard",
+        "test_studio_restore_reduces_more_than_strong",
+        "test_invalid_mode_falls_back_to_strong",
+        "test_studio_restore_is_applied_per_stem",
+        "test_short_term_energy_preservation_cancels_processing_created_step",
+        "test_production_energy_settings_are_excerpt_stable_and_silence_safe",
+        "test_production_energy_settings_preserve_drum_attack_and_stereo_shape",
+        "test_gain_off_session_runs_post_correction_quality_safety"
+      ]
+    },
+    {
+      "path": "tests/test_audio_export_metadata.py",
+      "sha256": "e82debb7f73f3c7e2762c6fa5ce83a6b4602b63e5da00d780fe31a5e07d35441",
+      "bytes": 2560,
+      "imports": [
+        "PIL",
+        "__future__",
+        "native_core.io",
+        "numpy",
+        "soundfile",
+        "struct"
+      ],
+      "classes": [],
+      "functions": [
+        "_tone",
+        "test_safe_export_stem_replaces_windows_invalid_characters",
+        "test_wav_export_is_atomic_readable_and_contains_info_tags",
+        "test_mp3_export_is_readable_and_contains_id3_tags",
+        "test_mp3_export_rejects_non_image_cover"
+      ]
+    },
+    {
+      "path": "tests/test_audio_preview_player.py",
+      "sha256": "dea03436fd80020cd7f2557ed5001c2fc3fd6ef6faa16bf8338b99647da4054d",
+      "bytes": 2876,
+      "imports": [
+        "__future__",
+        "native_core.audio_preview",
+        "numpy",
+        "pytest"
+      ],
+      "classes": [],
+      "functions": [
+        "_tone",
+        "test_preview_sources_and_matching",
+        "test_raw_match_never_turns_a_down_and_uses_processed_without_master",
+        "test_seek_skip_snapshot_and_preserve_position",
+        "test_unavailable_source_is_rejected"
+      ]
+    },
+    {
+      "path": "tests/test_audit_hardening.py",
+      "sha256": "e56283d0054737c657a1f42aae6c305383536a8aa3e737052a2f1f0047aa1189",
+      "bytes": 3592,
+      "imports": [
+        "__future__",
+        "native_core.fingerprint",
+        "native_core.stem_session",
+        "native_core.sync_balance",
+        "numpy",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "_tone",
+        "_drums",
+        "test_audio_fingerprint_distinguishes_equal_level_different_spectrum",
+        "test_sync_balance_does_not_reuse_stale_analysis_for_equal_level_audio",
+        "test_sync_balance_local_section_cache_is_content_aware",
+        "test_audio_only_role_inference_handles_reference_synthetic_stems",
+        "test_filename_role_is_cross_checked_and_confidence_is_reduced_on_conflict"
+      ]
+    },
+    {
+      "path": "tests/test_commander.py",
+      "sha256": "7b4804ca8ee66fa0927ef311f2deb68f82f6d875a6a06ab35c4df56f2f37e4bb",
+      "bytes": 3482,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "native_core.commander",
+        "native_core.intent",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib"
+      ],
+      "classes": [
+        "DummyTrack"
+      ],
+      "functions": [
+        "test_commander_resolves_competing_foreground_requests",
+        "test_global_quality_judge_rolls_back_destructive_candidate",
+        "test_global_quality_judge_rejects_gain_matched_peak_overload",
+        "test_commander_session_roundtrip_and_full_chain"
+      ]
+    },
+    {
+      "path": "tests/test_configuration_search.py",
+      "sha256": "80dddfb99608b235b347de6023bb0ffc15b3ca64c2376eae413535c7c7f9ca95",
+      "bytes": 7442,
+      "imports": [
+        "__future__",
+        "native_core.commander",
+        "native_core.configuration_search",
+        "native_core.intent",
+        "native_core.io",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib"
+      ],
+      "classes": [
+        "FakeJudge"
+      ],
+      "functions": [
+        "test_module_blend_strength_endpoints",
+        "test_exact_search_evaluates_all_128_binary_combinations",
+        "test_configuration_search_session_roundtrip",
+        "test_session_search_rerenders_and_applies_selected_configuration",
+        "test_captured_family_deltas_reconstruct_full_chain"
+      ]
+    },
+    {
+      "path": "tests/test_drum_tail_repair.py",
+      "sha256": "0eb9181e6d6d1b578e7ee027298eba7552fc2d7190a108f10829a6db54b3cb09",
+      "bytes": 3239,
+      "imports": [
+        "native_core.drum_tail_repair",
+        "native_core.stem_session",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "test_reference_detector_finds_short_level_collapse",
+        "test_only_accepted_repair_changes_audio_and_is_bounded",
+        "test_legacy_accepted_candidate_is_not_applied_without_user_provenance",
+        "test_gain_off_session_bypasses_even_explicit_local_gain_repair"
+      ]
+    },
+    {
+      "path": "tests/test_dynamic_sculpt.py",
+      "sha256": "0abaf98ba234085c218350e0faff8d98ef989d6d53250a106e728bceff431e06",
+      "bytes": 4659,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.dsp",
+        "native_core.dynamic_sculpt",
+        "native_core.intent",
+        "native_core.parameters",
+        "numpy",
+        "pathlib",
+        "scipy",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "vocal_signal",
+        "drum_signal",
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_dynamic_sculpt_session.py",
+      "sha256": "366f5f6d3aa8fd6b8a16260b7c11dacbc491bbf841cc79fb87d6d26290d98595",
+      "bytes": 4248,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.intent",
+        "native_core.io",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "sys",
+        "tempfile"
+      ],
+      "classes": [],
+      "functions": [
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_export_preflight.py",
+      "sha256": "432fb98a36135e9d02beedf778d42434b9fdaa6f59f112f3f3d83b9fcbce0b4a",
+      "bytes": 1663,
+      "imports": [
+        "__future__",
+        "native_core.export_preflight",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_tone",
+        "test_preflight_passes_safe_wav",
+        "test_preflight_blocks_silence_and_clipping",
+        "test_preflight_warns_for_balance_and_missing_mp3_tags"
+      ]
+    },
+    {
+      "path": "tests/test_final_guard.py",
+      "sha256": "38b968f309cf53001a3c28e9140d23bf8e91fb1cf215187ce23d5d2b50bda49c",
+      "bytes": 6234,
+      "imports": [
+        "__future__",
+        "native_core.dsp",
+        "native_core.final_guard",
+        "native_core.stem_session",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_dynamic_program",
+        "test_final_guard_target_and_true_peak_safety",
+        "test_impact_polish_preserves_air_for_upstream_air_polish",
+        "test_final_guard_auto_retry_prefers_dynamics_over_loudness",
+        "test_final_guard_silence_preserved",
+        "test_gain_off_uniform_master_reaches_safe_fixed_target_without_rollback",
+        "test_final_guard_sample_rates_are_finite_and_safe",
+        "test_final_guard_restores_protected_input_when_every_master_candidate_fails",
+        "test_final_guard_session_settings_roundtrip"
+      ]
+    },
+    {
+      "path": "tests/test_final_guard_envelope.py",
+      "sha256": "a755e5b30d05bb4e9014d85ddbc416286f2c67c85b9a33ff2fc3fdeeb7c22441",
+      "bytes": 1145,
+      "imports": [
+        "native_core.final_guard",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_window_rms",
+        "test_mastering_envelope_guard_repairs_short_level_shift_without_clipping"
+      ]
+    },
+    {
+      "path": "tests/test_full_mix_registration.py",
+      "sha256": "747f51f7cabc3ea681f0d9968afebf86a97ef43f4f32c1fabefe9e75c722aa96",
+      "bytes": 1886,
+      "imports": [
+        "native_core.stem_session",
+        "numpy",
+        "soundfile"
+      ],
+      "classes": [],
+      "functions": [
+        "_tone",
+        "test_single_file_registration_forces_full_mix_and_skips_stem_modules",
+        "test_reference_registered_before_song_follows_first_song_sample_rate"
+      ]
+    },
+    {
+      "path": "tests/test_guitar_doubling.py",
+      "sha256": "02c8f92a61e25e2710e2b19e89b18488325c3e6c1e7f5bb7933df1422cc3a94a",
+      "bytes": 2544,
+      "imports": [
+        "native_core.stem_session",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "test_guitar_double_uses_selected_delay_and_preserves_level",
+        "test_session_defaults_to_30ms_and_only_doubles_guitar",
+        "test_human_double_role_defaults_and_exclusions"
+      ]
+    },
+    {
+      "path": "tests/test_harmonic_aliasing.py",
+      "sha256": "04d1b554ad1866dd678ee748deea2a0914c35da7688e749da82c1cc678c3f137",
+      "bytes": 2001,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.harmonic_color",
+        "numpy",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "bin_level_db",
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_harmonic_color.py",
+      "sha256": "331de7943c2d25b658236e562c2c4a87e587636aa7b97b4c517e016e872af1fa",
+      "bytes": 4884,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.dsp",
+        "native_core.harmonic_color",
+        "native_core.intent",
+        "native_core.parameters",
+        "numpy",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "bass_signal",
+        "bright_signal",
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_harmonic_color_session.py",
+      "sha256": "b7f4b5d2f5753bb337dafc26bf370400f728b2918954074c37344fc439a2e202",
+      "bytes": 4536,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.intent",
+        "native_core.io",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "sys",
+        "tempfile"
+      ],
+      "classes": [],
+      "functions": [
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_high_end_repair.py",
+      "sha256": "8b0c19c219833aafa8336252ea7f94fb40964b4ab617f451bbd79a4b64e27126",
+      "bytes": 1908,
+      "imports": [
+        "native_core.high_end_repair",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_band_level",
+        "test_hiss_reducer_targets_nine_khz_without_shape_change",
+        "test_manual_freshness_boost_lifts_presence_band",
+        "test_auto_freshness_never_exceeds_requested_limit"
+      ]
+    },
+    {
+      "path": "tests/test_live_venue.py",
+      "sha256": "cc985f7e32dda29b97807406a441e42c9402f3459d1ead0c2c580a0dc412e74d",
+      "bytes": 1151,
+      "imports": [
+        "native_core.live_venue",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_audio",
+        "test_off_is_transparent",
+        "test_all_venues_are_finite_level_safe_and_distinct"
+      ]
+    },
+    {
+      "path": "tests/test_masking_action.py",
+      "sha256": "88ba3afbad0247b65803cb11c0da8cdf8f8d4ed244ff80e98ea9117e76783899",
+      "bytes": 9308,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.dsp",
+        "native_core.masking",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "stereo",
+        "pulsed_tone",
+        "vocal_like",
+        "conflict",
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_mix_review_learning.py",
+      "sha256": "55b7036a8fafd9cdaddd0fc03e3fc639bcbb49d7c6df90c158cddf545da27308",
+      "bytes": 3692,
+      "imports": [
+        "__future__",
+        "native_core.review_learning",
+        "native_core.stem_session"
+      ],
+      "classes": [],
+      "functions": [
+        "_review",
+        "test_governance_stop_and_record_only",
+        "test_learning_inbox_requires_repeated_evidence_and_never_auto_applies",
+        "test_frozen_profile_does_not_apply_approved_candidate",
+        "test_review_serialization_and_export",
+        "test_session_roundtrip_preserves_reviews_but_cache_identity_ignores_them"
+      ]
+    },
+    {
+      "path": "tests/test_native_core.py",
+      "sha256": "2a82ec3ee00aa9e40b0c9f4d9af0f51b7e623f3c7725901f30fea2699bb5c991",
+      "bytes": 5918,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.dsp",
+        "native_core.intent",
+        "native_core.parameters",
+        "native_core.sync_balance",
+        "numpy",
+        "pathlib",
+        "scipy",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "make_test_signal",
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_performance_fast_path.py",
+      "sha256": "f37eca725d39f8a29534e0d9d4634b83e1cd104698b54e0649c2a09f4b77e64f",
+      "bytes": 4583,
+      "imports": [
+        "__future__",
+        "native_core.final_guard",
+        "native_core.harmonic_color",
+        "native_core.intent",
+        "native_core.stem_session",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_tone",
+        "test_locked_quality_decision_is_bit_identical_on_same_range",
+        "test_parallel_track_fast_path_preserves_deterministic_sum",
+        "test_final_guard_long_form_uses_preflight_and_bounded_full_renders",
+        "test_long_form_preflight_does_not_discard_safe_loudness_gain"
+      ]
+    },
+    {
+      "path": "tests/test_product_features.py",
+      "sha256": "8a0e40e5b653f15b2a0fc73b736809bdda9a5566b5d995d8d6eb585c45fa6759",
+      "bytes": 1976,
+      "imports": [
+        "__future__",
+        "native_core.product_features",
+        "numpy",
+        "soundfile"
+      ],
+      "classes": [],
+      "functions": [
+        "test_builtin_presets_cover_release_targets",
+        "test_user_preset_store_roundtrip",
+        "test_project_library_history_and_duplicate",
+        "test_friendly_error_has_actions",
+        "test_reference_comparison_scores_identical_audio_high"
+      ]
+    },
+    {
+      "path": "tests/test_punch_designer.py",
+      "sha256": "a02aa3172532e120ab814b214384f1b51a79cbd4472fab5819d309c759d9dd66",
+      "bytes": 4589,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.dsp",
+        "native_core.intent",
+        "native_core.parameters",
+        "native_core.punch_designer",
+        "numpy",
+        "pathlib",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "drum_signal",
+        "smooth_signal",
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_punch_designer_session.py",
+      "sha256": "e21d0d8f919485b6505571c036363e0d6d4e32d826f96505420e497744afaebc",
+      "bytes": 4689,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.intent",
+        "native_core.io",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "sys",
+        "tempfile"
+      ],
+      "classes": [],
+      "functions": [
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_release_audit.py",
+      "sha256": "be1eb1d0a2147cd89db3337b028447b57d687dd19b01582e01d4d8dc4e892542",
+      "bytes": 5058,
+      "imports": [
+        "native_core.audio_preview",
+        "native_core.dsp",
+        "native_core.io",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "soundfile",
+        "threading",
+        "zipfile"
+      ],
+      "classes": [],
+      "functions": [
+        "_program",
+        "_stereo_correlation",
+        "test_full_mix_reference_lifecycle_44100_and_48000_with_unicode_paths",
+        "test_cancelled_atomic_audio_write_keeps_existing_target",
+        "test_zip_utf8_filename_roundtrip"
+      ]
+    },
+    {
+      "path": "tests/test_release_readiness.py",
+      "sha256": "e5b221dc00129c387a79af51d8867bf0809e4ef02addbf85dc8528e612b0770e",
+      "bytes": 1819,
+      "imports": [
+        "__future__",
+        "pathlib"
+      ],
+      "classes": [],
+      "functions": [
+        "test_distribution_documents_are_present",
+        "test_signing_pipeline_rejects_self_signed_and_uses_sha256_timestamp",
+        "test_signed_installer_build_blocks_legal_placeholders",
+        "test_pyinstaller_packages_distribution_documents"
+      ]
+    },
+    {
+      "path": "tests/test_report_v2.py",
+      "sha256": "b729f9831c940ea4a70d940196906b71bd2d5ebc4b5c2c66ea2c59399db3555d",
+      "bytes": 2317,
+      "imports": [
+        "json",
+        "native_core.report"
+      ],
+      "classes": [],
+      "functions": [
+        "test_session_report_uses_mix_and_final_export_measurements"
+      ]
+    },
+    {
+      "path": "tests/test_retro_audio.py",
+      "sha256": "f7bb74be991dd9304eb0e205552674a5b64ac0a70abeb11be8441359a7f6c251",
+      "bytes": 1739,
+      "imports": [
+        "native_core.retro_audio",
+        "native_core.stem_session",
+        "numpy",
+        "pytest"
+      ],
+      "classes": [],
+      "functions": [
+        "_tone",
+        "test_off_is_bit_identical",
+        "test_retro_presets_are_deterministic_finite_and_peak_safe",
+        "test_amount_zero_preserves_audio",
+        "test_retro_session_settings_roundtrip"
+      ]
+    },
+    {
+      "path": "tests/test_runtime_support.py",
+      "sha256": "a0cf3c2e533d51a01ee0f470cec3c93c53ac9d7d5a1c4c106201a8d50165ebe0",
+      "bytes": 1306,
+      "imports": [
+        "__future__",
+        "pathlib",
+        "runtime_support"
+      ],
+      "classes": [],
+      "functions": [
+        "test_crash_log_uses_local_app_data_and_contains_traceback",
+        "test_startup_diagnostics_reports_missing_assets",
+        "test_user_data_dir_uses_macos_application_support"
+      ]
+    },
+    {
+      "path": "tests/test_section_commander.py",
+      "sha256": "02887b9fa42bad086e2f7e491f5fcd8f1d74f2fdafbe1fa3ce55c43824d6dcb4",
+      "bytes": 4679,
+      "imports": [
+        "__future__",
+        "native_core.configuration_search",
+        "native_core.intent",
+        "native_core.section_commander",
+        "native_core.stem_session",
+        "numpy",
+        "types"
+      ],
+      "classes": [],
+      "functions": [
+        "_song",
+        "test_section_detector_finds_real_changes",
+        "test_coherent_path_penalizes_abrupt_switches",
+        "test_session_builds_and_restores_section_plan",
+        "test_section_render_crossfade_is_finite"
+      ]
+    },
+    {
+      "path": "tests/test_sound_effects.py",
+      "sha256": "2cbf072011b2e4f98ef46a3f0eecdcb4695b25f0edd67187515d8788fa66b1d8",
+      "bytes": 2545,
+      "imports": [
+        "native_core.sound_effects",
+        "numpy",
+        "wave"
+      ],
+      "classes": [
+        "_FakeWinSound",
+        "_FakeSoundDevice"
+      ],
+      "functions": [
+        "_write_wav",
+        "test_sound_categories_can_be_disabled_independently",
+        "test_zero_master_volume_suppresses_all_playback",
+        "test_non_windows_sounddevice_fallback_plays_and_stops"
+      ]
+    },
+    {
+      "path": "tests/test_stability_guard.py",
+      "sha256": "d11f5db2cbf478c329d27c798f49212dfc5493103081c6d26e557c103e11ea14",
+      "bytes": 4578,
+      "imports": [
+        "native_core.dsp",
+        "native_core.stability_guard",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "test_isolated_metallic_other_stem_event_is_attenuated",
+        "test_anomaly_guard_leaves_normal_named_tracks_untouched",
+        "test_level_guard_repairs_short_processing_dip",
+        "test_level_guard_tames_short_processing_jump",
+        "test_true_peak_safety_uses_oversampled_measurement",
+        "test_uniform_level_guard_ignores_small_continuous_differences",
+        "test_uniform_level_guard_repairs_only_brief_clear_excursion",
+        "test_uniform_fixed_never_creates_local_gain_automation"
+      ]
+    },
+    {
+      "path": "tests/test_stem_reconstruction_guard.py",
+      "sha256": "0285950e938ea0b3581962aad1e444bd02588ad9a440a4e1db40ba40fa7f734d",
+      "bytes": 1644,
+      "imports": [
+        "native_core.stability_guard",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_rms",
+        "test_stem_reconstruction_guard_reduces_short_level_mismatch",
+        "test_stem_reconstruction_guard_does_not_move_a_persistent_transition"
+      ]
+    },
+    {
+      "path": "tests/test_stem_session.py",
+      "sha256": "5a002b0b5898841e0ff5fbd0abbbd4a1e0eca882e6cdb75ba2a6e5ce46322c61",
+      "bytes": 8331,
+      "imports": [
+        "__future__",
+        "json",
+        "native_core.dsp",
+        "native_core.intent",
+        "native_core.masking",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib",
+        "soundfile",
+        "sys",
+        "tempfile"
+      ],
+      "classes": [],
+      "functions": [
+        "tone",
+        "drums",
+        "run_tests"
+      ]
+    },
+    {
+      "path": "tests/test_stereo_stage.py",
+      "sha256": "58efe122fb5e9a67303996c5d78a5c4a2ac7b1b3030c1ee28362b0a28aa86941",
+      "bytes": 2065,
+      "imports": [
+        "native_core.intent",
+        "native_core.parameters",
+        "native_core.stereo_stage",
+        "numpy",
+        "pytest"
+      ],
+      "classes": [],
+      "functions": [
+        "make_stereo",
+        "test_center_is_preserved_and_rms_matched",
+        "test_low_side_is_reduced",
+        "test_sample_rates_are_finite",
+        "test_state_roundtrip_and_modes"
+      ]
+    },
+    {
+      "path": "tests/test_stereo_stage_session.py",
+      "sha256": "0dd5765acb0198ab404077ffa4f74b658ddca64bf5e9c686dbdb8ae73096a8e7",
+      "bytes": 1285,
+      "imports": [
+        "native_core.intent",
+        "native_core.stem_session",
+        "numpy",
+        "pathlib"
+      ],
+      "classes": [],
+      "functions": [
+        "test_session_stage_and_roundtrip"
+      ]
+    },
+    {
+      "path": "tests/test_validation_optimization.py",
+      "sha256": "6f0cd646e6a8571efa90d5fa92005c00d4d980bdafd9690ba4fe2460e3f59b77",
+      "bytes": 3876,
+      "imports": [
+        "__future__",
+        "native_core.intent",
+        "native_core.render_cache",
+        "native_core.stem_session",
+        "native_core.validation_lab",
+        "numpy"
+      ],
+      "classes": [],
+      "functions": [
+        "_session",
+        "_render",
+        "test_render_cache_hits_and_invalidates_on_intent_change",
+        "test_render_cache_respects_byte_budget",
+        "test_validation_report_is_deterministic_and_serializable",
+        "test_batch_validation_continues_after_one_session_error_and_writes_csv"
+      ]
+    },
+    {
+      "path": "tests/test_workflow_status.py",
+      "sha256": "9b391e9ee3a2c5269acab908733c1bb9f3357cd55758b77cfbb9a3f7d9ed96a4",
+      "bytes": 835,
+      "imports": [
+        "native_core.workflow_status"
+      ],
+      "classes": [],
+      "functions": [
+        "test_every_workflow_state_has_visible_presentation",
+        "test_raw_rollback_is_completed_protected_not_error",
+        "test_busy_states_are_explicit"
+      ]
+    },
+    {
+      "path": "tests/test_write_guard.py",
+      "sha256": "adc9cf09fe959544b4ec5230d73506168d4d3671e7d2cb262d1754596d2f1e49",
+      "bytes": 1314,
+      "imports": [
+        "__future__",
+        "native_core.write_guard",
+        "pathlib",
+        "pytest"
+      ],
+      "classes": [],
+      "functions": [
+        "test_write_guard_allows_only_managed_root",
+        "test_write_guard_rejects_prefix_collision",
+        "test_installer_scripts_have_delete_sentinel_and_fixed_target"
+      ]
+    },
+    {
+      "path": "tools/build_macos.py",
+      "sha256": "94552376e9e32abd7dbedd4c71f3b4bb29afe5ecb3406bfae5844f615aad05e0",
+      "bytes": 896,
+      "imports": [
+        "__future__",
+        "pathlib",
+        "platform",
+        "shutil",
+        "subprocess",
+        "sys"
+      ],
+      "classes": [],
+      "functions": [
+        "main"
+      ]
+    },
+    {
+      "path": "tools/package_portable.py",
+      "sha256": "f2bee6ebcaa2d89a34ab0bb0e2e415d179bfb1d7391bc52f3b0376667fc2bd0d",
+      "bytes": 1931,
+      "imports": [
+        "__future__",
+        "argparse",
+        "pathlib",
+        "zipfile"
+      ],
+      "classes": [],
+      "functions": [
+        "package",
+        "main"
+      ]
+    },
+    {
+      "path": "validate_session.py",
+      "sha256": "81af4a0b5636409e82261753681db57f872a15c019fcafdbe1da984983b325b2",
+      "bytes": 1408,
+      "imports": [
+        "__future__",
+        "argparse",
+        "native_core.stem_session",
+        "native_core.validation_lab",
+        "pathlib"
+      ],
+      "classes": [],
+      "functions": [
+        "main"
+      ]
+    }
+  ]
+}

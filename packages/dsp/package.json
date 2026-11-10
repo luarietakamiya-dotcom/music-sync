@@ -1,0 +1,45 @@
+{
+  "name": "@music-sync/dsp",
+  "version": "0.15.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "description": "Host-independent measurement filters and offline audio processing",
+  "author": "Music Sync contributors",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "docs"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@music-sync/shared": "0.15.0"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "keywords": [
+    "audio",
+    "music-sync",
+    "local-first",
+    "esm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luarietakamiya-dotcom/music-sync.git",
+    "directory": "packages/dsp"
+  },
+  "homepage": "https://github.com/luarietakamiya-dotcom/music-sync#readme",
+  "bugs": {
+    "url": "https://github.com/luarietakamiya-dotcom/music-sync/issues"
+  }
+}

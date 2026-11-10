@@ -1,0 +1,32 @@
+import { expect, test } from '@playwright/test';
+
+test('whole-song blind trial matches RAW sources, hides their identity and restores the previous monitor settings', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#blind-song')).toBeDisabled();
+  await page.locator('#compare-demo-button').click();
+  await expect(page.locator('#blind-song')).toBeEnabled();
+  await page.locator('#match-toggle').uncheck();
+  await page.locator('#select-b').click();
+  await page.locator('#seek').evaluate((el: HTMLInputElement) => { el.value = '2'; el.dispatchEvent(new Event('input')); });
+  await page.locator('#blind-song').click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(page.locator('#audition-time')).toContainText('0:02');
+  await expect(page.locator('#audition-result')).toBeEmpty();
+  await page.locator('#audition-x').click();
+  await expect(page.locator('#audition-x')).toHaveAttribute('aria-pressed','true');
+  await page.locator('#audition-y').click();
+  await expect(page.locator('#audition-y')).toHaveAttribute('aria-pressed','true');
+  await page.locator('#audition-restart').click();
+  await expect(page.locator('#audition-time')).toContainText('0:02');
+  await page.locator('#audition-preference').selectOption('same');
+  await page.locator('#audition-reveal').click();
+  await expect(page.locator('#audition-result')).toContainText('好みの差はありません');
+  await page.locator('#audition-reveal').click();
+  await expect(page.locator('#audition-result')).toBeEmpty();
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+  await expect(page.locator('#select-b')).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('#match-toggle')).not.toBeChecked();
+  await expect(page.locator('#play-time')).toContainText('0:02');
+});

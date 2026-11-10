@@ -1,0 +1,16 @@
+name: Feature request
+description: Propose a focused improvement
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Creator or developer need
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal, phase and validation plan
+      description: Explain local processing, licensing and Core reuse implications.
+    validations:
+      required: true

@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Music Sync Web — open-source audio analysis for AI musicians and independent creators. Your audio stays on your device." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <title>Music Sync Web — Audio workspace</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="ワークスペース">
+      <a class="brand" href="./"><span class="brand-icon">≋</span><span>MUSIC SYNC<span class="brand-sub">WEB WORKSPACE</span></span></a>
+      <span class="nav-heading">WORKSPACE</span>
+      <a class="nav-item" href="#analysis-heading"><span>◉</span> 音声解析 <small>01</small></a>
+      <a class="nav-item active" href="#comparison-heading"><span>◫</span> A/B 比較 <small>02</small></a>
+      <a class="nav-item" href="#dsp-heading"><span>≋</span> DSP チェーン <small>03</small></a>
+      <a class="nav-item" href="#master-heading"><span>✧</span> マスタリング <small>04</small></a>
+      <a class="nav-item" href="#sound-color-heading"><span>♫</span> 音色・演出 <small>05</small></a>
+      <a class="nav-item" href="#notification-settings"><span aria-hidden="true">♪</span> SE音量</a>
+      <div class="sidebar-bottom"><span class="local-dot"></span> ローカル処理<br /><small>音声は端末から送信されません</small><div class="version">OPEN SOURCE · v0.15.2</div></div>
+    </aside>
+    <main>
+      <header class="topbar"><span>WORKSPACE <span class="slash">/</span> <strong>曲を仕上げる</strong></span><div class="topbar-actions"><a class="se-settings-link" href="#notification-settings">SE音量</a><span class="privacy-badge">● PRIVATE BY DEFAULT</span></div></header>
+      <section class="page-heading"><div><div class="eyebrow">LISTEN CLOSER. COMPARE FAIRLY.</div><h1>曲を入れて、おまかせで仕上げる。</h1><p>音に合わせて必要な補正を選び、測定結果を確かめて音声を保存。すべてこのブラウザ内で。</p></div><span class="phase-badge">AUTO FINISH</span></section>
+
+      <section class="notification-toolbar" id="notification-settings" aria-labelledby="notification-heading">
+        <h2 id="notification-heading">通知音（SE）</h2>
+        <label class="notification-switch"><input id="se-enabled" type="checkbox" checked> 通知音を鳴らす</label>
+        <label class="notification-volume" for="se-volume">SE音量 <span id="se-volume-value">25%</span><input id="se-volume" type="range" min="0" max="100" value="25"></label>
+        <div class="notification-tests"><button id="se-test-success" class="button" type="button">完了音を試す</button><button id="se-test-error" class="button" type="button">エラー音を試す</button></div>
+        <p class="notification-description">処理中・完了・エラーの通知音です。音楽の試聴・保存とは別の音量です。</p>
+        <p id="se-status" aria-live="polite"></p>
+      </section>
+      <section id="dropzone" class="dropzone" aria-labelledby="import-title">
+        <div class="upload-icon" aria-hidden="true">↥</div><div><h2 id="import-title">音源・STEMをドロップ</h2><p>1本の完成音源、または複数のSTEM・ボーカル＋伴奏。WAV / FLAC</p><p id="input-capacity">単体WAVは20分・512 MiBまで分割して仕上げられます。モードと出力先を選び、原音と比較してWAVを保存できます。</p></div>
+        <label class="button primary file-label">ファイルを選択<input id="file-input" type="file" accept=".wav,.flac,audio/wav,audio/flac" multiple aria-label="音声ファイルを選択" /></label>
+        <span class="demo-text">まず試すなら <button id="demo-button" class="text-button">デモ音源を解析 ↗</button></span>
+      </section>
+      <section class="easy-finish-panel" aria-labelledby="easy-finish-heading">
+        <div class="section-heading"><h2 id="easy-finish-heading">迷ったら、これだけ <span>EASY FINISH</span></h2></div>
+        <ol class="easy-steps"><li><b>1</b> 曲・STEMを読み込む</li><li><b>2</b> おまかせで仕上げる</li><li><b>3</b> 音声をダウンロード</li></ol>
+        <p>音響の設定は不要です。AUTOで必要な補正を選び、品質条件を通過した仕上がりだけ保存します。</p>
+        <div class="easy-finish-controls">
+          <label for="output-profile">使い道（迷ったらおまかせ）<select id="output-profile"></select></label>
+          <button id="easy-finish-download" class="button primary" disabled>おまかせで仕上げて保存</button>
+        </div>
+        <details class="easy-output-details"><summary>使い道ごとの音量の目安</summary><p id="output-description"></p></details>
+        <p id="easy-finish-status" aria-live="polite">まず音源を読み込んでください。</p>
+        <div class="easy-links"><a href="#comparison-heading">原音と仕上がりを聴き比べる</a><a href="#auto-heading">自分好みに調整する</a><a href="#audio-export-heading">MP3・曲情報・ジャケットを設定</a><a href="#project-heading">作業を保存・再開</a><a href="#reference-heading">好きな曲の方向に仕上げる</a><a href="#batch-heading">複数曲をまとめて仕上げる</a></div>
+        <p class="comparison-footnote">このボタンは追加調整・音色演出を標準に戻し、選んだ使い道で仕上げます。原音を保持し、保存後もA/Bで聴き比べられます。</p>
+      </section>
+
+      <details id="reference-panel" class="auto-panel reference-panel" aria-labelledby="reference-heading">
+        <summary class="section-heading workspace-summary"><h2 id="reference-heading">好きな曲の方向に仕上げる <span>REFERENCE</span></h2></summary>
+        <p>参考曲の音色・低域・密度を調べ、今の曲に必要な補正だけ加えます。参考曲の音量をそのままコピーする機能ではありません。</p>
+        <fieldset id="reference-settings"><legend>参考にする曲</legend>
+          <div id="reference-dropzone" class="stem-dropzone"><strong>好きな曲を1曲ドロップ</strong><p>WAV / FLAC。現在のOriginalやProcessedは置き換えません。</p>
+            <label class="button file-label">参考曲を選ぶ<input id="reference-input" type="file" accept=".wav,.flac,audio/wav,audio/flac" aria-label="仕上げの参考曲を選択"></label></div>
+          <p id="reference-name">参考曲は未選択です。</p>
+          <div class="finish-controls"><label class="reference-toggle"><input id="reference-enabled" type="checkbox" checked disabled> この参考曲の方向を使う</label>
+            <label>近づける強さ<select id="reference-strength"><option value="0.35">控えめ</option><option value="0.65" selected>標準</option><option value="1">はっきり</option></select></label></div>
+          <div class="dsp-actions"><button id="reference-finish" class="button primary" disabled>参考曲の方向で仕上げる</button><button id="reference-clear" type="button" class="button" disabled>参考曲を外す</button></div>
+        </fieldset>
+        <p id="reference-status" aria-live="polite">参考曲を選んだ後、AUTOなどの仕上げにも反映します。読み込みだけでは現在のBを変更しません。</p>
+        <p id="reference-result" aria-live="polite"></p>
+        <p class="comparison-footnote">曲の構成・演奏・ボーカルそのものを再現するものではありません。測定と品質判定により、補正を弱めたり見送る場合があります。比較は音量をそろえて聴けます。参考曲と補正対象は24 kHz以上の音楽に対応し、2秒未満や解析の確かさが低い音源では参考補正を見送ります。</p>
+      </details>
+      <details id="batch-panel" class="auto-panel batch-panel" aria-labelledby="batch-heading">
+        <summary class="section-heading workspace-summary"><h2 id="batch-heading">複数曲をまとめて仕上げる <span>ALBUM / BATCH</span></h2></summary>
+        <p>完成した曲をまとめて入れ、曲ごとに仕上げた後、音量感をそろえます。STEMの合成とは別の機能です。</p>
+        <div id="batch-dropzone" class="stem-dropzone"><strong>完成曲をまとめてドロップ</strong><p>WAV / FLAC、最大20曲。1曲ずつ処理し、原音は保持します。</p><label class="button file-label">まとめて曲を選ぶ<input id="batch-input" type="file" accept=".wav,.flac,audio/wav,audio/flac" multiple aria-label="一括仕上げする完成曲を選択"></label></div>
+        <p>現在のモード・仕上がり調整・出力先・有効な参考曲を使います。安全にそろえられる共通の音量を選び、無理な音圧上昇を避けます。</p>
+        <div class="dsp-actions"><button id="batch-run" class="button primary" disabled>まとめて仕上げる</button><button id="batch-download-all" class="button" disabled>仕上がりをまとめて保存（ZIP）</button><button id="batch-clear" class="button" disabled>曲リストをクリア</button></div>
+        <p id="batch-target"></p><div id="batch-list" class="batch-list" aria-label="一括仕上げの曲一覧"></div><p id="batch-status" aria-live="polite">ここに追加した曲は、単体のA/BとSTEMリストを置き換えません。</p>
+        <p class="comparison-footnote">結果は1曲ずつA/B試聴できます。保存形式・曲情報・ジャケットは下の「音声の保存形式」を使います。無音・クリッピングなどの問題がある曲は個別に保留し、ほかの曲を続けます。</p>
+      </details>
+
+      <section class="auto-panel" aria-labelledby="stems-heading">
+        <div class="section-heading"><h2 id="stems-heading">STEM / ボーカル＋伴奏 <span>MULTITRACK INPUT</span></h2></div>
+        <p>分けて書き出した素材をまとめて読み込めます。曲の先頭がそろった、同じサンプルレートの素材を使ってください。</p>
+        <fieldset id="stem-settings" class="sound-color-panel">
+          <legend>素材からミックスを作る</legend>
+          <div class="sound-color-controls">
+            <label for="stem-mode">素材の組み合わせ<select id="stem-mode"><option value="stems">STEM（2〜16素材）</option><option value="vocal-instrumental">ボーカル＋伴奏（2素材）</option></select></label>
+          </div>
+          <div id="stem-dropzone" class="stem-dropzone">
+            <strong>STEM / ボーカル＋伴奏をここへドロップ</strong><p>まとめて、または1つずつ追加できます。</p>
+            <label class="button primary file-label">素材を追加<input id="stem-file-input" type="file" accept=".wav,.flac,audio/wav,audio/flac" multiple aria-label="STEMまたはボーカルと伴奏を選択" /></label>
+          </div>
+          <div id="stem-pair-inputs" hidden>
+            <p>名前から役割が分からない素材は、次の枠に1つずつ追加できます。</p>
+            <label class="stem-auto-balance"><input id="stem-auto-balance" type="checkbox" checked /> 声と伴奏の重なりを自動で整える</label>
+            <p class="comparison-footnote">素材の役割と帯域を調べ、必要なら声の音量と伴奏の重なる帯域を控えめに調整します。効果を確認できなければ伴奏の音色は変えません。</p>
+            <div class="sound-color-controls">
+              <div id="stem-vocal-zone" class="stem-dropzone"><strong>ボーカルをドロップ</strong><label class="button file-label">声を選ぶ<input id="stem-vocal-input" type="file" accept=".wav,.flac" aria-label="ボーカル素材を選択" /></label></div>
+              <div id="stem-instrumental-zone" class="stem-dropzone"><strong>伴奏をドロップ</strong><label class="button file-label">伴奏を選ぶ<input id="stem-instrumental-input" type="file" accept=".wav,.flac" aria-label="伴奏素材を選択" /></label></div>
+            </div>
+          </div>
+          <label><input type="checkbox" id="stem-multitrack-auto" checked> 複数STEMの歌と低音の重なりを自動で整える</label>
+          <p class="comparison-footnote">3素材以上のSTEMで使えます。メインボーカルとコーラスは名前から候補を設定します。役割を確認し、必要なら変更できます。</p>
+          <details id="stem-auto-options" open>
+            <summary>自動ミックスの詳細</summary>
+            <label><input type="checkbox" id="stem-vocal-support" checked> フレーズの途中で小さくなる歌声を控えめに支える</label>
+            <p class="comparison-footnote">前後の歌声と伴奏を調べ、短く引っ込む箇所だけ補助します。反映するには「ミックスを作り直す」を押してください。</p>
+          </details>
+          <details id="stem-studio-controls" open><summary>STEM別の補修・ギターの広がり</summary>
+            <p>設定を変えたら「ミックスを作り直す」で試聴用のAに反映します。</p>
+            <label><input type="checkbox" id="studio-restore" checked> STUDIO_RESTORE（素材ごとにざらつき・高域を補修）</label>
+            <p>補修を採用した素材と適用秒数は一覧に表示します。仕上げでは素材側の補修を活かします。</p>
+            <label><input type="checkbox" id="guitar-double" checked> ギターSTEMにHuman Doubleを加える</label>
+            <div class="finish-controls"><label>二重奏の時間差（ms）<input id="double-ms" type="number" value="30" min="12" max="45" step="1"></label><label>Human Double量 <output for="double-amount">65</output><input type="range" id="double-amount" min="0" max="100" value="65"></label></div>
+            <label><input type="checkbox" id="stem-stabilize"> 原曲との差が急変した区間を安定化</label>
+            <label>比較用の原曲WAV（STEMと同じ開始位置・長さ）<input type="file" id="stem-reference" accept=".wav,audio/wav"></label>
+            <details><summary>安定化の詳細設定</summary><div class="finish-controls">
+              <label>検出感度（dB）<input id="ref-sense" type="number" value="0.4" min="0.1" max="3" step="0.1"></label><label>補修する区間の上限（ms）<input id="ref-duration" type="number" value="300" min="50" max="1000" step="50"></label>
+              <label>最大補正（±dB）<input id="ref-max" type="number" value="1" min="0" max="3" step="0.1"></label><label>曲全体の最大補正範囲（%）<input id="ref-percent" type="number" value="3" min="0" max="10" step="0.1"></label><label>許容する差（±dB）<input id="ref-tolerance" type="number" value="0.3" min="0" max="2" step="0.1"></label>
+            </div></details>
+          </details>
+          <p class="comparison-footnote">「この素材を聴く」で中身を確認できます。素材名や役割は目安です。実際の音を聴いて役割を変更できます。</p>
+          <div id="stem-track-list" aria-label="STEM素材一覧"></div>
+          <div class="dsp-actions"><button id="stem-render" class="button primary" disabled>ミックスを作り直す</button><button id="stem-clear" class="button">素材リストをクリア</button></div>
+          <p id="stem-status" aria-live="polite">素材はまだありません。合成したミックスをAにし、AUTO / IMPACT / LIVEで仕上げられます。</p>
+          <div id="stem-audition" hidden>
+            <h3>STEMの調整を耳で比較</h3>
+            <p id="audition-range"></p>
+            <button type="button" id="blind-stem" class="button">調整前後を伏せて聴く</button>
+          </div>
+          <p id="stem-capacity" class="comparison-footnote" aria-live="polite">WAVのみなら最長20分・合成512 MiBまで。FLACを含む場合の合成上限は48 kHzで約4分22秒です。</p>
+          <p class="comparison-footnote">元のファイルを保持し、素材は先頭から同期します。短い素材の末尾は無音で補います。拍や歌い出しの自動位置合わせ、1曲からの音源分離は含みません。役割・音量・含める設定の変更は「ミックスを作り直す」で反映します。</p>
+        </fieldset>
+      </section>
+      <section class="auto-panel" aria-labelledby="auto-heading">
+        <div class="section-heading"><h2 id="auto-heading">どんな仕上がりにしますか？ <span>AUTO SOUND DIRECTION</span></h2></div>
+        <p>迷ったらAUTO。曲を調べて、必要な補正だけを選びます。モードを押すと仕上げを開始します。</p>
+        <div class="mode-grid">
+          <button id="mode-AUTO" class="mode-choice" aria-pressed="true" disabled><strong>AUTO</strong><span>NATURAL</span><small>曲の良さを残して、自然に整える</small></button>
+          <button id="mode-IMPACT" class="mode-choice" aria-pressed="false" disabled><strong>IMPACT</strong><span>PUNCH &amp; PRESENCE</span><small>低域を整え、立ち上がりと存在感を</small></button>
+          <button id="mode-LIVE" class="mode-choice" aria-pressed="false" disabled><strong>LIVE</strong><span>STAGE &amp; VENUE</span><small>会場の反射と響きで、客席にいるような奥行きを</small></button>
+        </div>
+        <h3 class="optional-adjustments-heading">好みに合わせたいときだけ調整</h3>
+        <fieldset id="finish-preferences" class="sound-color-panel">
+          <legend id="finish-preferences-heading">仕上がりを自分好みに</legend>
+          <p>好きな項目を組み合わせてください。すべて「そのまま」なら、曲に必要な自動補正だけを行います。</p>
+          <label for="treble-repair">高域補修<select id="treble-repair"><option value="auto" selected>おまかせ</option><option value="off">オフ</option><option value="light">弱め</option><option value="standard">標準</option><option value="strong">強め</option></select></label>
+          <p>持続するサーッという音を調べ、必要なところだけ整えます。</p>
+          <p>ざらつき除去は、声や楽器の音程の芯を保護し、その周囲の細かい雑音成分をスペクトル補修します。音量をそろえて聴き比べられます。</p>
+          <label>AI生成音のざらつき除去<select id="grain-mode"><option value="off">オフ</option><option value="light">LIGHT（弱）</option><option value="standard">STANDARD（標準）</option><option value="strong">STRONG（強）</option></select></label>
+          <details id="studio-finish-controls"><summary>ざらつき・高域・音圧の詳細設定</summary><div class="finish-controls">
+            <label>ざらつき除去量 <output for="grain-amount">100</output><input type="range" id="grain-amount" min="0" max="100" value="100"></label>
+            <label><input type="checkbox" id="grain-repeat"> 素材別OFFの保護を上書きして全体を追加補修する</label>
+            <label><input type="checkbox" id="hiss-enabled" checked> 持続するヒスを抑える</label>
+            <label>ヒス中心周波数（Hz）<input id="hiss-hz" type="number" value="9000" min="7000" max="11000" step="100"></label><label>最大除去量（dB）<input id="hiss-db" type="number" value="5" min="0" max="5" step="0.1"></label>
+            <label><input type="checkbox" id="clarity-enabled" checked> 瑞々しさ補正（4.75 kHz）</label>
+            <label><input type="checkbox" id="clarity-auto" checked> 明瞭さの補正量を自動調整</label>
+            <label>ブースト上限（dB）<input id="clarity-db" type="number" value="1" min="0" max="3.5" step="0.1"></label>
+            <label>音圧の攻め具合（35が標準） <output for="master-aggression">35</output><input type="range" id="master-aggression" min="0" max="100" value="35"></label>
+          </div></details>
+          <p id="finish-applied-summary" aria-live="polite"></p>
+          <div id="finish-controls" class="finish-controls"></div>
+          <div class="sound-color-controls">
+            <button id="finish-preferences-apply" class="button primary" disabled>この調整で仕上げる</button>
+            <button id="finish-preferences-reset" class="button">調整をリセット</button>
+          </div>
+          <p id="finish-settings-status" aria-live="polite" hidden></p>
+          <p id="preferences-result" aria-live="polite">選択後、AUTOなどを押すと適用します。選ぶだけでは現在のBは変わりません。</p>
+        </fieldset>
+        <fieldset id="sound-color-settings" class="sound-color-panel">
+          <legend id="sound-color-heading">音色・演出イコライザー</legend>
+          <p>名前で選ぶだけ。古い音源風の質感も作れます。選択後、AUTOなどを押すか「この音色でBを作る」で適用してください。</p>
+          <div class="sound-color-controls">
+            <label for="sound-color-preset">音の種類<select id="sound-color-preset"></select></label>
+            <label for="sound-color-intensity">強さ<select id="sound-color-intensity"><option value="gentle">控えめ</option><option value="standard" selected>標準</option><option value="vivid">はっきり</option></select></label>
+            <button id="sound-color-apply" class="button" disabled>この音色でBを作る</button>
+          </div>
+          <p id="sound-color-description"></p>
+          <div id="sound-color-bands" class="sound-color-bands" aria-label="選んだ音色のEQ設定の目安"></div>
+          <p id="sound-color-result" aria-live="polite">原音の音色が選ばれています。</p>
+          <p class="comparison-footnote">ラジオ・レコード・テープは帯域調整に加え、軽い歪み・ノイズ・揺れを使います。原音を残し、音量をそろえて比較できます。</p>
+        </fieldset>
+        <fieldset id="live-settings" class="sound-color-panel">
+          <legend>LIVEの会場感</legend>
+          <div class="sound-color-controls">
+            <label for="live-venue">会場<select id="live-venue"><option value="live-house">ライブハウス</option><option value="concert-hall" selected>ホール</option><option value="arena">アリーナ</option></select></label>
+            <label for="live-intensity">会場感<select id="live-intensity"><option value="gentle">控えめ</option><option value="standard">標準</option><option value="vivid" selected>はっきり</option></select></label>
+          </div>
+          <p id="live-description">ホールの広がりと奥行きを、はっきり加えます。選択後、下のLIVEを押してください。</p>
+          <p id="live-result" aria-live="polite">会場を選ぶだけでは、現在のBは変わりません。</p>
+        </fieldset>
+        <p id="finish-explanation" aria-live="polite">曲を読み込み、仕上がりの方向を選んでください。</p>
+        <div class="dsp-actions"><button id="wav-button" class="button primary" disabled>処理済みBをWAV保存 ↓</button><button id="undo-finish" class="button" disabled>原音へ戻す</button></div>
+        <p class="comparison-footnote">原音は書き換えません。測定上の問題がある候補は弱めて再試行し、最大3回で保留します。採用後も耳で確認してください。音質を保証するものではありません。</p>
+      </section>
+      <section class="comparison-panel" aria-labelledby="comparison-heading">
+        <div class="section-heading"><h2 id="comparison-heading">A/B リスニング <span>COMPARE</span></h2><button id="compare-demo-button" class="text-button">音量差デモを試す ↗</button></div>
+        <div class="compare-sources">
+          <article class="source-card" id="card-a"><div class="slot-heading"><button id="select-a" class="slot-button" disabled aria-pressed="true" aria-label="A / Beforeを聴く">Original / 原音</button><span class="eyebrow">REFERENCE</span></div><p id="a-name">元の音源を読み込み</p><div class="slot-stats"><span id="a-lufs">—</span><span>試聴補正 <b id="a-gain">—</b></span></div></article>
+          <article class="source-card" id="card-b"><div class="slot-heading"><button id="select-b" class="slot-button" disabled aria-pressed="false" aria-label="B / Afterを聴く">Processed / 仕上がり</button><label class="button file-label">Bを選択<input id="file-input-b" type="file" accept=".wav,.flac,audio/wav,audio/flac" aria-label="Bの音声ファイルを選択" disabled /></label></div><p id="b-name">比較する音源を読み込み・ここへドロップ</p><div class="slot-stats"><span id="b-lufs">—</span><span>試聴補正 <b id="b-gain">—</b></span></div></article>
+        </div>
+        <div class="match-controls"><label><input id="match-toggle" type="checkbox" disabled /> ラウドネスマッチ</label><span id="match-mode" class="source-badge">RAW</span><button id="blind-song" class="button" disabled>原音と仕上がりを伏せて聴く</button><button id="clear-b" class="text-button" disabled>Bを解除</button></div>
+        <p id="comparison-status" class="comparison-note" aria-live="polite">Bに別途処理した音源を読み込むと、同じ位置でA/B比較できます。</p>
+        <p class="comparison-footnote">音量補正は試聴のみに適用されます。解析値・音声ファイルは変わりません。両音源の先頭をそろえてください。</p>
+      </section>
+      <div class="status-row"><span id="status" role="status" aria-live="polite">音声を読み込むと、ここに解析結果が表示されます。</span></div>
+      <div id="error" class="error" role="alert" hidden></div>
+      <section class="wave-panel" aria-labelledby="track-name">
+        <div class="panel-top"><div><span class="eyebrow">SOURCE AUDIO</span><h2 id="track-name">まだ音声がありません</h2><p id="track-meta">オリジナルの音声を読み込んで始めましょう。</p></div><span id="source-badge" class="source-badge">ORIGINAL</span></div>
+        <div class="wave-container"><canvas id="waveform" role="img" aria-label="読み込んだ音声の波形"></canvas><span id="wave-placeholder">YOUR SOUND STARTS HERE</span></div>
+        <div class="timeline"><span>0:00</span><span id="duration">—</span></div>
+        <div class="seek-row"><label for="seek">再生位置</label><input id="seek" type="range" min="0" max="0" step="0.01" value="0" disabled /></div>
+        <div class="transport"><button id="play-button" class="play-button" disabled aria-label="再生">▶</button><button id="stop-button" class="button subtle" disabled>停止</button><span id="play-time">0:00.0 / 0:00.0</span><label class="volume">音量 <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" /></label><span class="transport-note">共通クロック · 20 ms切替</span></div>
+      </section>
+      <section class="analysis-section" aria-labelledby="analysis-heading"><div class="section-heading"><h2 id="analysis-heading">音のプロフィール <span>ANALYSIS</span></h2><button id="export-button" class="text-button" disabled>解析JSONを書き出す ↓</button></div>
+        <div class="metrics">
+          <article class="metric"><div class="metric-label">INTEGRATED LOUDNESS <span>01</span></div><div class="metric-number"><span id="lufs">—</span><small>LUFS</small></div><div class="meter-track"><span></span></div><p>K-weighted · ゲート付き統合値</p></article>
+          <article class="metric"><div class="metric-label">TRUE PEAK <span>02</span></div><div class="metric-number"><span id="true-peak">—</span><small>dBTP</small></div><div class="meter-track"><span></span></div><p>4×補間による近似値</p></article>
+          <article class="metric"><div class="metric-label">DYNAMICS <span>03</span></div><div class="metric-number"><span id="crest">—</span><small>dB</small></div><div class="meter-track"><span></span></div><p>クレストファクター · Peak − RMS</p></article>
+          <article class="metric"><div class="metric-label">STEREO CORRELATION <span>04</span></div><div class="metric-number"><span id="correlation">—</span><small>r</small></div><div class="meter-track"><span></span></div><p>−1 逆相 ／ 0 無相関 ／ +1 同相</p></article>
+        </div>
+        <div class="detail-grid"><section class="detail-panel"><h3>レベルの詳細</h3><dl><div><dt>Sample peak</dt><dd id="sample-peak">—</dd></div><div><dt>平均 RMS</dt><dd id="rms">—</dd></div><div><dt>0 dBFS以上のサンプル</dt><dd id="clipped">—</dd></div><div><dt>Side energy</dt><dd id="side">—</dd></div></dl></section><section class="detail-panel notes-panel"><h3><span class="local-dot"></span> 解析メモ</h3><p id="analysis-note">まだ解析結果はありません。</p><ul id="warnings"></ul><p class="measurement-note">LUFS / True Peakは開発中の測定実装です。規格適合認証はありません。DynamicsはLRAではありません。</p></section></div>
+      </section>
+      <details id="advanced-settings" class="advanced-panel"><summary>Advanced Settings</summary>
+        <p>通常の仕上げでは操作不要です。手動処理はAUTO / IMPACT / LIVEとは別に適用します。</p>
+      <section class="dsp-panel" aria-labelledby="dsp-heading">
+        <div class="section-heading"><h2 id="dsp-heading">音を整える <span>DSP CHAIN / 03</span></h2></div>
+        <p>ゲイン → EQ → リミッター。毎回Aから処理します。設定を変更したら「AからBを生成」を押してください。</p>
+        <fieldset id="dsp-settings"><legend>処理設定</legend>
+          <label class="bypass-control"><input id="dsp-bypass" type="checkbox" /> 全体バイパス（AをそのままBへ）</label>
+          <div class="dsp-grid">
+            <div class="dsp-module"><h3>01 / GAIN</h3><label>ゲイン (dB)<input id="dsp-gain" type="number" min="-24" max="12" step="0.1" value="0" required /></label></div>
+            <div class="dsp-module"><h3>02 / PEAKING EQ</h3><label><input id="eq-enabled" type="checkbox" /> EQを有効にする</label><label>中心周波数 (Hz)<input id="eq-frequency" type="number" min="20" max="20000" step="1" value="1000" required /></label><label>EQゲイン (dB)<input id="eq-gain" type="number" min="-12" max="12" step="0.1" value="0" required /></label><label>Q<input id="eq-q" type="number" min="0.1" max="10" step="0.001" value="0.707" required /></label></div>
+            <div class="dsp-module"><h3>03 / LINKED LIMITER</h3><label><input id="limiter-enabled" type="checkbox" checked /> リミッターを有効にする</label><label>上限 (dB)<input id="limiter-ceiling" type="number" min="-12" max="-0.1" step="0.1" value="-1" required /></label><label>リリース (ms)<input id="limiter-release" type="number" min="10" max="500" step="1" value="80" required /></label><p>5 ms先読み・左右連動。推定True Peakに応じて追加減衰します。</p></div>
+          </div>
+        </fieldset>
+        <div class="dsp-actions"><button id="process-button" class="button primary" disabled>AからBを生成</button></div>
+        <p id="processing-result" aria-live="polite">Aから新しいBを生成します。適用すると現在のBを置き換えます。</p>
+        <p class="comparison-footnote">選択した形式・音質で保存。WAVは元のサンプルレートを維持します。試聴音量や音量マッチは書き出しに含みません。リミッターOFFでは0 dBFS超過があり得ます。</p>
+      </section>
+      <section class="dsp-panel" aria-labelledby="master-heading">
+        <div class="section-heading"><h2 id="master-heading">音量の数値を個別指定 <span>MASTERING / 04</span></h2></div>
+        <p>通常は上の「マスタリングの出力先」で用途を選べます。ここでは原音Aの音量だけを数値で調整します。</p>
+        <p>ローカルのルール処理で補正し、結果を再測定します。品質条件を通過した場合だけBを置き換えます。</p>
+        <fieldset id="master-settings"><legend>仕上がりの目標</legend><div class="dsp-grid">
+          <div class="dsp-module"><label>目標ラウドネス (LUFS)<input id="master-target" type="number" min="-24" max="-9" step="0.1" value="-14" required /></label></div>
+          <div class="dsp-module"><label>推定ピーク上限 (dB)<input id="master-ceiling" type="number" min="-6" max="-0.5" step="0.1" value="-1" required /></label></div>
+        </div></fieldset>
+        <p id="master-plan" aria-live="polite">Aを読み込むと補正案が表示されます。</p>
+        <button id="master-button" class="button primary" disabled>自動マスタリングしてBへ</button>
+        <p id="master-outcome" aria-live="polite"></p>
+        <p class="comparison-footnote">目標±0.5 LU、減衰合計3 dB以内、クレスト低下3 dB以内などを確認。達成困難な目標は保留します。音色調整や歪み修復は行いません。採用後はA/B比較し、上の「処理済みBをWAV保存」で保存できます。</p>
+      </section>
+        <h3>自動仕上げの計画・比較・判定</h3><label><input id="report-anonymous" type="checkbox" checked /> 素材名と自由記述を匿名化する（共有用）</label><p class="comparison-footnote">匿名化しても数値と採否は残ります。解除すると、素材名・説明文を含む詳細版を保存します。</p><button id="finish-report-button" class="text-button" disabled>仕上げレポートを保存</button><pre id="finish-details"></pre>
+      </details>
+
+      <section class="auto-panel" aria-labelledby="audio-export-heading">
+        <div class="section-heading"><h2 id="audio-export-heading">音声の保存形式 <span>AUDIO EXPORT</span></h2></div>
+        <p>上の保存ボタンと「おまかせで仕上げて保存」に使う形式です。音量の目標は「使い道」で選べます。</p>
+        <fieldset id="audio-export-settings"><legend>保存する音質</legend>
+          <div class="finish-controls">
+            <label>ファイル形式<select id="audio-export-format"><option value="wav-f32">WAV / Float32（編集用・そのまま）</option><option value="wav-24">WAV / 24-bit（高音質）</option><option value="wav-16">WAV / 16-bit（CD相当のビット深度）</option><option value="mp3">MP3（共有・試聴用）</option></select></label>
+            <label id="audio-export-dither-label" hidden><input id="audio-export-dither" type="checkbox" checked> 小さな音を滑らかに保存（ディザー）</label>
+          </div>
+          <div id="audio-export-mp3" hidden>
+            <label>MP3の音質<select id="audio-export-bitrate"><option value="128">128 kbps / 小さめ</option><option value="192" selected>192 kbps / 標準</option><option value="256">256 kbps / 高音質</option><option value="320">320 kbps / 最高設定</option></select></label>
+            <h3>曲情報・ジャケット</h3><p>入力は任意です。日本語の曲情報と画像をMP3に埋め込みます。</p>
+            <div class="finish-controls export-tags"><label>曲名<input id="audio-tag-title" type="text" maxlength="1000"></label>
+<label>アーティスト<input id="audio-tag-artist" type="text" maxlength="1000"></label>
+<label>アルバム<input id="audio-tag-album" type="text" maxlength="1000"></label>
+<label>アルバムアーティスト<input id="audio-tag-albumArtist" type="text" maxlength="1000"></label>
+<label>年<input id="audio-tag-year" type="text" maxlength="1000"></label>
+<label>トラック番号<input id="audio-tag-track" type="text" maxlength="1000"></label>
+<label>ジャンル<input id="audio-tag-genre" type="text" maxlength="1000"></label>
+<label>コメント<input id="audio-tag-comment" type="text" maxlength="1000"></label></div>
+            <label class="button file-label">ジャケットを選ぶ<input id="audio-export-artwork" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" aria-label="ジャケット画像を選択"></label>
+            <button id="audio-export-cover-clear" type="button" class="button">ジャケットを外す</button>
+            <img id="audio-export-cover" class="export-cover" alt="登録したジャケット" hidden>
+            <p class="comparison-footnote">JPEG / PNG、2 MiB以内・各辺8192px以内・約1600万画素以内。画像も端末から送信しません。</p>
+          </div>
+        </fieldset>
+        <p id="audio-export-status" aria-live="polite">WAVは元のサンプルレートを保ちます。16-bitを選んでもCD規格への変換は行いません。</p>
+        <p class="comparison-footnote">MP3は圧縮形式です。試聴音量・音量マッチ・SEは書き出しに含みません。<a href="./vendor/lamejs/NOTICE.txt" target="_blank" rel="noopener">MP3エンコーダーのライセンス</a> / <a href="./vendor/lamejs/lamejs-1.2.7-source.tar.gz" download>対応ソース</a></p>
+      </section>
+      <section class="auto-panel" aria-labelledby="project-heading">
+        <div class="section-heading"><h2 id="project-heading">作業を保存・再開 <span>PROJECT</span></h2></div>
+        <p>素材・設定・現在のOriginal / Processedを1つのファイルにまとめます。次回は読み込むだけで続けられます。</p>
+        <label>プロジェクト名<input id="project-name" type="text" maxlength="120" value="MusicSync Project"></label>
+        <div class="dsp-actions"><button id="project-save" class="button primary" disabled>素材込みでプロジェクトを保存</button>
+          <label class="button file-label">プロジェクトを開く<input id="project-open" type="file" accept=".zip" aria-label="MusicSyncプロジェクトを開く"></label></div>
+        <p id="project-status" aria-live="polite">開くと内容を検証・再解析し、成功後に現在の作業を置き換えます。元の素材ファイルは変更しません。</p>
+        <p class="comparison-footnote">.musicsync.zip には音声素材と曲情報・画像が含まれます。共有前に内容を確認してください。処理途中の再開や操作履歴は含みません。</p>
+      </section>
+
+
+      <footer><span>MUSIC SYNC <span class="footer-divider">/</span> 音づくりを、もっと自由に。</span><span>LOCAL AUDIO · NO ACCOUNT · NO PAID API</span></footer>
+    </main>
+    <dialog id="stem-solo-dialog" aria-labelledby="stem-solo-title" aria-describedby="stem-solo-description">
+      <button id="stem-solo-dismiss" type="button" class="button stem-solo-dismiss" aria-label="素材の試聴を閉じる">閉じる</button>
+      <h2 id="stem-solo-title">素材を1つずつ聴く</h2>
+      <p id="stem-solo-description">元の素材・補修前を試聴します。素材名や役割は目安なので、実際の音を聴いて確認してください。</p>
+      <label for="stem-solo-track">聴く素材</label>
+      <select id="stem-solo-track"></select>
+      <div class="dsp-actions stem-solo-modes">
+        <button type="button" id="stem-solo-isolate" class="button slot-button" aria-pressed="true">この素材だけ</button>
+        <button type="button" id="stem-solo-mix" class="button slot-button" aria-pressed="false">全体ミックス A</button>
+      </div>
+      <section id="stem-solo-repair-controls" hidden>
+        <h3>この素材の補修を聴き比べる</h3>
+        <div class="dsp-actions">
+          <button type="button" id="stem-solo-before" class="button slot-button" aria-pressed="true">補修前</button>
+          <button type="button" id="stem-solo-after" class="button slot-button" aria-pressed="false">補修後</button>
+        </div>
+        <label><input id="stem-solo-match" type="checkbox" checked> 音量をそろえて比較</label>
+        <progress id="stem-solo-repair-progress" max="1" hidden></progress>
+        <button type="button" id="stem-solo-repair-cancel" class="button" hidden>準備をキャンセル</button>
+        <label><input id="stem-solo-repair-use" type="checkbox" checked> この素材の補修を使う</label>
+        <p id="stem-solo-repair-state"></p>
+        <button type="button" id="stem-solo-rebuild" class="button">この設定でミックスを作り直す</button>
+        <p class="comparison-footnote">ざらつき・高域の補修だけを比較します。素材の音量・広がり・自動ミックス補正は含みません。補修OFFはミックスの再合成で反映します。</p>
+      </section>
+      <label for="stem-solo-seek">再生位置</label>
+      <input id="stem-solo-seek" type="range" min="0" max="0" step="0.01" value="0">
+      <output id="stem-solo-time">0:00.0 / 0:00.0</output>
+      <label for="stem-solo-volume">試聴音量</label>
+      <input id="stem-solo-volume" type="range" min="0" max="1" step="0.01" value="0.5">
+      <div class="dsp-actions">
+        <button type="button" id="stem-solo-play" class="button primary">再生</button>
+        <button type="button" id="stem-solo-stop" class="button">先頭へ</button>
+        <button type="button" id="stem-solo-close" class="button">ミックスへ戻る</button>
+      </div>
+      <p id="stem-solo-status" role="status" aria-live="polite"></p>
+    </dialog>
+    <dialog id="listening-test" aria-labelledby="audition-title" aria-describedby="audition-description">
+      <h2 id="audition-title">耳で比較</h2>
+      <p id="audition-description"></p>
+      <div class="dsp-actions">
+        <button type="button" id="audition-x" class="button slot-button" aria-pressed="false" autofocus>音1を聴く</button>
+        <button type="button" id="audition-y" class="button slot-button" aria-pressed="false">音2を聴く</button>
+        <button type="button" id="audition-restart" class="button">同じ位置から聴き直す</button>
+        <button type="button" id="audition-stop" class="button" disabled>一時停止</button>
+        <span id="audition-time"></span>
+      </div>
+      <label for="audition-preference">どちらが好みでしたか？</label>
+      <select id="audition-preference"><option value="">選ばずに確認</option><option value="X">音1</option><option value="Y">音2</option><option value="same">差はわからない</option></select>
+      <div class="dsp-actions"><button type="button" id="audition-reveal" class="button">内訳を見る</button><button type="button" id="audition-close" class="button">閉じる</button></div>
+      <p id="audition-result" aria-live="polite"></p>
+    </dialog>
+  </div>
+  <section id="processing-overlay" class="processing-overlay" aria-label="音声処理の進捗" hidden>
+    <div id="processing-card" class="processing-card">
+      <h2 id="processing-task">準備しています…</h2>
+      <div class="processing-progress-label"><span class="processing-spinner" aria-hidden="true"></span><span id="processing-percent">準備中</span></div>
+      <progress id="progress" max="1" aria-label="処理の進捗" hidden></progress>
+      <button id="cancel-button" class="button" type="button" hidden>キャンセル</button>
+    </div>
+  </section>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

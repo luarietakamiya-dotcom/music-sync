@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@music-sync/shared": [
+        "packages/shared/src/index.ts"
+      ],
+      "@music-sync/dsp": [
+        "packages/dsp/src/index.ts"
+      ],
+      "@music-sync/audio-analysis": [
+        "packages/audio-analysis/src/index.ts"
+      ],
+      "@music-sync/core": [
+        "packages/core/src/index.ts"
+      ],
+      "@music-sync/ui": [
+        "packages/ui/src/index.ts"
+      ]
+    },
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "apps/**/*.ts",
+    "packages/**/*.ts",
+    "tests/**/*.ts",
+    "*.ts"
+  ]
+}

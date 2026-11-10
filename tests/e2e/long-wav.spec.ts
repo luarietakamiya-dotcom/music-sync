@@ -1,0 +1,105 @@
+import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+import { tone, wav } from '../helpers/audio';
+
+test('finishes an eleven-minute WAV, compares and exports the measured candidate', async ({ page }) => {
+  test.setTimeout(120000);
+  const sampleRate = 8000, frames = sampleRate * 11 * 60;
+  const samples = new Float32Array(frames);
+  for (let i = 0; i < frames; i++) samples[i] = i % 40 < 20 ? 0.1 : -0.1;
+  const buffer = Buffer.from(wav({ sampleRate, channels: [samples] }));
+  await page.goto('/');
+  await page.locator('#file-input').setInputFiles({ name: 'long-song.wav', mimeType: 'audio/wav', buffer });
+  await expect(page.getByRole('status')).toContainText('分割解析が完了', { timeout: 100000 });
+  await expect(page.locator('#duration')).toContainText('11:00');
+  await expect(page.locator('#lufs')).not.toHaveText('—');
+  await page.locator('#mode-AUTO').click();
+  await expect(page.getByRole('status')).toContainText('仕上げが完了', { timeout: 90000 });
+  await expect(page.locator('#match-toggle')).toBeChecked();
+  await expect(page.locator('#b-name')).toContainText('AUTO');
+  await expect(page.locator('#finish-applied-summary')).toContainText('主に全体の音量');
+  await expect(page.locator('#finish-vocal')).toBeEnabled();
+  await page.locator('#finish-vocal').selectOption('3');
+  await page.locator('#finish-bass').selectOption('3');
+  await expect(page.locator('#finish-settings-status')).toBeVisible();
+  await page.locator('#finish-preferences-apply').click();
+  await expect(page.locator('#preferences-result')).toContainText('適用済み：ボーカルの存在感・低音の厚み',{ timeout:90000 });
+  await expect(page.locator('#finish-applied-summary')).toContainText('厚み・輪郭');
+  await expect(page.locator('#finish-settings-status')).toBeHidden();
+  await page.locator('#finish-preferences-reset').click();
+  await expect(page.locator('#finish-settings-status')).toBeVisible();
+  await page.locator('#blind-song').click();
+  await page.locator('#audition-x').click();
+  await expect(page.locator('#audition-x')).toHaveAttribute('aria-pressed','true');
+  await page.locator('#audition-y').click();
+  await expect(page.locator('#audition-y')).toHaveAttribute('aria-pressed','true');
+  await page.locator('#audition-close').click();
+  await expect(page.locator('#match-toggle')).toBeChecked();
+  await page.evaluate(() => {
+    document.getElementById('mode-LIVE')!.click();
+    document.getElementById('cancel-button')!.click();
+  });
+  await expect(page.locator('#b-name')).toContainText('AUTO');
+  await page.locator('#mode-IMPACT').click();
+  await page.locator('#mode-LIVE').click();
+  await expect(page.locator('#b-name')).toContainText('LIVE', { timeout: 90000 });
+  const downloaded = page.waitForEvent('download');
+  await page.locator('#wav-button').click();
+  const saved = await downloaded;
+  expect(saved.suggestedFilename()).toBe('long-song-LIVE.wav');
+  const bytes = readFileSync((await saved.path())!);
+  expect(bytes.length).toBe(56 + frames * 4);
+  expect(bytes.readUInt32LE(24)).toBe(sampleRate);
+  expect(bytes.readUInt32LE(44)).toBe(frames);
+  expect(Number.isFinite(bytes.readFloatLE(56 + (frames - 1) * 4))).toBe(true);
+  await expect(page.locator('#file-input-b')).toBeDisabled();
+  await page.getByRole('button', { name: '再生', exact: true }).click();
+  await expect(page.getByRole('button', { name: '一時停止', exact: true })).toBeVisible();
+  await page.locator('#select-a').click();
+  await expect(page.getByRole('button', { name: '一時停止', exact: true })).toBeVisible();
+  await page.locator('#select-b').click();
+  await page.getByRole('button', { name: '停止', exact: true }).click();
+  await page.locator('#file-input').setInputFiles({ name: 'short-song.wav', mimeType: 'audio/wav', buffer: Buffer.from(wav({ sampleRate, channels: [samples.subarray(0, sampleRate)] })) });
+  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.locator('#mode-AUTO')).toBeEnabled();
+});
+
+test('finishes a five-minute 48 kHz stereo WAV above the original PCM limit', async ({ page }) => {
+  test.setTimeout(240000);
+  const second = new Uint8Array(wav(tone({ stereo: true, amplitude: 0.16 })));
+  const header = second.slice(0, 44), payload = second.subarray(44);
+  const view = new DataView(header.buffer);
+  view.setUint32(4, 36 + payload.length * 305, true);
+  view.setUint32(40, payload.length * 305, true);
+  await page.goto('/');
+  await page.locator('#dropzone').evaluate((zone, fixture) => {
+    const pcm = Uint8Array.from(fixture.payload);
+    const noisy = pcm.slice(), samples = new DataView(noisy.buffer);
+    let seed = 7, prev = 0;
+    for (let i = 0; i < noisy.length; i += 4) {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      const value = seed / 2 ** 32 - 0.5, hiss = (value - prev) * 6000;
+      prev = value;
+      for (const c of [0, 2]) samples.setInt16(i + c, samples.getInt16(i + c, true) + hiss, true);
+    }
+    const file = new File([Uint8Array.from(fixture.header), noisy, noisy, noisy, ...Array(302).fill(pcm)], 'five-minutes.wav', { type: 'audio/wav' });
+    const transfer = new DataTransfer(); transfer.items.add(file);
+    zone.dispatchEvent(new DragEvent('drop', { bubbles: true, dataTransfer: transfer }));
+  }, { header: Array.from(header), payload: Array.from(payload) });
+  await expect(page.locator('#duration')).toContainText('5:05', { timeout: 90000 });
+  await page.locator('#mode-IMPACT').click();
+  await expect(page.locator('#b-name')).toContainText('IMPACT', { timeout: 150000 });
+  await expect(page.locator('#finish-explanation')).toContainText('秒で抑えました');
+  await expect(page.locator('#match-toggle')).toBeChecked();
+  await expect(page.locator('#wav-button')).toBeEnabled();
+  await page.locator('#undo-finish').click();
+  await expect(page.locator('#wav-button')).toBeDisabled();
+  await expect.poll(() => page.evaluate(async () => {
+    const root = await navigator.storage.getDirectory();
+    const dir = await root.getDirectoryHandle('music-sync-candidates');
+    const entries = dir as FileSystemDirectoryHandle & { keys(): AsyncIterable<string> };
+    const names = [];
+    for await (const key of entries.keys()) names.push(key);
+    return names.length;
+  })).toBe(0);
+});

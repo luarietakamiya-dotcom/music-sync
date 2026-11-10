@@ -1,0 +1,10 @@
+* text=auto eol=lf
+
+*.wav binary
+*.flac binary
+*.mp3 binary
+*.gz binary
+*.png binary
+
+# Preserve third-party source and license files byte-for-byte.
+apps/web/public/vendor/** -text -whitespace

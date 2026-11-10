@@ -1,0 +1,59 @@
+{
+  "name": "music-sync",
+  "version": "0.15.2",
+  "private": true,
+  "type": "module",
+  "description": "Open-source audio analysis and mastering toolkit for AI musicians and independent creators",
+  "license": "MIT",
+  "author": "Music Sync contributors",
+  "keywords": [
+    "audio",
+    "mastering",
+    "loudness",
+    "music",
+    "local-first",
+    "web-audio"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "workspaces": [
+    "apps/web",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "vite --config apps/web/vite.config.ts --host 127.0.0.1",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/run-vitest.mjs run",
+    "test:watch": "node scripts/run-vitest.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "vite preview --config apps/web/vite.config.ts --host 127.0.0.1",
+    "test:e2e": "node scripts/prepare-fixtures.mjs && node scripts/test-e2e.mjs",
+    "example": "node examples/analyze-tone.mjs && node examples/compare-tones.mjs && node examples/process-tone.mjs && node examples/master-tone.mjs && node examples/auto-finish.mjs && node examples/sound-color.mjs && node examples/finish-preferences.mjs && node examples/mix-stems.mjs && node examples/reference-and-batch.mjs",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build && npm run example",
+    "pack:local": "node scripts/package-release.mjs",
+    "release:local": "npm run build && npm run pack:local",
+    "test:package": "npm run pack:local && node scripts/test-package.mjs",
+    "test:sdk-browser": "node scripts/test-sdk-browser.mjs",
+    "evaluate:perceptual": "node --experimental-strip-types scripts/evaluate-perceptual.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.10.1",
+    "eslint": "10.11.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.70.1",
+    "vite": "8.3.7",
+    "vitest": "5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luarietakamiya-dotcom/music-sync.git"
+  },
+  "homepage": "https://github.com/luarietakamiya-dotcom/music-sync#readme",
+  "bugs": {
+    "url": "https://github.com/luarietakamiya-dotcom/music-sync/issues"
+  }
+}

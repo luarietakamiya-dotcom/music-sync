@@ -1,0 +1,27 @@
+name: Bug report
+description: Report an audio analysis or application problem
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Prefer generated tones. Do not attach private or unlicensed music.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Version, OS and browser
+    validations:
+      required: true
+  - type: textarea
+    id: audio
+    attributes:
+      label: Format, sample rate, channels, duration and measurements
+      description: Include expected numeric values and tolerance where applicable.

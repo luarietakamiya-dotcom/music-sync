@@ -1,0 +1,47 @@
+{
+  "name": "@music-sync/core",
+  "version": "0.15.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "description": "Reusable audio analysis, DSP and automatic loudness mastering API",
+  "author": "Music Sync contributors",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "docs"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@music-sync/shared": "0.15.0",
+    "@music-sync/audio-analysis": "0.15.0",
+    "@music-sync/dsp": "0.15.0"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "keywords": [
+    "audio",
+    "music-sync",
+    "local-first",
+    "esm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luarietakamiya-dotcom/music-sync.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/luarietakamiya-dotcom/music-sync#readme",
+  "bugs": {
+    "url": "https://github.com/luarietakamiya-dotcom/music-sync/issues"
+  }
+}

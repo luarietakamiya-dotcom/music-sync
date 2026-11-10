@@ -9,7 +9,7 @@ test('demo, waveform, analysis JSON and preview work without external requests',
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
   await page.getByRole('button', { name: 'デモ音源を解析' }).click();
-  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('解析完了');
   await expect(page.locator('#lufs')).not.toHaveText('—');
   await expect(page.locator('#correlation')).not.toHaveText('—');
   await expect(page.locator('#wave-placeholder')).toBeHidden();
@@ -37,7 +37,7 @@ test('actual file input, malicious filename, malformed file and replacement', as
   const fileInput = page.locator('#file-input');
   const buffer = Buffer.from(wav(tone({ sampleRate: 44100, seconds: 1, stereo: true }), 24));
   await fileInput.setInputFiles({ name: '<img src=x onerror=alert(1)>.wav', mimeType: 'audio/wav', buffer });
-  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('解析完了');
   await expect(page.locator('#track-name')).toHaveText('<img src=x onerror=alert(1)>.wav');
   await expect(page.locator('#track-name img')).toHaveCount(0);
   await expect(page.locator('#track-meta')).toContainText('44.1 kHz');
@@ -47,7 +47,7 @@ test('actual file input, malicious filename, malformed file and replacement', as
   await expect(page.locator('#track-name')).toHaveText('<img src=x onerror=alert(1)>.wav');
   await expect(page.getByRole('button', { name: '再生', exact: true })).toBeEnabled();
   await fileInput.setInputFiles({ name: 'valid.wav', mimeType: 'audio/wav', buffer });
-  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('解析完了');
   await expect(page.getByRole('alert')).toBeHidden();
 });
 
@@ -59,21 +59,21 @@ test('drag and drop and cancelled job do not publish stale results', async ({ pa
     transfer.items.add(new File([new Uint8Array(values)], 'dropped.wav', { type: 'audio/wav' }));
     target.dispatchEvent(new DragEvent('drop', { dataTransfer: transfer, bubbles: true }));
   }, bytes);
-  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('解析完了');
   await expect(page.locator('#track-name')).toHaveText('dropped.wav');
   await expect(page.locator('#lufs')).toHaveText('—');
   // Dispatch start and cancel in one event turn to make the race deterministic.
   await page.evaluate(() => { document.getElementById('demo-button')!.click(); document.getElementById('cancel-button')!.click(); });
-  await expect(page.getByRole('status')).toContainText('キャンセル');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('キャンセル');
   await expect(page.locator('#lufs')).toHaveText('—');
   await page.getByRole('button', { name: 'デモ音源を解析' }).click();
-  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('解析完了');
 });
 
 test('FLAC file decodes at its source rate', async ({ page }) => {
   await page.goto('/');
   await page.locator('#file-input').setInputFiles(resolve('tests/fixtures/tone.flac'));
-  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('解析完了');
   await expect(page.locator('#track-meta')).toContainText('44.1 kHz');
   await expect(page.locator('#lufs')).not.toHaveText('—');
 });
@@ -82,7 +82,7 @@ test('mobile viewport has no horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await page.getByRole('button', { name: 'デモ音源を解析' }).click();
-  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('解析完了');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.screenshot({ path: 'test-results/phase1-mobile.png', fullPage: true });
 });

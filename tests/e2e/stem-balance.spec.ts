@@ -16,6 +16,9 @@ test('paired import adjusts only when measured, exposes the decision, and can re
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await page.locator('#stem-mode').selectOption('vocal-instrumental');
+  // Isolate automatic vocal/bed balance from the default-on restoration and doubling.
+  await page.locator('#studio-restore').uncheck();
+  await page.locator('#guitar-double').uncheck();
   await expect(page.locator('#stem-auto-balance')).toBeChecked();
   await page.locator('#stem-file-input').setInputFiles([file('voice.wav', 0.02), file('instrumental.wav', 0.22)]);
   await expect(page.locator('#stem-status')).toContainText('声の素材だけを少し前に出しました');

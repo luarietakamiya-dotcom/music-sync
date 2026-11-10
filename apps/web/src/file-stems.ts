@@ -25,7 +25,7 @@ export async function importFileStems(entries: StemFileEntry[], mode: StemMode, 
   const inputs = await Promise.all(entries.map(async ({ file, ...settings }) => {
     if (/\.flac$/i.test(file.name)) {
       if (destination || !decode || file.size > STEM_LIMITS.maxFileBytes) throw new Error('長尺のSTEM処理にはWAVを使用してください。');
-      const info = readFlacMetadata(await file.slice(0, 42).arrayBuffer(), STEM_LIMITS.maxBusBytes);
+      const info = readFlacMetadata(await file.slice(0, 42).arrayBuffer());
       let decoded: AudioData | undefined;
       return { descriptor: { ...settings, name: file.name, ...info }, async *open() {
         decoded ??= await decode({ file, ...settings });
@@ -37,10 +37,15 @@ export async function importFileStems(entries: StemFileEntry[], mode: StemMode, 
     const descriptor = { ...settings, name: file.name, sampleRate: info.sampleRate, frames: info.frames, channels: info.channels };
     return { descriptor, open: () => streamWavChunks(file, info) };
   }));
-  const plan = planStemMix(inputs.map(t => t.descriptor), mode, destination ? 'file' : 'memory');
-  if (!destination) self.postMessage({ type: 'stem-capacity', tracks: entries.length, sampleRate: plan.sampleRate,
-    seconds: plan.frames / plan.sampleRate, maxSeconds: Math.min(600, STEM_LIMITS.maxBusBytes / (8 * plan.sampleRate)),
-    sourceMiB: plan.sourceBytes / 1024 ** 2, busMiB: plan.busBytes / 1024 ** 2 });
+  const descriptors = inputs.map(t => t.descriptor);
+  // Explain the actual STEM budget from headers before the memory plan rejects
+  // an oversized mix. No PCM is decoded or allocated during this preflight.
+  const sampleRate = descriptors[0].sampleRate, frames = Math.max(...descriptors.map(t => t.frames));
+  if (!destination) self.postMessage({ type: 'stem-capacity', tracks: entries.length, sampleRate,
+    seconds: frames / sampleRate, maxSeconds: Math.min(600, STEM_LIMITS.maxBusBytes / (8 * sampleRate)),
+    sourceMiB: descriptors.reduce((n, t) => n + t.frames * t.channels * 4, 0) / 1024 ** 2,
+    busMiB: frames * 8 / 1024 ** 2 });
+  const plan = planStemMix(descriptors, mode, destination ? 'file' : 'memory');
   const refInfo = reference && studio?.stabilize ? await readWavFileMetadata(reference) : undefined;
   if (studio?.stabilize && (!refInfo || refInfo.frames !== plan.frames || refInfo.sampleRate !== plan.sampleRate))
     throw new Error('安定化にはSTEMと同じ長さ・レート・開始位置の原曲WAVを選んでください。');

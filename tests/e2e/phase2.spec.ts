@@ -74,7 +74,7 @@ test('mismatched rate, malformed and cancelled B leave A available; replacing A 
     target.dispatchEvent(new DragEvent('drop', { dataTransfer: transfer, bubbles: true }));
     document.getElementById('cancel-button')!.click();
   }, bytes);
-  await expect(page.getByRole('status')).toContainText('キャンセル');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('キャンセル');
   await expect(page.locator('#select-a')).toBeEnabled();
   await expect(page.locator('#select-b')).toBeDisabled();
   await page.locator('#file-input-b').setInputFiles({ name: 'valid-b.wav', mimeType: 'audio/wav', buffer: Buffer.from(wav(tone({ amplitude: 0.2 }))) });

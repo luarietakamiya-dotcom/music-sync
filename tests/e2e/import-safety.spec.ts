@@ -68,7 +68,9 @@ test('rapid drops queue every accepted file and commit only the complete group',
   await expect(page.locator('#stem-status')).toContainText('処理待ち'); await expect(page.locator('#a-name')).toHaveText(a);
   release(); await idle(page); await page.unroute('**/workers.json');
   await expect(page.locator('#a-name')).toContainText('4 tracks');
-  expect(await page.locator('.stem-track strong').allTextContents()).toEqual(['first.wav', 'second.wav', 'third.wav', 'fourth.wav']);
+  // Repair badges are appended inside <strong>; compare the filename text itself, in arrival order.
+  expect(await page.locator('.stem-track strong').evaluateAll(names => names.map(name => name.firstChild?.textContent ?? '')))
+    .toEqual(['first.wav', 'second.wav', 'third.wav', 'fourth.wav']);
   // Cancellation stops the queued job but retains all editable staged files.
   let releaseAgain!: () => void; const again = new Promise<void>(resolve => { releaseAgain = resolve; });
   await page.route('**/workers.json', async route => { await again; await route.continue(); });
@@ -77,8 +79,21 @@ test('rapid drops queue every accepted file and commit only the complete group',
   await page.unroute('**/workers.json'); await page.locator('#stem-render').click(); await idle(page);
   await expect(page.locator('#a-name')).toContainText('6 tracks');
 });
-test('preflight explains the actual length limit without decoding oversized PCM', async ({ page }) => {
+for (const studioEnabled of [true, false]) {
+test(`preflight explains the actual length limit without decoding oversized PCM (${studioEnabled ? 'default studio' : 'raw opt-out'})`, async ({ page }) => {
+  await page.addInitScript(() => {
+    const state = window as unknown as { preflightDecodeCalls: number }; state.preflightDecodeCalls = 0;
+    const decode = OfflineAudioContext.prototype.decodeAudioData;
+    OfflineAudioContext.prototype.decodeAudioData = function (...args: unknown[]) {
+      state.preflightDecodeCalls++; return Reflect.apply(decode, this, args);
+    };
+  });
   await page.goto('/');
+  if (studioEnabled) {
+    await expect(page.locator('#studio-restore')).toBeChecked(); await expect(page.locator('#guitar-double')).toBeChecked();
+  } else {
+    await page.locator('#studio-restore').uncheck(); await page.locator('#guitar-double').uncheck();
+  }
   const header = await readFile('tests/fixtures/tone.flac');
   header.writeBigUInt64BE((48000n << 44n) | (1n << 41n) | (15n << 36n) | 14400000n, 18);
   await page.locator('#stem-file-input').setInputFiles([
@@ -86,7 +101,9 @@ test('preflight explains the actual length limit without decoding oversized PCM'
   ]); await idle(page);
   await expect(page.locator('#stem-capacity')).toContainText('長さ 5:00.0 / 合成上限 4:22.1');
   await expect(page.locator('#error')).toContainText('262秒'); await expect(page.locator('.stem-track')).toHaveCount(2);
+  expect(await page.evaluate(() => (window as unknown as { preflightDecodeCalls: number }).preflightDecodeCalls)).toBe(0);
 });
+}
 test('anonymous report defaults hide material names; opt-in detailed report preserves them', async ({ page }) => {
   await page.goto('/'); await page.locator('#stem-file-input').setInputFiles([file('private-vocal.wav'), file('private-music.wav')]); await idle(page);
   await page.locator('#mode-AUTO').click(); await expect(page.locator('#finish-explanation')).toContainText('候補を用意しました');

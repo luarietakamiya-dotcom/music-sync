@@ -105,10 +105,16 @@ test('heavy WAV analysis can be cancelled from the responsive UI while preservin
   await page.goto('/'); await page.locator('#demo-button').click(); await expect(page.locator('#mode-AUTO')).toBeEnabled();
   await page.locator('#mode-AUTO').click(); await expect(page.locator('#finish-explanation')).toContainText('候補を用意しました');
   const a = await page.locator('#a-lufs').innerText(), b = await page.locator('#b-lufs').innerText();
+  await expect(page.locator('#studio-restore')).toBeChecked();
   await page.locator('#stem-file-input').setInputFiles([file('long-voice.wav', { sampleRate: 48000, seconds: 45 }), file('long-music.wav', { sampleRate: 48000, seconds: 45 })]);
-  await expect(page.locator('#status')).toContainText('読み込み・解析');
+  await expect(page.locator('#processing-overlay')).toBeVisible();
+  await expect(page.locator('#status')).toContainText(/long-(?:voice|music)\.wav.*(?:解析|補修)/);
+  await expect(page.locator('#progress')).toBeVisible();
+  await expect(page.locator('#processing-percent')).toHaveText(/^(?:準備中|\d{1,3}%)$/);
+  await expect(page.locator('#cancel-button')).toBeEnabled();
   await page.locator('#cancel-button').click();
   await expect(page.locator('#stem-status')).toContainText('キャンセル');
+  await expect(page.locator('#processing-overlay')).toBeHidden();
   await expect(page.locator('#a-lufs')).toHaveText(a); await expect(page.locator('#b-lufs')).toHaveText(b);
   await expect(page.locator('#stem-track-list .stem-track')).toHaveCount(2);
 });

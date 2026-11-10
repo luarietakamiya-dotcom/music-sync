@@ -54,7 +54,7 @@ test('bypass retains exact A and cancellation/invalid settings retain prior B', 
   await expect(page.locator('#error')).toBeVisible(); await expect(page.locator('#wav-button')).toBeEnabled();
   await page.locator('#dsp-gain').fill('0');
   await page.evaluate(() => { document.getElementById('process-button')!.click(); document.getElementById('cancel-button')!.click(); });
-  await expect(page.getByRole('status')).toContainText('キャンセル'); await expect(page.locator('#wav-button')).toBeEnabled();
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('キャンセル'); await expect(page.locator('#wav-button')).toBeEnabled();
   await page.locator('#clear-b').click(); await expect(page.locator('#wav-button')).toBeDisabled();
 });
 

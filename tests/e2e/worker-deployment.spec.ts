@@ -21,7 +21,7 @@ test('HTML fallback and incompatible protocol leave Original and prior B availab
   const a=await page.locator('#a-lufs').innerText(),b=await page.locator('#b-lufs').innerText();
   await page.route(`**/${manifest.processing}`,route=>route.fulfill({contentType:'text/html',body:'<!doctype html>SPA fallback'}));
   await page.locator('#mode-LIVE').click();await expect(page.locator('#error')).toContainText('処理プログラムを読み込めませんでした');
-  await expect(page.getByRole('status')).toContainText('原音と既存の仕上がりは保持');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('原音と既存の仕上がりは保持');
   await expect(page.locator('#a-lufs')).toHaveText(a);await expect(page.locator('#b-lufs')).toHaveText(b);await expect(page.locator('#select-b')).toBeEnabled();
   await page.route('**/workers.json',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({...manifest,protocol:2})}));
   await page.locator('#mode-AUTO').click();await expect(page.locator('#error')).toContainText('バージョンが一致しません');
@@ -33,7 +33,7 @@ test('cancelling while worker metadata is loading cannot publish a stale candida
   let release!:()=>void;const gate=new Promise<void>(resolve=>{release=resolve;});
   await page.route('**/workers.json',async route=>{await gate;await route.continue();});
   await page.locator('#mode-AUTO').click();await expect(page.locator('#cancel-button')).toBeEnabled();await page.locator('#cancel-button').click();release();
-  await expect(page.getByRole('status')).toContainText('キャンセル');await expect(page.locator('#select-a')).toBeEnabled();await expect(page.locator('#select-b')).toBeDisabled();
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('キャンセル');await expect(page.locator('#select-a')).toBeEnabled();await expect(page.locator('#select-b')).toBeDisabled();
 });
 
 test('the compatibility entry queues PCM until the current worker is loaded',async({page})=>{
@@ -52,8 +52,8 @@ test('analysis startup failure does not misdiagnose a different audio file as th
   await page.goto('/');
   await page.route('**/workers.json',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({protocol:2})}));
   await page.locator('#demo-button').click();await expect(page.locator('#error')).toContainText('バージョンが一致しません');
-  await expect(page.getByRole('status')).toContainText('処理を完了できませんでした');
-  await expect(page.getByRole('status')).not.toContainText('別のファイル');await expect(page.locator('#demo-button')).toBeEnabled();
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('処理を完了できませんでした');
+  await expect(page.getByRole('status', { name: '処理状況' })).not.toContainText('別のファイル');await expect(page.locator('#demo-button')).toBeEnabled();
 });
 
 test('a staged pair retries after a temporary Worker outage without selecting files again',async({page})=>{

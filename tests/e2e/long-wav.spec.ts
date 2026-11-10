@@ -10,11 +10,11 @@ test('finishes an eleven-minute WAV, compares and exports the measured candidate
   const buffer = Buffer.from(wav({ sampleRate, channels: [samples] }));
   await page.goto('/');
   await page.locator('#file-input').setInputFiles({ name: 'long-song.wav', mimeType: 'audio/wav', buffer });
-  await expect(page.getByRole('status')).toContainText('分割解析が完了', { timeout: 100000 });
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('分割解析が完了', { timeout: 100000 });
   await expect(page.locator('#duration')).toContainText('11:00');
   await expect(page.locator('#lufs')).not.toHaveText('—');
   await page.locator('#mode-AUTO').click();
-  await expect(page.getByRole('status')).toContainText('仕上げが完了', { timeout: 90000 });
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('仕上げが完了', { timeout: 90000 });
   await expect(page.locator('#match-toggle')).toBeChecked();
   await expect(page.locator('#b-name')).toContainText('AUTO');
   await expect(page.locator('#finish-applied-summary')).toContainText('主に全体の音量');
@@ -60,7 +60,7 @@ test('finishes an eleven-minute WAV, compares and exports the measured candidate
   await page.locator('#select-b').click();
   await page.getByRole('button', { name: '停止', exact: true }).click();
   await page.locator('#file-input').setInputFiles({ name: 'short-song.wav', mimeType: 'audio/wav', buffer: Buffer.from(wav({ sampleRate, channels: [samples.subarray(0, sampleRate)] })) });
-  await expect(page.getByRole('status')).toContainText('解析完了');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('解析完了');
   await expect(page.locator('#mode-AUTO')).toBeEnabled();
 });
 

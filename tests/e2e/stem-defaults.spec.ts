@@ -73,3 +73,18 @@ test('failed and cancelled imports with the new defaults retain the existing Ori
   await expect(page.locator('#stem-status')).toContainText('キャンセル');expect(await pair(page)).toEqual(before);await expect(page.locator('#select-b')).toBeEnabled();
  }finally{release();await completed;await page.unroute('**/workers.json');}
 });
+
+test('visible Human Double output keeps its semantics while named job status follows real import and finishing',async({page})=>{
+ await page.goto('/');
+ const primary=page.getByRole('status',{name:'処理状況',exact:true});
+ const amount=page.getByRole('status',{name:/^Human Double量(?:\s+65)?$/});
+ await expect(page.locator('#stem-studio-controls')).toHaveJSProperty('open',true);
+ await expect(amount).toBeVisible();await expect(amount).toHaveText('65');await expect(primary).toHaveCount(1);
+ // Both live elements remain exposed; select the job status by its accessible name.
+ await page.locator('#file-input').setInputFiles(materials()[0]);
+ await expect(primary).toContainText('解析完了');await expect(amount).toBeVisible();await expect(amount).toHaveText('65');
+ await expect(page.locator('#mode-AUTO')).toBeEnabled();await page.locator('#mode-AUTO').click();
+ await expect(page.locator('#finish-explanation')).toContainText('候補を用意しました');
+ await expect(primary).toContainText('完成候補を用意しました');await expect(amount).toBeVisible();await expect(amount).toHaveText('65');
+ await expect(page.locator('#match-toggle')).toBeChecked();await expect(page.locator('#error')).toBeHidden();
+});

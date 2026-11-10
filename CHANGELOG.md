@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Label the main processing status independently of visible STEM value outputs.
+- Show the actual STEM duration and memory limit before rejecting an oversized
+  mixed WAV/FLAC import, without decoding PCM or allocating a mix buffer.
+- Update browser regressions for open STEM controls and enabled restoration defaults.
+
 ## 0.15.2 — STEM defaults and first GitHub publication
 
 - Open automatic-mix and STEM restoration controls initially. Enable per-material

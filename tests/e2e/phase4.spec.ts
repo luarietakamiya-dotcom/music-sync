@@ -39,7 +39,7 @@ test('rejected candidate, cancelled job and invalid settings preserve existing B
   await page.locator('#master-target').fill('-30'); await expect(page.locator('#master-button')).toBeDisabled();
   await page.locator('#master-target').fill('-14'); await page.locator('#master-ceiling').fill('-1');
   await page.evaluate(() => { document.getElementById('master-button')!.click(); document.getElementById('cancel-button')!.click(); });
-  await expect(page.getByRole('status')).toContainText('キャンセル');
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('キャンセル');
   await expect(page.locator('#b-name')).toHaveText(bName); await expect(page.locator('#b-lufs')).toHaveText(bLufs);
   await page.locator('#file-input').setInputFiles({ name: 'silence.wav', mimeType: 'audio/wav', buffer: Buffer.from(wav(tone({ amplitude: 0, seconds: 0.5 }))) });
   await expect(page.locator('#select-a')).toBeEnabled();

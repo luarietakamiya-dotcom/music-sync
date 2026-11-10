@@ -24,7 +24,7 @@ test('cancel and mode switching do not publish stale candidates; rejected import
   await expect(page.locator('#finish-explanation')).toContainText('IMPACTの候補を用意しました');
   await expect(page.locator('#b-name')).toContainText('IMPACT'); const b = await page.locator('#b-lufs').innerText();
   await page.evaluate(() => { document.getElementById('mode-LIVE')!.click(); document.getElementById('cancel-button')!.click(); });
-  await expect(page.getByRole('status')).toContainText('キャンセル'); await expect(page.locator('#b-lufs')).toHaveText(b);
+  await expect(page.getByRole('status', { name: '処理状況' })).toContainText('キャンセル'); await expect(page.locator('#b-lufs')).toHaveText(b);
   await page.locator('#file-input').setInputFiles({ name: 'clipped.wav', mimeType: 'audio/wav', buffer: Buffer.from(wav(tone({ amplitude: 1.2 }), 32, true)) });
   await expect(page.locator('#mode-AUTO')).toBeEnabled(); await page.locator('#mode-AUTO').click();
   await expect(page.locator('#finish-explanation')).toContainText('候補を採用しませんでした');

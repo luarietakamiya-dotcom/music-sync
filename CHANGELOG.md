@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Publish the browser workspace on HTTPS GitHub Pages with a checked build,
+  pinned deployment actions and only the app distribution and OSS notices.
+
 - Label the main processing status independently of visible STEM value outputs.
 - Show the actual STEM duration and memory limit before rejecting an oversized
   mixed WAV/FLAC import, without decoding PCM or allocating a mix buffer.

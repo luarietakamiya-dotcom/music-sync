@@ -6,9 +6,13 @@
 Music Sync Core: reusable audio tools that run on your own device, without an
 account, upload, paid API, or cloud processing service.
 
+**Use Music Sync Web:** [Open the browser app](https://luarietakamiya-dotcom.github.io/music-sync/).
+
 **Source:** [luarietakamiya-dotcom/music-sync on GitHub](https://github.com/luarietakamiya-dotcom/music-sync).
-The source repository is public. A hosted Web app has not been deployed; use the
-[local setup below](#quick-start) to run it in your browser.
+Audio analysis, processing and export run in your browser; audio files are not
+uploaded to GitHub Pages. Local development remains available through the
+[setup below](#quick-start). The **Publish Web App** workflow builds and checks
+the app on main, then deploys only `apps/web/dist` to GitHub Pages.
 
 **Status: v0.15.2 — Reference and album finishing.** Local analysis, A/B comparison, loudness matching,
 manual DSP, experimental adaptive finishing, portable projects and WAV/MP3 export

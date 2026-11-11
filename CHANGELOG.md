@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.17.0 — instrument and lead/backing vocal separation
+
+- Add an optional PC-only `instruments` mode with six learned full-mix
+  estimates: main vocal, backing vocal, piano, guitar, bass and drums, plus one
+  computed unassigned remainder. Existing four/two music and six/nine drum modes
+  retain their behavior.
+- Preserve explicit lead/backing vocal roles through STEM staging and portable
+  project restoration; keep original files, current A/B and transactional adoption.
+- Reuse the bounded Core renderer and stereo-linked original-phase masks to
+  resolve overlapping estimates into seven exclusive contributions. Do not add
+  the coarse vocal/instrument parents again.
+- Fetch the additional self-hosted model only after the user starts this mode;
+  use the existing local Worker, device guards, temporary-storage ownership and
+  cancellation boundaries without an account or inference API.
+- Pin the 104,573,310-byte converted model by SHA-256 and ship its own model card,
+  source/weight provenance and existing author-confirmed MIT license grant.
+  Verify shared-trunk identity across all six heads, native/ONNX numerical parity, actual hardware GPU
+  execution and a real two-window CPU browser workflow including seven WAVs,
+  mixing, project restoration and unchanged original bytes.
+- Document short-context/quantization limits and separately mocked error/cancel
+  cleanup checks. GPU measurements exclude GPU/JS/process memory, and CPU total
+  memory is not measured. Synthetic functional checks do not establish real-song
+  instrument isolation or subjective sound quality.
+
 ## 0.16.0 — PC STEM and drum-part separation
 
 - Pin the development glob matcher to the patched 11.0.1 release for

@@ -1,7 +1,7 @@
 import {planSeparation,renderSeparation,floatWavHeader,writeFloatSamples,StreamingAudioAnalyzer,type AudioData} from '@music-sync/core';
 import {readWavFileMetadata,streamWavChunks} from './wav-stream';
 import {createSeparationInference} from './separation-inference';
-import {separationModel,separationTargets,SEPARATION_TRACKS,type SeparationRequest,type SeparationResponse} from './separation-protocol';
+import {separationModel,separationTargets,SEPARATION_TRACKS,isDirectSeparationMode,type SeparationRequest,type SeparationResponse} from './separation-protocol';
 
 let working=false;
 const send=(message:SeparationResponse)=>self.postMessage(message);
@@ -37,7 +37,7 @@ async function run(request:SeparationRequest){
     }finally{access.close();}
   }
   try{
-    if(request?.kind!=='separate'||!(request.file instanceof File)||!['four','two','drums'].includes(request.mode))throw new Error('分離リクエストが不正です。');
+    if(request?.kind!=='separate'||!(request.file instanceof File)||!isDirectSeparationMode(request.mode))throw new Error('分離リクエストが不正です。');
     const model=separationModel(request.mode),targets=separationTargets(request.mode),info=request.audio?undefined:await readWavFileMetadata(request.file);
     const input=info?{sampleRate:info.sampleRate,channels:info.channels as 1|2,frames:info.frames}:
       {sampleRate:request.audio!.sampleRate,channels:request.audio!.channels.length as 1|2,frames:request.audio!.channels[0].length};

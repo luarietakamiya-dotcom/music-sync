@@ -19,7 +19,7 @@
       <a class="nav-item" href="#sound-color-heading"><span>♫</span> 音色・演出 <small>05</small></a>
       <a class="nav-item" href="#separation-heading"><span aria-hidden="true">♫</span> STEM分離 <small>PC</small></a>
       <a class="nav-item" href="#notification-settings"><span aria-hidden="true">♪</span> SE音量</a>
-      <div class="sidebar-bottom"><span class="local-dot"></span> ローカル処理<br /><small>音声は端末から送信されません</small><div class="version">OPEN SOURCE · v0.16.0</div></div>
+      <div class="sidebar-bottom"><span class="local-dot"></span> ローカル処理<br /><small>音声は端末から送信されません</small><div class="version">OPEN SOURCE · v0.17.0</div></div>
     </aside>
     <main>
       <header class="topbar"><span>WORKSPACE <span class="slash">/</span> <strong>曲を仕上げる</strong></span><div class="topbar-actions"><a class="se-settings-link" href="#notification-settings">SE音量</a><span class="privacy-badge">● PRIVATE BY DEFAULT</span></div></header>
@@ -86,7 +86,7 @@
           <button id="separation-use-source" type="button" class="button" disabled>現在のOriginalを使う</button>
         </div>
         <p id="separation-source-name">分離する曲を選ぶか、上のOriginalに曲を読み込んでください。</p>
-        <div class="finish-controls"><label for="separation-mode">取り出す素材<select id="separation-mode" aria-describedby="separation-mode-description separation-resource-note"><option value="four" selected>ボーカル・ドラム・ベース・その他（4素材）</option><option value="two">ボーカル＋伴奏（2素材）</option><option value="detailed">曲＋ドラムの各パーツ（9素材）</option><option value="drums">ドラム音源の各パーツ（6素材）</option></select></label></div>
+        <div class="finish-controls"><label for="separation-mode">取り出す素材<select id="separation-mode" aria-describedby="separation-mode-description separation-resource-note"><option value="four" selected>ボーカル・ドラム・ベース・その他（4素材）</option><option value="two">ボーカル＋伴奏（2素材）</option><option value="instruments">楽器・コーラスまで詳しく（7素材）</option><option value="detailed">曲＋ドラムの各パーツ（9素材）</option><option value="drums">ドラム音源の各パーツ（6素材）</option></select></label></div>
         <p id="separation-mode-description">完成曲からボーカル・ドラム・ベース・その他を取り出します。ドラムは1素材です。</p>
         <div class="dsp-actions"><button id="separation-run" type="button" class="button primary" disabled>AIで素材に分ける</button><button id="separation-stage" type="button" class="button" disabled>分離素材をSTEMリストに入れる</button><button id="separation-clear" type="button" class="button" disabled>分離結果をクリア</button></div>
         <p id="separation-status" aria-live="polite">分離後は素材ごとに試聴・WAV保存できます。STEMリストに入れた後、「ミックスを作る」で合成できます。</p>

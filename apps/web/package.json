@@ -1,15 +1,15 @@
 {
   "name": "@music-sync/web",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "private": true,
   "type": "module",
   "license": "MIT",
   "dependencies": {
     "@audio/neural-separate": "0.7.0",
     "@breezystack/lamejs": "1.2.7",
-    "@music-sync/core": "0.16.0",
-    "@music-sync/shared": "0.16.0",
-    "@music-sync/ui": "0.16.0",
+    "@music-sync/core": "0.17.0",
+    "@music-sync/shared": "0.17.0",
+    "@music-sync/ui": "0.17.0",
     "fflate": "0.8.3",
     "onnxruntime-web": "1.31.1"
   },

@@ -1,6 +1,6 @@
 {
   "name": "music-sync",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "private": true,
   "type": "module",
   "description": "Open-source audio analysis and mastering toolkit for AI musicians and independent creators",

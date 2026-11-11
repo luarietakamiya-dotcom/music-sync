@@ -12,6 +12,7 @@ still be imported directly without downloading a model.
 | Vocal + accompaniment | A complete song | `vocals`, `instrumental` |
 | Drum parts | A recording containing drums | `kick`, `snare`, `hh`, `toms`, `percussion`, `remaining-drums` |
 | Song + detailed drums | A complete song | `vocals`, `bass`, `other`, plus the six drum parts above: **nine** materials |
+| Instruments + main/backing vocal | A complete song | `lead-vocal`, `back-vocal`, `piano`, `guitar`, `bass`, `drums`, plus computed `remaining-other`: **seven** materials |
 
 Four-material and two-material modes use SCNet. The two-material mode keeps the
 vocal estimate and derives accompaniment from original minus vocal. Detailed
@@ -25,6 +26,117 @@ instrument. It can contain cymbals, bleed and other unresolved content. There ar
 no learned cymbal, ride or crash heads in this model. A model label is a proposed
 content category; listen to it rather than assuming a source name describes every
 sound in it. In particular, imported SUNO labels are not proof of instrument identity.
+
+## Seven-material instrument/vocal mode (v0.17)
+
+The additional **`instruments`** mode is an opt-in, PC-only direct separation of
+one complete song. Its outputs are six learned Mega53 estimates and a
+computed remainder:
+
+| Output | Intended content | Metadata retained on staging/save |
+| --- | --- | --- |
+| `lead-vocal` | Main vocal | Vocal role `lead` |
+| `back-vocal` | Backing vocal | Vocal role `backing` |
+| `piano` | Learned piano class | Named piano material, existing `keys` role |
+| `guitar` | Learned guitar class | Guitar material |
+| `bass` | Bass | Bass material |
+| `drums` | Whole drum part | Drums material |
+| `remaining-other` | Unassigned mixture content | Other material; no learned-instrument claim |
+
+This is a separate mode, not a replacement for four-material SCNet, two-material
+vocal/accompaniment separation, six-part drum separation or the two-stage
+nine-material detailed-drum workflow. The seven-material mode keeps drums as
+one part; it does not automatically expand into kick/snare/etc. An exported drum
+material can be supplied to the existing drum-only mode separately.
+
+SCNet's `other` is a broad learned class. It can contain piano, guitar, keyboards,
+synths, strings and effects. The new piano/guitar estimates instead come from
+their own learned full-mix heads: they are not fixed EQ bands, manually renamed
+copies or a guarantee that every piano/guitar note leaves `other`. Piano-like
+synths, layered guitars/keyboards and sustained sounds can cross those categories.
+`remaining-other` can retain synths, strings, effects, percussion and vocal or
+instrument bleed; it does not certify that the six named classes are absent.
+
+Main/backing vocal separation is also an estimate. Choir, doubled lead, harmony,
+ad-libs and reverberant tails may cross or remain in several parts. Explicit
+`vocalRole` metadata lets the existing STEM mixer distinguish the intended lead
+and backing roles; it does not prove singer identity, remove vocal bleed or turn
+a model label into a confidence score. The roles remain editable and are saved
+with staged and committed materials. SUNO's own filenames or synth/instrument
+labels do not override what is actually audible.
+
+The six model estimates can overlap. The host uses the existing stereo-linked
+ratio-mask policy on the original complex spectrum, plus the computed unassigned
+remainder, so the **seven adopted contributions** reconstruct the mixture rather
+than double-adding overlapping full-level estimates. Original phase and pan are
+preserved per bin. This can leave bleed and discard a model's proposed phase or
+stereo changes; reconstruction alone is not evidence of successful isolation.
+Do not add the original full-vocal, SCNet `other` or another parent mix on top of
+these seven parts as though they were an additional missing instrument.
+
+Only starting `instruments` fetches its extra same-origin model. Selecting
+or running existing modes does not download it, and phones/tablets remain guarded
+out. The six-head conversion uses the already confirmed Mega53 MIT weight grant;
+that permission is separate from validating a particular converted artifact.
+
+### Converted model and measured evidence
+
+| Artifact or contract | Verified value |
+| --- | --- |
+| File | `mega53-instruments-071fabf5.int8.onnx` |
+| Encoded size | 104,573,310 bytes (about 105 MB / 99.73 MiB) |
+| SHA-256 | `071fabf56f73ebf8bae1ff411eecdac2e02039666e82bb5de62dcf1aa3718557` |
+| Learned order | `lead-vocal`, `back-vocal`, `piano`, `guitar`, `bass`, `drums` |
+| Model input → raw output | Float32 `[1,4,1025,259]` → `[1,24,1025,259]` |
+| Host masks | Seven outputs, Float32 `[1,28,1025,259]`, including computed `remaining-other` |
+| Model audio | 44,100 Hz stereo, 132,096 samples/channel (about 2.995 seconds) |
+| Host STFT | FFT 2048, hop 512, periodic Hann, centered reflection padding, unnormalized; no input standardization |
+| Core windows | 2.99 seconds, 50% overlap; retain source rate and exact frame count after resampling |
+
+All 451 shared non-mask tensors compare exactly across the six source checkpoints;
+the pinned sources and common-trunk fingerprint are recorded in the model's own
+provenance. A native PyTorch → FP32 CPU ONNX comparison measured **4.12e-7 relative
+waveform L2**, and equivalent quantized-native → compact ONNX measured **5.01e-7**.
+The intentional INT8-storage conversion changed the waveform by **1.2158%
+relative L2** versus full precision on synthetic input. Weights are dequantized
+for Float32 computation; there is no INT8 arithmetic-speed claim. Replacing two
+wide Split nodes with 124 ordered Slice nodes preserved CPU output bitwise.
+These are numerical conversion checks, not perceptual quality scores.
+
+A separate full-Chromium NVIDIA hardware-WebGPU probe observed 8,418 compute
+dispatches: initialization **5.337 seconds**, first exact-spectrum inference
+**1.226 seconds**, and a warm run with the real JavaScript FFT frontend
+**0.467 seconds**. Exact-input GPU versus compact CPU waveform difference was
+**9.28e-7 relative L2**. JavaScript/native STFT rounding produced a distinct
+**1.5327% waveform difference** in the end-to-end frontend comparison; quiet heads
+can have larger relative errors. These device-specific short-window measurements
+are not whole-song timings, native-frontend identity or musical-quality evidence.
+
+That GPU route tracked **1,097,400,320 WASM bytes**, excluding GPU allocations,
+JavaScript heap and operating-system process RSS. **Total CPU memory for this
+model has not been measured.** The 4 GB free-memory guidance is conservative,
+with an 8 GB or larger PC recommended; neither figure is a measured minimum or a
+success guarantee.
+
+The real production CPU factory also passed a **four-second synthetic,
+two-window browser workflow**: seven finite WAV outputs with source length/rate,
+reconstruction, unchanged Original bytes, normal STEM mixing and ZIP project
+save/reload with explicit lead/backing roles. The **whole test took about
+1.9 minutes**, including all seven WAV downloads, analysis, mixing and project
+I/O; that is not a per-window inference benchmark. Separate explicitly
+Worker-mocked failure/cancellation tests check OPFS cleanup and state protection;
+they do not verify neural inference. No recorded singer, real-song isolation or
+subjective listening-quality benchmark is established by these synthetic checks.
+
+The production GPU route also passed the same four-second/two-window file
+contract: seven saved WAVs reconstructed the input with RMS error **2.43e-9**;
+Original-file SHA-256, prior A/B and the staged lead/backing roles were retained.
+The adapter reported the `webgpu` provider. This generated-audio functional check
+is separate from the raw-graph GPU timing probe and does not rate isolation.
+
+The model's own license, source revisions, conversion metadata and per-head
+technical results are in [its asset directory](../apps/web/public/models/mega53-instruments/)
+and [model card](../apps/web/public/models/mega53-instruments/MODEL_CARD.md).
 
 ## Use the results
 
@@ -62,6 +174,7 @@ The first use of each model downloads same-origin static files:
 | --- | ---: |
 | SCNet weights, used by four / two / detailed | 13 MB |
 | Mega53 Drums weights, used by drums / detailed | 92 MB |
+| Additional Mega53 instrument/vocal weights, used only by `instruments` | 105 MB |
 | ONNX Runtime WASM plus its JavaScript loader | 29 MB, plus application code |
 
 There is no audio POST, account, paid API or remote inference service in this
@@ -77,14 +190,19 @@ runs on the GPU. CPU drum inference can take much longer than the recording:
 a separate short-window test took about 45 seconds for roughly three seconds of
 input. Timings vary substantially by device and cold model loading.
 
-Allow roughly **1.5 GB free memory for ordinary separation**, and **3 GB free for
-drum/detailed modes**; an **8 GB or larger PC** is recommended for the latter.
+Allow roughly **1.5 GB free memory for ordinary separation**, **3 GB free for
+drum/detailed modes**, and a conservative **4 GB free for instrument mode**;
+an **8 GB or larger PC** is recommended for drum/instrument modes.
 These are starting guidelines, not enforced free-memory measurements or a success
 guarantee. Separate short synthetic CPU probes observed about **1.2 GiB for
 SCNet** and **2.28 GiB for the drum model in tracked WASM buffers alone**. Those
 figures exclude JavaScript heap, decoder/browser/OS overhead and GPU memory.
 A 92 MB model download therefore does not imply a 92 MB working set. Keep other
 heavy tabs closed and try a short excerpt first.
+
+The SCNet/drum figures are separate from the instrument-model GPU-route evidence
+above. CPU total memory for instrument mode remains unmeasured; do not infer it
+from download size, GPU-route WASM tracking or the drum model's figures.
 
 ## Data and storage bounds
 
@@ -127,7 +245,8 @@ transient, so stage it or save the individual WAVs before leaving. See
 
 ## Reconstruction and musical limits
 
-The five independent drum estimates can overlap. Music Sync converts their
+The five independent drum estimates, and the six instrument/vocal
+estimates, can overlap. Music Sync converts their
 combined stereo magnitudes into linked ratio masks, applies them to the original
 complex spectrum, and retains an unassigned remainder. This preserves original
 phase and pan per time/frequency bin, prevents duplicated assigned energy and
@@ -138,7 +257,8 @@ that each instrument was isolated correctly.
 
 Core combines bounded windows with shared overlap-add weights and preserves the
 source edges/tail. The adapter folds numerical/resampling remainder into `other`
-or `remaining-drums`; it does not clip or individually normalize saved parts.
+or `remaining-drums` (and `remaining-other` for the new instrument mode); it does
+not clip or individually normalize saved parts.
 It rejects non-finite or malformed output and excessive reconstruction residual.
 That safety gate is distinct from musical-quality evaluation.
 
@@ -237,9 +357,13 @@ Core unit tests cover metadata/shape checks, overlap edges/tails, bounded writes
 unchanged source PCM and cancellation around read/infer/write. Public-package
 consumer checks cover runtime exports and strict TypeScript contracts. Real-model
 browser fixtures use original synthetic audio to exercise model loading,
-six/four-file output, finite samples, reconstruction and A/B protection. Separate
+four/six/seven-file output, finite samples, reconstruction and A/B protection. Separate
 explicitly mocked Worker tests cover detailed nine-part staging and second-stage
 cancellation/cleanup; they are not evidence of neural quality.
+
+The instrument-mode checks include actual production-model CPU inference and
+production hardware-GPU integration and separate conversion probes, as distinguished above. Mocked
+orchestration and a successful build are not substitutes for those checks.
 
 These checks do not establish real-vocal isolation, subjective listening quality,
 long-song reliability, phone compatibility or broad GPU/Safari support. Evaluate

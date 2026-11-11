@@ -1,6 +1,6 @@
 {
   "name": "@music-sync/core",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -22,9 +22,9 @@
   },
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@music-sync/shared": "0.16.0",
-    "@music-sync/audio-analysis": "0.16.0",
-    "@music-sync/dsp": "0.16.0"
+    "@music-sync/shared": "0.17.0",
+    "@music-sync/audio-analysis": "0.17.0",
+    "@music-sync/dsp": "0.17.0"
   },
   "engines": {
     "node": ">=22.13.0"

@@ -14,7 +14,8 @@ uploaded to GitHub Pages. Local development remains available through the
 [setup below](#quick-start). The **Publish Web App** workflow builds and checks
 the app on main, then deploys only `apps/web/dist` to GitHub Pages.
 
-**Status: v0.16.0 — Local AI STEM and drum-part separation (PC).** Local analysis, A/B comparison, loudness matching,
+**Status: v0.17.0 — seven-material instrument/vocal separation (PC).**
+The existing local AI STEM/drum separation, analysis, A/B comparison, loudness matching,
 manual DSP, experimental adaptive finishing, portable projects and WAV/MP3 export
 are implemented. The existing impact.67 desktop application is preserved outside this
 new workspace; it is not rewritten, replaced or redistributed here.
@@ -32,10 +33,31 @@ percussion; the sixth is unassigned remaining drums. Ride and crash are not
 individually identified. Listen to each result, save its Float32 WAV, or explicitly
 stage it in the existing STEM workspace and build a mix for mastering.
 
+The optional v0.17 `instruments` mode estimates **main vocal,
+backing vocal, piano, guitar, bass and drums**, plus **unassigned remaining
+audio**: seven materials from one complete song. Main/backing vocal roles remain
+explicit when staged and saved in a project. This is a separate direct mode;
+four/two music modes and six/nine drum modes keep their current meanings.
+Piano/guitar are learned content estimates, not fixed slices of SCNet's `other`
+material, and the remainder is not an extra learned instrument. Choir, harmony,
+synth-like sounds and reverb can cross labels, including in SUNO songs. Listen to
+the results; a category name is not proof of an isolated instrument.
+
+The converted model has numerical parity checks and actual browser inference
+coverage. A synthetic two-window CPU workflow verifies all seven WAV outputs,
+mixing, project restoration and explicit vocal roles. These checks do not establish
+real-song isolation or subjective sound quality. See the
+[instrument-mode evidence and limits](docs/stem-separation.md#seven-material-instrumentvocal-mode-v017).
+
 All inference runs locally in a dedicated Worker. Self-hosted models are downloaded
 only after you start: about 13 MB for SCNet and another 92 MB for drum separation,
-plus the ONNX runtime. A supported hardware GPU is selected automatically, with a
-CPU fallback; CPU drum separation can take much longer. Phones and tablets do not
+plus the ONNX runtime. The new instrument/vocal model is an additional opt-in
+download of about 105 MB only for `instruments`. Ordinary modes do
+not fetch it. A supported hardware GPU is selected automatically, with a
+CPU fallback; CPU drum/instrument separation can take much longer. Instrument
+mode's 4 GB free-memory guidance and 8 GB PC recommendation are conservative
+starting points, not measured total-memory requirements or a success guarantee.
+Phones and tablets do not
 start inference or download these assets. Other mobile workflows remain available.
 Original files and the current A/B pair are retained. Cancellation or failed
 separation cannot adopt partial outputs. This is experimental estimation, with
@@ -114,8 +136,9 @@ the option off for manual summing. This is a bounded decision based on the roles
 you assigned, not automatic vocal detection or full multitrack mixing. Same-rate
 source files begin at zero; shorter tails are padded. Worker import uses bounded
 WAV chunks (native FLAC stays within its source-PCM budget), protects the summed
-peak and preserves A/B on failure or cancellation. Source separation, comprehensive masking correction and track-specific dynamics remain
-future work. With 3+ STEMs, the new automatic mix option distinguishes editable
+peak and preserves A/B on failure or cancellation. Local source separation is
+described above; comprehensive masking correction and track-specific dynamics
+remain future work. With 3+ STEMs, the new automatic mix option distinguishes editable
 lead/backing roles and reduces competing bands only during masked singing, with
 limited kick/bass overlap control. Short weak vocal phrases may also receive
 bounded lead-only support, with a separate on/off control under automatic mix
@@ -297,8 +320,9 @@ The GitHub Actions workflow defines lint/test/build checks for pushes and PRs;
 inspect the [Actions run](https://github.com/luarietakamiya-dotcom/music-sync/actions)
 for its current result. See [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) and [SECURITY](SECURITY.md).
 
-Source publication and hosting are separate. No hosted application, npm release or
-audio-upload service is configured by this source publication. Maintainers should
+Source publication, browser deployment and npm publication are separate. The
+browser app is hosted through GitHub Pages; there is no npm registry release or
+audio-upload service. Maintainers should
 review vulnerability reporting and branch protection in the
 [publication checklist](docs/publication.md).
 

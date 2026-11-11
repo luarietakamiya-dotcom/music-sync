@@ -3,7 +3,7 @@ import * as ort from 'onnxruntime-web/webgpu';
 import wasmModule from 'onnxruntime-web/ort-wasm-simd-threaded.asyncify.mjs?url';
 import wasmBinary from 'onnxruntime-web/ort-wasm-simd-threaded.asyncify.wasm?url';
 import {createMixtureMasks, type AudioData} from '@music-sync/core';
-import {separationModel, separationTargets, type DirectSeparationMode} from './separation-protocol';
+import {separationModel, separationTargets, isDirectSeparationMode, type DirectSeparationMode} from './separation-protocol';
 
 type Notify = (fraction:number|undefined,text:string)=>void;
 type Backend = 'webgpu'|'wasm';
@@ -61,8 +61,8 @@ function finiteSamples(data:Float32Array){
 const sameShape=(actual:readonly (string|number)[],expected:readonly number[])=>actual.length===expected.length&&actual.every((value,index)=>value===expected[index]);
 
 export async function createSeparationInference(mode:DirectSeparationMode,notify:Notify){
-  if(!['four','two','drums'].includes(mode))throw new Error('分離モードが不正です。');
-  const model=separationModel(mode),targets=separationTargets(mode),drums=mode==='drums';
+  if(!isDirectSeparationMode(mode))throw new Error('分離モードが不正です。');
+  const model=separationModel(mode),targets=separationTargets(mode);
   const bins=model.n/2+1,inputShape=[1,4,bins,model.frames],outputShape=[1,4*model.learnedTargets.length,bins,model.frames];
   // One pinned entry and matching Asyncify assets serve both providers. No SAB/isolation is required.
   ort.env.wasm.numThreads=1;ort.env.wasm.proxy=false;
@@ -115,9 +115,9 @@ export async function createSeparationInference(mode:DirectSeparationMode,notify
       if(Object.keys(outputs).length!==1||!tensor||tensor.type!=='float32'||!sameShape(tensor.dims,outputShape)||
         !(tensor.data instanceof Float32Array)||tensor.data.length!==outputShape.reduce((product,size)=>product*size,1))
         throw new Error('分離モデルの出力形式が一致しません。');
-      if(drums){
-        const data=createMixtureMasks(feeds.mix_spec.data,tensor.data,{channels:2,sources:5,bins,frames:model.frames});
-        return {stems_spec:{data,dims:[1,24,bins,model.frames]}};
+      if(model.mixtureMasks){
+        const data=createMixtureMasks(feeds.mix_spec.data,tensor.data,{channels:2,sources:model.learnedTargets.length,bins,frames:model.frames});
+        return {stems_spec:{data,dims:[1,4*targets.length,bins,model.frames]}};
       }
       finiteSamples(tensor.data);
       // ORT's CPU output owns its typed array. Keep that array, then dispose the Tensor wrapper.
@@ -155,7 +155,7 @@ export async function createSeparationInference(mode:DirectSeparationMode,notify
     for(const channel of channels)finiteSamples(channel);
     const result:Record<string,AudioData>=Object.fromEntries(targets.map(target=>[target,{sampleRate:audio.sampleRate,channels:[new Float32Array(length),new Float32Array(length)]}]));
     if(channels.every(channel=>channel.every(sample=>sample===0)))return result;
-    const modelTargets=drums?[...model.learnedTargets,'remaining-drums']:[...model.learnedTargets];
+    const modelTargets=model.mixtureMasks?[...model.learnedTargets,model.residualTarget]:[...model.learnedTargets];
     const separated=await separate({channelData:channels,sampleRate:audio.sampleRate},{
       model:{url:bytes,targets:modelTargets},modelType:'complex',n:model.n,hop:model.hop,window:model.window,normalized:model.normalized,
       segment:model.graphSegment,frames:model.frames,step:1,fade:0,targetRate:model.sampleRate,standardize:model.standardize,session:()=>adapter,
@@ -173,7 +173,7 @@ export async function createSeparationInference(mode:DirectSeparationMode,notify
         const vocal=separated.stems.vocals[channel][frame];result.vocals.channels[channel][frame]=vocal;
         result.instrumental.channels[channel][frame]=original-vocal;
       }else{
-        for(const target of targets)result[target].channels[channel][frame]=separated.stems[target][channel][frame]+((target==='other'||target==='remaining-drums')?residual:0);
+        for(const target of targets)result[target].channels[channel][frame]=separated.stems[target][channel][frame]+(target===model.residualTarget?residual:0);
       }
     }
     // Reject broken inference BEFORE folding numerical/SRC remainder into the declared residual target.

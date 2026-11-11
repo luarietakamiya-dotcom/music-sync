@@ -4,7 +4,7 @@ import {readWavFileMetadata,LONG_WAV_LIMITS} from './wav-stream';
 import {CandidateFile} from './candidate-file';
 import {openAudioWorker} from './worker-client';
 import workerUrl from './separation.worker.ts?worker&url';
-import {SEPARATION_TRACKS,separationModel,separationTargets,type DirectSeparationMode,type SeparationMode,type SeparationRequest,type SeparationResponse,type SeparatedFiles} from './separation-protocol';
+import {SEPARATION_TRACKS,separationModel,separationTargets,isDirectSeparationMode,type DirectSeparationMode,type SeparationMode,type SeparationRequest,type SeparationResponse,type SeparatedFiles} from './separation-protocol';
 import {separationAvailableOnDevice} from './separation-platform';
 export {separationAvailableOnDevice} from './separation-platform';
 export type {SeparationMode,SeparatedFiles} from './separation-protocol';
@@ -40,7 +40,7 @@ export async function separateFile(file:File,mode:SeparationMode,signal:AbortSig
 async function separateDirect(file:File,mode:DirectSeparationMode,signal:AbortSignal,progress:Progress,decode?:SeparationDecoder,extraOutputs=0):Promise<SeparatedFiles>{
   signal.throwIfAborted();
   if(!separationAvailableOnDevice())throw new Error('AI STEM分離はPCでご利用ください。');
-  if(!(file instanceof File)||!file.size||file.size>LONG_WAV_LIMITS.maxFileBytes||!/^.+\.(wav|flac)$/i.test(file.name)||!['four','two','drums'].includes(mode))throw new Error('分離するWAV / FLACを1曲選んでください。WAVは512 MiB以内です。');
+  if(!(file instanceof File)||!file.size||file.size>LONG_WAV_LIMITS.maxFileBytes||!/^.+\.(wav|flac)$/i.test(file.name)||!isDirectSeparationMode(mode))throw new Error('分離するWAV / FLACを1曲選んでください。WAVは512 MiB以内です。');
   if(!navigator.storage?.getDirectory||!navigator.locks)throw new Error('このブラウザでは分離用の一時保存を利用できません。PCのChrome / Edgeなどで開いてください。');
   progress(undefined,'原音の形式と分離する長さを確認しています…');
   const flac=/\.flac$/i.test(file.name);
@@ -99,7 +99,7 @@ async function separateDirect(file:File,mode:DirectSeparationMode,signal:AbortSi
       const stored=await handles[index].getFile();signal.throwIfAborted();
       const info=await readWavFileMetadata(stored);
       if(info.frames!==metadata.frames||info.sampleRate!==metadata.sampleRate||info.channels!==2||stored.size!==metadata.frames*8+56)throw new Error('分離音声の長さが一致しません。');
-      return {id:target,label:SEPARATION_TRACKS[target].label,role:SEPARATION_TRACKS[target].role,
+      return {id:target,...SEPARATION_TRACKS[target],
         file:new File([stored],`${index+1} ${target} - ${originalName}.wav`,{type:'audio/wav'})};
     }));
     signal.throwIfAborted();

@@ -249,6 +249,21 @@ parts and an unassigned drum remainder. It omits the coarse drum parent to avoid
 double-counting. Provider selection attempts hardware WebGPU with CPU fallback;
 separation is PC-only because model working memory remains substantial.
 
+The v0.17 `instruments` mode adds a separate direct six-head Mega53
+provider for main/backing vocals, piano, guitar, bass and drums. It uses the same
+generic Core segmentation and DSP mask contracts, with a computed seventh
+unassigned remainder. Those masks allocate overlapping estimates against the
+original spectrum rather than summing independent full-level estimates. This
+branch does not change SCNet or the two-stage nine-material drum workflow. Its
+additional model is fetched only for an explicit instrument-mode job, with a
+pinned converted-asset identity and validated tensor contract. Six learned heads
+produce 24 complex-component planes; generic masks add the remainder and pass
+28 planes for seven outputs to the existing inverse-FFT adapter. Numerical/model
+and synthetic browser checks are distinct from perceptual isolation quality.
+The two vocal materials carry explicit `vocalRole: 'lead' | 'backing'` metadata
+through staging, committed mix descriptors and portable sessions. Metadata is a
+declared model category, not an instrument-confidence measurement.
+
 The separation workspace only auditions/downloads results until explicit staging.
 Shared leases retain files after that panel clears while the STEM workspace uses
 them. A/B remains unchanged until the existing explicit mix commit. Original-file

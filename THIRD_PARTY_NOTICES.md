@@ -62,7 +62,7 @@ binaries. The other filenames mentioned in the historic README are not included
 in the Web sound set. No legacy executable, native plugin or DLL is copied or run
 by this feature.
 
-## Local AI separation (v0.16)
+## Local AI separation (v0.16 and v0.17)
 
 - **SCNet weights**: MIT, copyright starrytong. The model author explicitly confirms
   pretrained-weight and converted-model redistribution in
@@ -77,6 +77,13 @@ by this feature.
   Full notices, pinned checkpoints, conversion provenance and measured limits are
   in apps/web/public/models/mega53-drums/. The computed remaining-drums output is
   not an extra learned cymbal/ride/crash classifier.
+- **Mega53 instrument/vocal subset (v0.17)**: the six learned
+  heads use the same author-confirmed MIT grant for the 53-STEM weights linked
+  above. Its own license, upstream attribution, pinned checkpoints, converted
+  artifact identity, conversion comparisons and measured browser limits are in
+  [the instrument-model asset directory](apps/web/public/models/mega53-instruments/).
+  The computed `remaining-other` is unassigned mixture audio, not a seventh
+  learned classifier. Preserve the notices shipped with that separate asset.
 - **@audio/neural-separate 0.7.0** and its runtime/resampler/FFT helpers are MIT.
   Source: https://github.com/audiojs/neural . These perform host FFT/inverse FFT
   and resampling; Music Sync provides its own session, ownership and bounded rendering.

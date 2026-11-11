@@ -62,21 +62,24 @@ export function bindSeparationWorkspace(host: SeparationWorkspaceHost) {
   }
   function fileToUse() { return selected ?? host.source(); }
   function refreshModeDescription() {
-    const fine = mode.value === 'drums' || mode.value === 'detailed';
+    const fine = mode.value === 'drums' || mode.value === 'detailed' || mode.value === 'instruments';
     inputTitle.textContent = mode.value === 'drums' ? 'ドラムだけの音源を1つドロップ' : '分離する完成曲を1曲ドロップ';
     input.setAttribute('aria-label', mode.value === 'drums' ? 'AIで分離するドラム音源を選択' : 'AIで分離する完成曲を選択');
     if (mode.value === 'drums') {
       modeDescription.textContent = 'ドラムだけの音源を選んでください。キック・スネア・ハイハット・タム・パーカッションと、残りのドラムに分けます。完成曲から分ける場合は「曲＋ドラムの各パーツ」を選んでください。';
     } else if (mode.value === 'detailed') {
       modeDescription.textContent = '完成曲をボーカル・ドラム・ベース・その他に分け、さらにドラムを6素材に分けます。ドラム全体は重ねず、合計9素材として使えます。';
+    } else if (mode.value === 'instruments') {
+      modeDescription.textContent = '原曲からメインボーカル・バックコーラス・ピアノ・ギター・ベース・ドラムを推定し、残りの音と合わせて7素材に分けます。親のボーカルや「その他」は重ねず、曲全体を分け直します。';
     } else if (mode.value === 'two') {
       modeDescription.textContent = '完成曲をボーカルと伴奏の2素材に分けます。';
     } else {
       modeDescription.textContent = '完成曲からボーカル・ドラム・ベース・その他を取り出します。ドラムは1素材です。';
     }
-    const models = mode.value === 'drums' ? 'ドラム用AIモデル約92MB'
+    const models = mode.value === 'instruments' ? '楽器・コーラス用AIモデル約105MB'
+      : mode.value === 'drums' ? 'ドラム用AIモデル約92MB'
       : mode.value === 'detailed' ? 'AIモデル約13MBとドラム用モデル約92MB' : 'AIモデル約13MB';
-    resourceNote.textContent = `初回は${models}と実行プログラムを取得します。空きメモリは約${fine ? '3' : '1.5'}GB以上が目安です。`
+    resourceNote.textContent = `初回は${models}と実行プログラムを取得します。空きメモリは約${mode.value === 'instruments' ? '4' : fine ? '3' : '1.5'}GB以上が目安です。`
       + (fine ? ' GPUを利用できる場合は自動で使用します。CPUでは長時間かかる場合があります。' : '');
   }
   function refresh() {
@@ -200,7 +203,7 @@ export function bindSeparationWorkspace(host: SeparationWorkspaceHost) {
     const error = validation(source);
     if (error) { status.textContent = error; return; }
     const requestedMode = mode.value;
-    const pickedMode: SeparationMode = requestedMode === 'two' || requestedMode === 'drums' || requestedMode === 'detailed' ? requestedMode : 'four';
+    const pickedMode: SeparationMode = requestedMode === 'two' || requestedMode === 'drums' || requestedMode === 'detailed' || requestedMode === 'instruments' ? requestedMode : 'four';
     let handle: Job['handle'];
     try { handle = host.begin(); }
     catch (reason) {

@@ -1430,7 +1430,7 @@ const separationWorkspace=bindSeparationWorkspace({
     if(busy)throw new Error('ほかの処理が終わってから素材を追加してください。');
     if(result.tracks.length<2||result.tracks.length>STEM_LIMITS.maxTracks||result.tracks.reduce((sum,track)=>sum+track.file.size,0)>longStemInputBytes)
       throw new Error('STEMリストへ入れられるのは2〜16素材・合計1 GiB以内です。大きい結果は各WAVを保存して使用してください。');
-    const pending=result.tracks.map(track=>({id:'stem-'+(++stemNextId),file:track.file,role:track.role,gainDb:0,pan:0,muted:false}));
+    const pending=result.tracks.map(track=>({id:'stem-'+(++stemNextId),file:track.file,role:track.role,...(track.vocalRole?{vocalRole:track.vocalRole}:{}),gainDb:0,pan:0,muted:false}));
     if(!separatedGroups.some(group=>group.result===result))separatedGroups.push({result,release:result.retain()});
     result.tracks.forEach(track=>separatedOrigins.set(track.file,result.original));
     stemEntries=pending;stemMode.value=result.mode;stemModeExplicit=true;restoredStemNeedsRebuild=true;

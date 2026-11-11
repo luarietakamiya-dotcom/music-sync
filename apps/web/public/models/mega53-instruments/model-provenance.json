@@ -1,0 +1,652 @@
+{
+  "schemaVersion": 1,
+  "name": "Music Sync Mega53 six-head full-mix instrument separation",
+  "license": "MIT",
+  "artifact": {
+    "file": "mega53-instruments-071fabf5.int8.onnx",
+    "bytes": 104573310,
+    "sha256": "071fabf56f73ebf8bae1ff411eecdac2e02039666e82bb5de62dcf1aa3718557"
+  },
+  "targets": [
+    "lead-vocal",
+    "back-vocal",
+    "piano",
+    "guitar",
+    "bass",
+    "drums"
+  ],
+  "hostComputedRemainder": "remaining-other",
+  "inputPolicy": {
+    "source": "original full stereo mix",
+    "independentOfScnet": true,
+    "parentStemsAddedAgain": false,
+    "trainingDomainCaveat": "Target names and configs are verified. No comparative benchmark establishes a vocal-bus-only input as preferable; the app does not assume that workflow."
+  },
+  "contract": {
+    "sampleRate": 44100,
+    "audioChannels": 2,
+    "samples": 132096,
+    "durationSeconds": 2.995374149659864,
+    "inputName": "mix_spec",
+    "inputShape": [
+      1,
+      4,
+      1025,
+      259
+    ],
+    "outputName": "stems_spec",
+    "outputShape": [
+      1,
+      24,
+      1025,
+      259
+    ],
+    "layout": "target-major,channel-major,real/imaginary;frequency,time",
+    "stft": {
+      "fftSize": 2048,
+      "hop": 512,
+      "window": "periodic Hann",
+      "center": true,
+      "padding": "reflect",
+      "normalized": false
+    },
+    "standardize": false,
+    "zeroOutputDc": true
+  },
+  "hostRendering": {
+    "method": "Stereo-linked nonnegative ratio masks applied to original spectrum plus unassigned remainder",
+    "outputTargets": [
+      "lead-vocal",
+      "back-vocal",
+      "piano",
+      "guitar",
+      "bass",
+      "drums",
+      "remaining-other"
+    ],
+    "outputSpectrumShape": [
+      1,
+      28,
+      1025,
+      259
+    ],
+    "mixtureConsistency": "Sum all seven outputs to the original within Float32/SRC rounding; fold small numerical/SRC remainder into remaining-other",
+    "semanticLimit": "Overlapping learned estimates can retain bleed; remaining-other is not a learned instrument label"
+  },
+  "upstream": {
+    "sourceRepository": "https://github.com/ZFTurbo/Music-Source-Separation-Training",
+    "sourceRevision": "1d4b3c431b37de696b3795ed2018493aacba946f",
+    "sources": [
+      {
+        "file": "bs_roformer.py",
+        "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/models/bs_roformer/bs_roformer.py",
+        "bytes": 20494,
+        "sha256": "a6f670325cdb8a7a212914f62602119b23eb888df9bcfe4a85f9be74728b3ef4"
+      },
+      {
+        "file": "attend.py",
+        "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/models/bs_roformer/attend.py",
+        "bytes": 4410,
+        "sha256": "c7abbc40a3fd20ff7f6001fa9f8ee9ad5df6452272712a5e719b8f8468bf2223"
+      },
+      {
+        "file": "LICENSE",
+        "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/LICENSE",
+        "bytes": 1081,
+        "sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207"
+      }
+    ],
+    "checkpointRepository": "noblebarkrr/BS-Roformer-MVSep-Mega-53-stems",
+    "checkpointRevision": "0677941f9cdfd891a6bc3336229244e197035327",
+    "licenseGrant": "https://github.com/ZFTurbo/Music-Source-Separation-Training/issues/245#issuecomment-5834608838",
+    "checkpoints": [
+      {
+        "target": "lead-vocal",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_lead-vocal_mvsep.ckpt",
+        "bytes": 77620513,
+        "sha256": "7622ef83040f3a1e683d4250af10bcc52ebc36f0b4188ff2101d23c6dae310ce",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_lead-vocal_mvsep_config.yaml",
+          "bytes": 1574,
+          "sha256": "76bd97171a1d5e5af78ee0a65cd85dd1b523f0fa72c435ad6e559dce80301205",
+          "gitBlob": "fb07cda1f65eadb0c2816fc13138edd075494610"
+        }
+      },
+      {
+        "target": "back-vocal",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_back-vocal_mvsep.ckpt",
+        "bytes": 77620513,
+        "sha256": "9e60a9057340574977b0f858084113d952ba4731a7bbe054bf49d1d5338ca9d9",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_back-vocal_mvsep_config.yaml",
+          "bytes": 1574,
+          "sha256": "0b794338e60b1876188b8c2fc26a8e9b4c081526b5ec0819be3bb0ac874ee33f",
+          "gitBlob": "ee6565a1f8edd41a54334279fa680ea23be4739c"
+        }
+      },
+      {
+        "target": "piano",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_piano_mvsep.ckpt",
+        "bytes": 77616988,
+        "sha256": "8e58ad544386136028ec1f5764bb95a235235492144112d94782ff1333905fe9",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_piano_mvsep_config.yaml",
+          "bytes": 1564,
+          "sha256": "c204096de0d784f08202d940b6615c6d2868c640e08adae6b31aace43dd0420f",
+          "gitBlob": "242e6113954fbf6b0a9a3d7918a3f8db668596e9"
+        }
+      },
+      {
+        "target": "guitar",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_guitar_mvsep.ckpt",
+        "bytes": 77617693,
+        "sha256": "9e4524d60cc7eb01eae4048ecda6e3fbf9a9a404e12838f4ed58b8dfb733762d",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_guitar_mvsep_config.yaml",
+          "bytes": 1566,
+          "sha256": "75467ff7bcc2376d248b364d2320be867c1493383d8ab3aa50be147029ce2641",
+          "gitBlob": "cd0a71ced12bccc03cd209de29017e4fa2076943"
+        }
+      },
+      {
+        "target": "bass",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_bass_mvsep.ckpt",
+        "bytes": 77616219,
+        "sha256": "b17600dd1c2027a72ab34180ff6191d3bdeb786db9fbb13c58337c33fc10163c",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_bass_mvsep_config.yaml",
+          "bytes": 1562,
+          "sha256": "f97022b5ed31120970b0ba9ace2ec2606159d4612b877345b1dc109a82434e20",
+          "gitBlob": "848e5bfd9b93080a4f28a12a15c9a4d0dc0e3369"
+        }
+      },
+      {
+        "target": "drums",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_drums_mvsep.ckpt",
+        "bytes": 77616988,
+        "sha256": "abfa64203417f0874aa3936320b1666364ef1badd917f5613a3017d0ea73c7a2",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_drums_mvsep_config.yaml",
+          "bytes": 1564,
+          "sha256": "f5690be43cb47167ca2993288202ee176cc3486b562ceb4a26d0bdfbab5818c0",
+          "gitBlob": "cdf956eca7132071f06c74f018b67ba80d8b0388"
+        }
+      }
+    ]
+  },
+  "sharedTrunk": {
+    "verified": true,
+    "tensors": 451,
+    "parameterElements": 26328772,
+    "sha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+    "method": "Every non-mask key/shape/dtype and torch.equal value matches across six verified FP16 checkpoints; raw-byte fingerprint also matches the existing verified trunk",
+    "heads": [
+      {
+        "target": "lead-vocal",
+        "head_index": 0,
+        "trunk_tensor_count": 451,
+        "head_tensor_count": 248,
+        "all_non_mask_tensors_torch_equal": true,
+        "trunk_sha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "head_sha256": "89ba10a34126046b38cdd795a12436f95ce542b56f24292f7ccbfabcca7f022f",
+        "checkpoint_sha256": "7622ef83040f3a1e683d4250af10bcc52ebc36f0b4188ff2101d23c6dae310ce",
+        "config_sha256": "76bd97171a1d5e5af78ee0a65cd85dd1b523f0fa72c435ad6e559dce80301205",
+        "checkpoint_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_lead-vocal_mvsep.ckpt",
+        "config_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_lead-vocal_mvsep_config.yaml"
+      },
+      {
+        "target": "back-vocal",
+        "head_index": 1,
+        "trunk_tensor_count": 451,
+        "head_tensor_count": 248,
+        "all_non_mask_tensors_torch_equal": true,
+        "trunk_sha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "head_sha256": "8e154238d5795ee3694b46548057255df933ef55ae2a61690af11cfaad4e9dad",
+        "checkpoint_sha256": "9e60a9057340574977b0f858084113d952ba4731a7bbe054bf49d1d5338ca9d9",
+        "config_sha256": "0b794338e60b1876188b8c2fc26a8e9b4c081526b5ec0819be3bb0ac874ee33f",
+        "checkpoint_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_back-vocal_mvsep.ckpt",
+        "config_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_back-vocal_mvsep_config.yaml"
+      },
+      {
+        "target": "piano",
+        "head_index": 2,
+        "trunk_tensor_count": 451,
+        "head_tensor_count": 248,
+        "all_non_mask_tensors_torch_equal": true,
+        "trunk_sha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "head_sha256": "c163e9ccc1f7577b51c8dfb57e87d1f2c59d24738339c0673a783a3c0b86138d",
+        "checkpoint_sha256": "8e58ad544386136028ec1f5764bb95a235235492144112d94782ff1333905fe9",
+        "config_sha256": "c204096de0d784f08202d940b6615c6d2868c640e08adae6b31aace43dd0420f",
+        "checkpoint_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_piano_mvsep.ckpt",
+        "config_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_piano_mvsep_config.yaml"
+      },
+      {
+        "target": "guitar",
+        "head_index": 3,
+        "trunk_tensor_count": 451,
+        "head_tensor_count": 248,
+        "all_non_mask_tensors_torch_equal": true,
+        "trunk_sha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "head_sha256": "aaefffce317e6f96b05faaa873e20a0b31dc98afbc24881b43a2e58313614d2e",
+        "checkpoint_sha256": "9e4524d60cc7eb01eae4048ecda6e3fbf9a9a404e12838f4ed58b8dfb733762d",
+        "config_sha256": "75467ff7bcc2376d248b364d2320be867c1493383d8ab3aa50be147029ce2641",
+        "checkpoint_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_guitar_mvsep.ckpt",
+        "config_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_guitar_mvsep_config.yaml"
+      },
+      {
+        "target": "bass",
+        "head_index": 4,
+        "trunk_tensor_count": 451,
+        "head_tensor_count": 248,
+        "all_non_mask_tensors_torch_equal": true,
+        "trunk_sha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "head_sha256": "09db929008c8d388c1a66b4072e288d13942ddf24ee4d84a0c14d1882ac3b03f",
+        "checkpoint_sha256": "b17600dd1c2027a72ab34180ff6191d3bdeb786db9fbb13c58337c33fc10163c",
+        "config_sha256": "f97022b5ed31120970b0ba9ace2ec2606159d4612b877345b1dc109a82434e20",
+        "checkpoint_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_bass_mvsep.ckpt",
+        "config_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_bass_mvsep_config.yaml"
+      },
+      {
+        "target": "drums",
+        "head_index": 5,
+        "trunk_tensor_count": 451,
+        "head_tensor_count": 248,
+        "all_non_mask_tensors_torch_equal": true,
+        "trunk_sha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "head_sha256": "e32d63b0c8cd3d04c99747cf546b3de56e0f985e0240fb6f5e6c32c44724f7aa",
+        "checkpoint_sha256": "abfa64203417f0874aa3936320b1666364ef1badd917f5613a3017d0ea73c7a2",
+        "config_sha256": "f5690be43cb47167ca2993288202ee176cc3486b562ceb4a26d0bdfbab5818c0",
+        "checkpoint_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_drums_mvsep.ckpt",
+        "config_url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_drums_mvsep_config.yaml"
+      }
+    ]
+  },
+  "conversion": {
+    "float": {
+      "bytes": 403638067,
+      "sha256": "45db99df6cee77fcaf835e4f99d22b06863e91075a9463061e426f7453acf942"
+    },
+    "compact": {
+      "bytes": 104541548,
+      "sha256": "1677e7bcddfeebc6b3a20c36b9a85d73e2e9339af8eba13562979c2db30d231f"
+    },
+    "portableTransformations": [
+      {
+        "name": "/band_split/Split",
+        "axis": -1,
+        "outputs": 62,
+        "lengths": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          8,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          16,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          48,
+          96,
+          96,
+          96,
+          96,
+          96,
+          96,
+          96,
+          96,
+          192,
+          192,
+          192,
+          192,
+          192,
+          192,
+          192,
+          192,
+          512,
+          516
+        ]
+      },
+      {
+        "name": "/mask_estimators.0/Split",
+        "axis": -2,
+        "outputs": 62,
+        "lengths": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "scripts": [
+      {
+        "file": "export_instruments.py",
+        "bytes": 26426,
+        "sha256": "d42d296acc484acd39385725ca0a08f4c517b1fea2669d3e4f8883c194bdb425"
+      },
+      {
+        "file": "compact_instruments.py",
+        "bytes": 8468,
+        "sha256": "a1d02f6cfa657a9e90140eba01a405580a91f353ae226ff614b0b3efa506da5e"
+      },
+      {
+        "file": "webgpu_instruments.py",
+        "bytes": 6798,
+        "sha256": "f7bf749540859648d0bb4932327042cdbe04eedb9ecf5355ed60f46255fe20b0"
+      },
+      {
+        "file": "prepare_instruments.py",
+        "bytes": 3202,
+        "sha256": "1d5b99bdf1c62dcdf1e05a96cc427858b5968042277bcdd410ffa19141ca6445"
+      }
+    ],
+    "shippedSizeBelowGitHub100MiBBy": 284290
+  },
+  "validation": {
+    "input": "Deterministic generated synthetic musical mixture, 132096 stereo frames at44100Hz; no private recordings or semantic/listening benchmark",
+    "nativeFullPrecision": {
+      "status": "onnx-parity-passed",
+      "originalUnchanged": true,
+      "realWrapperWaveformParity": {
+        "max_abs": 1.30385160446167e-7,
+        "rmse": 1.9142687129183855e-9,
+        "relative_l2": 3.6123843416367277e-7,
+        "finite": true
+      },
+      "onnxWaveformParity": {
+        "max_abs": 1.1920928955078125e-7,
+        "rmse": 2.1834667142438346e-9,
+        "relative_l2": 4.120383369268234e-7,
+        "finite": true
+      },
+      "perHeadOnnxParity": {
+        "lead-vocal": {
+          "max_abs": 2.684828359633684e-9,
+          "rmse": 2.2021088671269718e-10,
+          "relative_l2": 0.000007172128190412599,
+          "finite": true
+        },
+        "back-vocal": {
+          "max_abs": 3.7471181713044643e-10,
+          "rmse": 6.293169367296294e-11,
+          "relative_l2": 0.000010921462437430499,
+          "finite": true
+        },
+        "piano": {
+          "max_abs": 2.764863893389702e-9,
+          "rmse": 6.21838082142451e-10,
+          "relative_l2": 0.000005214073756402415,
+          "finite": true
+        },
+        "guitar": {
+          "max_abs": 6.83940015733242e-10,
+          "rmse": 5.792189817538647e-11,
+          "relative_l2": 0.000005331592623893226,
+          "finite": true
+        },
+        "bass": {
+          "max_abs": 5.122274160385132e-9,
+          "rmse": 6.221768803139846e-10,
+          "relative_l2": 0.000003323662724329682,
+          "finite": true
+        },
+        "drums": {
+          "max_abs": 1.1920928955078125e-7,
+          "rmse": 5.270252982872945e-9,
+          "relative_l2": 4.0608018715009803e-7,
+          "finite": true
+        }
+      }
+    },
+    "quantization": {
+      "equivalentQuantizedNativeParity": {
+        "max_abs": 1.2665987014770508e-7,
+        "rmse": 2.6377234995886817e-9,
+        "relative_l2": 5.012857014133113e-7,
+        "finite": true
+      },
+      "intentionalWaveformChangeVsOriginal": {
+        "max_abs": 0.0037102773785591125,
+        "rmse": 0.00006442659773420578,
+        "relative_l2": 0.012157835066173163,
+        "finite": true
+      },
+      "activationQuantization": false,
+      "compute": "float32",
+      "matrixStorage": "int8-per-output-channel",
+      "matrices": 926
+    },
+    "portable": {
+      "status": "cpu-bitwise-parity-passed",
+      "cpuBitwiseEqual": true,
+      "originalInitializersUnchanged": true,
+      "originalInitializerCount": 2846,
+      "wideSplitCount": 2,
+      "sliceCount": 124
+    },
+    "browserWebGPU": {
+      "status": "passed",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "secure": true,
+        "crossOriginIsolated": false,
+        "sharedArrayBuffer": "undefined"
+      },
+      "adapter": {
+        "vendor": "nvidia",
+        "architecture": "turing",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": false
+      },
+      "actualQueueSubmissions": 2462,
+      "actualComputeDispatches": 8418,
+      "modelLoadMs": 5336.699999809265,
+      "exactInputFirstRunMs": 1226.4000000953674,
+      "realJsFrontendWarmRunMs": 466.80000019073486,
+      "exactInputWaveformParityVsCompactCpu": {
+        "length": 1585152,
+        "maxAbs": 2.5331974029541016e-7,
+        "rmse": 4.883654214171513e-9,
+        "relativeL2": 9.28113447250856e-7,
+        "peak": 0.1061423271894455,
+        "finite": true
+      },
+      "realJsFrontendInputDifference": {
+        "length": 1061900,
+        "maxAbs": 0.000003814697265625,
+        "rmse": 1.0083597648630325e-7,
+        "relativeL2": 1.5001060292935525e-7,
+        "peak": 41.170066833496094,
+        "finite": true
+      },
+      "realJsFrontendWaveformDifferenceVsCompactCpu": {
+        "length": 1585152,
+        "maxAbs": 0.004181206226348877,
+        "rmse": 0.00008064929604057765,
+        "relativeL2": 0.0153269852622589,
+        "peak": 0.10972568392753601,
+        "finite": true
+      },
+      "realJsFrontendPerHead": {
+        "lead-vocal": {
+          "length": 264192,
+          "maxAbs": 0.000008466813596896827,
+          "rmse": 0.0000015054888657192976,
+          "relativeL2": 0.05632922080819781,
+          "peak": 0.0004598649684339762,
+          "finite": true,
+          "rms": 0.00002723648288397595,
+          "frames": 132096,
+          "channels": 2
+        },
+        "back-vocal": {
+          "length": 264192,
+          "maxAbs": 0.000001201748091261834,
+          "rmse": 2.11022702938708e-7,
+          "relativeL2": 0.040598907989362394,
+          "peak": 0.00003428498166613281,
+          "finite": true,
+          "rms": 0.000005032456822206644,
+          "frames": 132096,
+          "channels": 2
+        },
+        "piano": {
+          "length": 264192,
+          "maxAbs": 0.00004427979001775384,
+          "rmse": 0.0000095798075381989,
+          "relativeL2": 0.07755216178700942,
+          "peak": 0.0005499123362824321,
+          "finite": true,
+          "rms": 0.000132903419980722,
+          "frames": 132096,
+          "channels": 2
+        },
+        "guitar": {
+          "length": 264192,
+          "maxAbs": 0.000006731119356118143,
+          "rmse": 6.659513832507317e-7,
+          "relativeL2": 0.05990029983066605,
+          "peak": 0.00016204622806981206,
+          "finite": true,
+          "rms": 0.000011609924153968842,
+          "frames": 132096,
+          "channels": 2
+        },
+        "bass": {
+          "length": 264192,
+          "maxAbs": 0.00005723035428673029,
+          "rmse": 0.000010434078592173387,
+          "relativeL2": 0.05973394223660957,
+          "peak": 0.001497601275332272,
+          "finite": true,
+          "rms": 0.00018032980751167955,
+          "frames": 132096,
+          "channels": 2
+        },
+        "drums": {
+          "length": 264192,
+          "maxAbs": 0.004181206226348877,
+          "rmse": 0.0001970341505525299,
+          "relativeL2": 0.015289138204538448,
+          "peak": 0.10972568392753601,
+          "finite": true,
+          "rms": 0.013041586685830853,
+          "frames": 132096,
+          "channels": 2
+        }
+      },
+      "originalUnchanged": true,
+      "trackedWasmBytes": 1097400320,
+      "memoryScope": "WASM buffers only, excludes JavaScript heap/GPU memory/process RSS; not a whole-machine memory requirement"
+    }
+  },
+  "runtime": {
+    "package": "onnxruntime-web",
+    "version": "1.31.1",
+    "entry": "onnxruntime-web/webgpu",
+    "wasmBuild": "asyncify",
+    "numThreads": 1,
+    "proxy": false,
+    "frontend": "@audio/neural-separate@0.7.0 with Music Sync-owned session"
+  },
+  "limitations": [
+    "Fixed2.995s context is experimental versus upstream20s inference",
+    "No recorded-vocal/piano/guitar semantic quality or commercial fitness guarantee",
+    "CPU/full-app validation is separate from this rawgraphGPU proof",
+    "Mobile/Safari/long-song memory and transition quality are not established by this probe",
+    "Author license grant does not promise training-data copyright clearance or indemnification"
+  ]
+}

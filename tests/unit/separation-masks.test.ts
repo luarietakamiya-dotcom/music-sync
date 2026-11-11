@@ -32,13 +32,13 @@ describe('conservative learned separation masks', () => {
     const joined = reconstruct(output, 4, 1); joined.forEach((value, index) => close(value, mixture[index]));
   });
 
-  it.each([1, 2])('reconstructs every bin / frame of five overlapping estimates with %s channel(s)', channels => {
-    const dimensions = shape({ channels, sources: 5, bins: 13, frames: 17 }), length = channels * 2 * 13 * 17;
+  it.each([{channels:1,sources:5},{channels:2,sources:5},{channels:1,sources:6},{channels:2,sources:6}])('reconstructs every bin / frame of $sources overlapping estimates with $channels channel(s)', ({channels,sources}) => {
+    const dimensions = shape({ channels, sources, bins: 13, frames: 17 }), length = channels * 2 * 13 * 17;
     let seed = 0x739fd129;
     const random = () => { seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5; return (seed >>> 0) / 0x100000000 * 4 - 2; };
-    const mixture = Float32Array.from({ length }, random), estimates = Float32Array.from({ length: length * 5 }, random);
-    const output = createMixtureMasks(mixture, estimates, dimensions), joined = reconstruct(output, length, 5);
-    expect(output.length).toBe(length * 6);
+    const mixture = Float32Array.from({ length }, random), estimates = Float32Array.from({ length: length * sources }, random);
+    const output = createMixtureMasks(mixture, estimates, dimensions), joined = reconstruct(output, length, sources);
+    expect(output.length).toBe(length * (sources+1));
     joined.forEach((value, index) => close(value, mixture[index]));
     for (let source = 0; source < 6; source++) for (let index = 0; index < length; index++) {
       const value = output[source * length + index];

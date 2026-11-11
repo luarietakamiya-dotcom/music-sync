@@ -1,0 +1,477 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-11T04:12:01.823Z",
+  "name": "Music Sync Mega53 five-head drum-parts",
+  "license": "MIT",
+  "artifact": {
+    "file": "mega53-drums-2044dee8.int8.onnx",
+    "bytes": 91762503,
+    "sha256": "2044dee8a8756b92bc92ae14a0069d744bc67457ba3a4f2a592f414a17eaa8b2"
+  },
+  "targets": [
+    "kick",
+    "snare",
+    "hh",
+    "toms",
+    "percussion"
+  ],
+  "contract": {
+    "sampleRate": 44100,
+    "audioChannels": 2,
+    "inputName": "mix_spec",
+    "inputShape": [
+      1,
+      4,
+      1025,
+      259
+    ],
+    "outputName": "stems_spec",
+    "outputShape": [
+      1,
+      20,
+      1025,
+      259
+    ],
+    "samples": 132096,
+    "durationSeconds": 2.995374149659864,
+    "layout": "target-major, channel-major, real/imaginary; frequency then time",
+    "stft": {
+      "fftSize": 2048,
+      "hop": 512,
+      "window": "periodic Hann",
+      "center": true,
+      "padding": "reflect",
+      "normalized": false
+    },
+    "standardize": false,
+    "zeroOutputDc": true
+  },
+  "upstream": {
+    "checkpointRepository": "noblebarkrr/BS-Roformer-MVSep-Mega-53-stems",
+    "checkpointRevision": "0677941f9cdfd891a6bc3336229244e197035327",
+    "licenseGrant": "https://github.com/ZFTurbo/Music-Source-Separation-Training/issues/245#issuecomment-5834608838",
+    "checkpoints": [
+      {
+        "target": "kick",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_kick_mvsep.ckpt",
+        "bytes": 77616219,
+        "sha256": "ad914b83f9ef13bedf9608771f4f1a86174e27a84f7f235dc2d1dd91bab85fbc",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_kick_mvsep_config.yaml",
+          "bytes": 1562,
+          "sha256": "e234de6e1fd66a2c359bd5fb5d4bb815125e1d6408ee4df581ca297f6f17ff14",
+          "gitBlob": "5dc89a40fe36dd9daa1d898592f259f5a8e0d200"
+        }
+      },
+      {
+        "target": "snare",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_snare_mvsep.ckpt",
+        "bytes": 77616988,
+        "sha256": "c4cde14867f1311836d4aa07649e39df4df43c4ba98780783fe96cd4fe8293bf",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_snare_mvsep_config.yaml",
+          "bytes": 1564,
+          "sha256": "605debf3206fcdc34046e6de72bdf7c66014a0fd400dd8908df3b89774146db9",
+          "gitBlob": "a737b57db39aa47e03046abbc1352a89bed0f5bb"
+        }
+      },
+      {
+        "target": "hh",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_hh_mvsep.ckpt",
+        "bytes": 77614809,
+        "sha256": "94901a05d358f16b2de4064eec45f0947bb28bf239040a3fe79e2ae7fadd2984",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_hh_mvsep_config.yaml",
+          "bytes": 1558,
+          "sha256": "d6d712604e80060938c23c38da202d768d29d4d37a3ec4f2459706cbf15193ca",
+          "gitBlob": "0dd40f5c73aa91c26e53a2a967e44de9b939e07c"
+        }
+      },
+      {
+        "target": "toms",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_toms_mvsep.ckpt",
+        "bytes": 77616219,
+        "sha256": "ceb45bbc16419363bb842484dadcc786a9ca290c4553c9eced0e98dc8f0f2458",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_toms_mvsep_config.yaml",
+          "bytes": 1562,
+          "sha256": "174f4a1307d96e6a7167ed441eadd4625f877f766da10ef70aba5e7cbcf40786",
+          "gitBlob": "c2a7ac406caac6218004b92fe70f38aa223169c6"
+        }
+      },
+      {
+        "target": "percussion",
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_percussion_mvsep.ckpt",
+        "bytes": 77620513,
+        "sha256": "82187665185d51e6050b4d6afaf45e7acafd85d1eefffd86c47ac0aa601e089f",
+        "config": {
+          "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_percussion_mvsep_config.yaml",
+          "bytes": 1574,
+          "sha256": "583bfe3cfae1db6a8e38205aa61d12f7c96df99c0f8568a69b9a9eb9dc715838",
+          "gitBlob": "1d1315da94e06c0640f827ec7b36a9c88d9fb96e"
+        }
+      }
+    ],
+    "sourceRepository": "https://github.com/ZFTurbo/Music-Source-Separation-Training",
+    "sourceRevision": "1d4b3c431b37de696b3795ed2018493aacba946f",
+    "sources": [
+      {
+        "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/models/bs_roformer/bs_roformer.py",
+        "bytes": 20494,
+        "sha256": "a6f670325cdb8a7a212914f62602119b23eb888df9bcfe4a85f9be74728b3ef4"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/models/bs_roformer/attend.py",
+        "bytes": 4410,
+        "sha256": "c7abbc40a3fd20ff7f6001fa9f8ee9ad5df6452272712a5e719b8f8468bf2223"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/LICENSE",
+        "bytes": 1081,
+        "sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207"
+      }
+    ]
+  },
+  "sharedTrunk": {
+    "verified": true,
+    "method": "All non-mask tensors: identical keys, shapes, dtypes and torch.equal; independent raw-byte SHA-256 fingerprints",
+    "tensorCount": 451,
+    "parameterElements": 26328772,
+    "sourceFp16Bytes": 52657544,
+    "sha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+    "heads": [
+      {
+        "target": "kick",
+        "modelConfigurationEqual": true,
+        "allNonMaskTensorsEqual": true,
+        "trunkSha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "headSha256": "6884702d9a3e3582cb85862499f5e39ef2f87a43d2bcfa9f13294e83c635c5a6",
+        "headTensorCount": 248,
+        "headParameterElements": 12364808,
+        "sourceFp16Bytes": 24729616
+      },
+      {
+        "target": "snare",
+        "modelConfigurationEqual": true,
+        "allNonMaskTensorsEqual": true,
+        "trunkSha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "headSha256": "349bcbf673594491df268a077c98aa7ca814e41ed1dd8cf98e82ba8edd827a0f",
+        "headTensorCount": 248,
+        "headParameterElements": 12364808,
+        "sourceFp16Bytes": 24729616
+      },
+      {
+        "target": "hh",
+        "modelConfigurationEqual": true,
+        "allNonMaskTensorsEqual": true,
+        "trunkSha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "headSha256": "3e5dd07833466066babc8afbda289219514f06a3f66993d060b50548fba2b164",
+        "headTensorCount": 248,
+        "headParameterElements": 12364808,
+        "sourceFp16Bytes": 24729616
+      },
+      {
+        "target": "toms",
+        "modelConfigurationEqual": true,
+        "allNonMaskTensorsEqual": true,
+        "trunkSha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "headSha256": "980771e4c2f7512f8d9268a72020f28f75d258edf347cf58cdfed1cb8d5438cd",
+        "headTensorCount": 248,
+        "headParameterElements": 12364808,
+        "sourceFp16Bytes": 24729616
+      },
+      {
+        "target": "percussion",
+        "modelConfigurationEqual": true,
+        "allNonMaskTensorsEqual": true,
+        "trunkSha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+        "headSha256": "31c7dc8968ee199ddda2e462e8a1f3aa8456209492be2215ea8de579211d2446",
+        "headTensorCount": 248,
+        "headParameterElements": 12364808,
+        "sourceFp16Bytes": 24729616
+      }
+    ]
+  },
+  "conversion": {
+    "floatModel": {
+      "file": "five.fp32.onnx",
+      "bytes": 354042794,
+      "sha256": "c4fb87d31bbe651e6f79b117bdd4e09fd100f708fa5247e36f5d88f5149dde14",
+      "originalWaveformParity": {
+        "max_abs": 1.0244548320770264e-7,
+        "rmse": 5.3862320137310804e-9,
+        "relative_l2": 8.872330355987003e-7,
+        "finite": true
+      }
+    },
+    "compactModel": {
+      "file": "five.int8.onnx",
+      "bytes": 91730741,
+      "sha256": "93455d12f512de3990ca85aad94db3635afb57c4f1dede230292189c10ed61bd",
+      "storage": "int8-per-output-channel",
+      "compute": "float32",
+      "quantizedMatrices": 802,
+      "activationQuantization": false,
+      "quantizedNativeParity": {
+        "max_abs": 1.043081283569336e-7,
+        "rmse": 3.523166681340935e-9,
+        "relative_l2": 5.816337896469129e-7,
+        "finite": true
+      },
+      "waveformChangeVsOriginalFloat": {
+        "max_abs": 0.002993907779455185,
+        "rmse": 0.0001718512325905001,
+        "relative_l2": 0.02830774656085212,
+        "finite": true
+      }
+    },
+    "webgpuTransformation": {
+      "changedWideSplits": 2,
+      "remainingWideSplits": 0,
+      "emittedSlices": 124,
+      "concatTreeEnabled": false,
+      "originalInitializersUnchanged": true,
+      "originalInitializerCount": 2474,
+      "cpuOutputParityVsCompact": {
+        "bitwise_array_equal": true,
+        "max_abs": 0,
+        "rmse": 0,
+        "relative_l2": 0,
+        "finite": true
+      }
+    },
+    "scripts": [
+      {
+        "file": "prepare-five.mjs",
+        "bytes": 4403,
+        "sha256": "9248a50d28744b2e063abe09ac16f1ab97a875fd92cc7bb327c2b17a764fb903"
+      },
+      {
+        "file": "compare-five.py",
+        "bytes": 6294,
+        "sha256": "c856859a8807bb15e00f4935a3237d4376555617c453bbe65f8ec3567831dfb5"
+      },
+      {
+        "file": "export-five.py",
+        "bytes": 14253,
+        "sha256": "7803ce74dbe197eb040bf72cb3600a481718fd9a76cc890d1537c964a12de624"
+      },
+      {
+        "file": "export-real.py",
+        "bytes": 19567,
+        "sha256": "81c5a08a2ecda0050851b05ebd7479b002263809e098cddd38571341a7ad36aa"
+      },
+      {
+        "file": "compact-weights.py",
+        "bytes": 5301,
+        "sha256": "d557841a8aa327415fe7a5e674eb17fd8aa45a860cb31d98e366f5ee488fd917"
+      },
+      {
+        "file": "measure-compact.py",
+        "bytes": 3760,
+        "sha256": "326f0ceeba57ca9fc5ee235dafa6b83939a573e07ad881cef564b6d39006ef93"
+      },
+      {
+        "file": "webgpu-portable.py",
+        "bytes": 9047,
+        "sha256": "9f3f86bf89344d30f81e79d19542eab8562454d0cae6201e72e71f799ff373ab"
+      }
+    ]
+  },
+  "validation": {
+    "input": "Original deterministic synthetic musical mixture; no private recordings or real-song quality benchmark",
+    "nativeWebGPU": {
+      "status": "passed",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+        "secure": true,
+        "crossOriginIsolated": false,
+        "sharedArrayBuffer": "undefined"
+      },
+      "adapter": {
+        "vendor": "nvidia",
+        "architecture": "turing",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": false
+      },
+      "modelLoadMs": 4247.099999904633,
+      "firstExactInputRunMs": 1116.3000001907349,
+      "warmRealFrontendRunMs": 470.6000003814697,
+      "gpuDispatches": 7638,
+      "gpuQueueSubmissions": 2164,
+      "exactInputWaveformParityVsEquivalentQuantizedNative": {
+        "length": 1320960,
+        "maxAbs": 1.6391277313232422e-7,
+        "rmse": 7.633035171042337e-9,
+        "relativeL2": 0.000001260125362801917,
+        "peak": 0.09190532565116882,
+        "finite": true
+      },
+      "realFrontendInputSpectrumParity": {
+        "length": 1061900,
+        "maxAbs": 0.000003814697265625,
+        "rmse": 1.0083597648630325e-7,
+        "relativeL2": 1.5001060292935525e-7,
+        "peak": 41.170066833496094,
+        "finite": true
+      },
+      "realFrontendWaveformDifferenceVsEquivalentQuantizedNative": {
+        "length": 1320960,
+        "maxAbs": 0.0026421789079904556,
+        "rmse": 0.00012646012979088556,
+        "relativeL2": 0.020877097165393536,
+        "peak": 0.09243234246969223,
+        "finite": true
+      },
+      "realFrontendPerHead": {
+        "kick": {
+          "length": 264192,
+          "maxAbs": 0.001111496239900589,
+          "rmse": 0.000058039438877527376,
+          "relativeL2": 0.004451932129521754,
+          "peak": 0.09243234246969223,
+          "finite": true,
+          "rms": 0.013052842131209044,
+          "frames": 132096,
+          "channels": 2
+        },
+        "snare": {
+          "length": 264192,
+          "maxAbs": 0.0012976080179214478,
+          "rmse": 0.0000454950576394756,
+          "relativeL2": 0.07653458588228206,
+          "peak": 0.014954475685954094,
+          "finite": true,
+          "rms": 0.0006326579183691015,
+          "frames": 132096,
+          "channels": 2
+        },
+        "hh": {
+          "length": 264192,
+          "maxAbs": 0.00042308634147047997,
+          "rmse": 0.00001343008216877766,
+          "relativeL2": 0.10573684188941716,
+          "peak": 0.005217051133513451,
+          "finite": true,
+          "rms": 0.00013760056249781036,
+          "frames": 132096,
+          "channels": 2
+        },
+        "toms": {
+          "length": 264192,
+          "maxAbs": 0.0026421789079904556,
+          "rmse": 0.00027221777897537265,
+          "relativeL2": 0.07513640821291159,
+          "peak": 0.035135604441165924,
+          "finite": true,
+          "rms": 0.003876378032814915,
+          "frames": 132096,
+          "channels": 2
+        },
+        "percussion": {
+          "length": 264192,
+          "maxAbs": 0.0008552467916160822,
+          "rmse": 0.000015477696904078897,
+          "relativeL2": 0.38081592530553643,
+          "peak": 0.0015830514021217823,
+          "finite": true,
+          "rms": 0.00002570690460792963,
+          "frames": 132096,
+          "channels": 2
+        }
+      },
+      "trackedWasmBytes": 1032060928,
+      "originalUnchanged": true,
+      "memoryScope": "Tracked WASM buffers only; excludes GPU buffers, JavaScript heap and OS process peak RSS"
+    },
+    "baseCompactWasm": {
+      "artifactSha256": "93455d12f512de3990ca85aad94db3635afb57c4f1dede230292189c10ed61bd",
+      "status": "passed",
+      "numThreads": 1,
+      "modelLoadMs": 2593.9000000953674,
+      "runMs": 44883.89999961853,
+      "exactInputWaveformParity": {
+        "length": 1320960,
+        "maxAbs": 6.803020369261503e-8,
+        "rmse": 3.125849334693709e-9,
+        "relativeL2": 5.160413831038527e-7,
+        "peak": 0.09190530329942703,
+        "finite": true
+      },
+      "trackedWasmBytes": 2443509760,
+      "scope": "Separate WASM entry and base compact artifact; not a unified WebGPU-entry fallback certification"
+    }
+  },
+  "runtime": {
+    "package": "onnxruntime-web",
+    "version": "1.31.1",
+    "license": "MIT",
+    "entry": "onnxruntime-web/webgpu",
+    "wasmBuild": "asyncify",
+    "numThreads": 1,
+    "proxy": false,
+    "files": [
+      {
+        "file": "ort.webgpu.min.mjs",
+        "bytes": 70742,
+        "sha256": "329cd956772397a1aedd668e911195d39afefb182f6fc14aafa4f08ac8d8f379"
+      },
+      {
+        "file": "ort-wasm-simd-threaded.asyncify.mjs",
+        "bytes": 53457,
+        "sha256": "59cf781530e1a16df2a291d78798e3ec1152467edaec402d6f9599d85047c302"
+      },
+      {
+        "file": "ort-wasm-simd-threaded.asyncify.wasm",
+        "bytes": 28747738,
+        "sha256": "ca319e9539cd0f1e291cf56074760121eaf39650f5dbf84b6e52c07f4b2944ec"
+      }
+    ],
+    "licenseUrl": "https://github.com/microsoft/onnxruntime/blob/v1.31.1/LICENSE",
+    "thirdPartyNoticesUrl": "https://github.com/microsoft/onnxruntime/blob/v1.31.1/ThirdPartyNotices.txt",
+    "otherModelUnifiedEntryValidation": {
+      "model": "SCNet",
+      "modelSha256": "98228931494151762a1c4ab1ec7899a894b1f81fd4a509921a9d2f9bacc50845",
+      "modelBytes": 12900277,
+      "testedProviderSelections": [
+        "webgpu",
+        "wasm"
+      ],
+      "gpuRunTimesMs": [
+        4187.200000286102,
+        2697.5999999046326
+      ],
+      "actualGpuDispatches": 12401,
+      "wasmRunTimesMs": [
+        19303
+      ],
+      "scope": "Separate explicit provider selections through the same webgpu entry and asyncify assets, on SCNet only. This is not a final five-head model automatic-failover certification."
+    }
+  },
+  "toolchain": {
+    "python": "3.11.18",
+    "pytorch": "2.9.1+cpu",
+    "numpy": "2.4.6",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.31.1",
+    "uv": {
+      "version": "0.13.7",
+      "url": "https://github.com/astral-sh/uv/releases/download/0.13.7/uv-x86_64-pc-windows-msvc.zip",
+      "bytes": 15236317,
+      "sha256": "0cdc5b38fe5a8168ed6a25814f5ba43c21d313dd3187314fccb37b7cec46e021"
+    },
+    "managedPythonInstallFlags": [
+      "--no-bin",
+      "--no-registry"
+    ]
+  },
+  "limitations": [
+    "Fixed approximately three-second context, not the upstream twenty-second inference context",
+    "No real-drum semantic separation, musical quality or commercial fitness guarantee",
+    "Five independent learned outputs may overlap and do not form a complete exclusive drum partition",
+    "No learned cymbal, ride or crash head; an unassigned residual must not be given those labels",
+    "Mobile, Safari hardware, long-song transitions and device-memory portability are unverified",
+    "A host ratio-mask or residual rendering policy is downstream processing, not part of this ONNX parity proof"
+  ]
+}

@@ -17,8 +17,9 @@
       <a class="nav-item" href="#dsp-heading"><span>≋</span> DSP チェーン <small>03</small></a>
       <a class="nav-item" href="#master-heading"><span>✧</span> マスタリング <small>04</small></a>
       <a class="nav-item" href="#sound-color-heading"><span>♫</span> 音色・演出 <small>05</small></a>
+      <a class="nav-item" href="#separation-heading"><span aria-hidden="true">♫</span> STEM分離 <small>PC</small></a>
       <a class="nav-item" href="#notification-settings"><span aria-hidden="true">♪</span> SE音量</a>
-      <div class="sidebar-bottom"><span class="local-dot"></span> ローカル処理<br /><small>音声は端末から送信されません</small><div class="version">OPEN SOURCE · v0.15.2</div></div>
+      <div class="sidebar-bottom"><span class="local-dot"></span> ローカル処理<br /><small>音声は端末から送信されません</small><div class="version">OPEN SOURCE · v0.16.0</div></div>
     </aside>
     <main>
       <header class="topbar"><span>WORKSPACE <span class="slash">/</span> <strong>曲を仕上げる</strong></span><div class="topbar-actions"><a class="se-settings-link" href="#notification-settings">SE音量</a><span class="privacy-badge">● PRIVATE BY DEFAULT</span></div></header>
@@ -74,6 +75,25 @@
         <div class="dsp-actions"><button id="batch-run" class="button primary" disabled>まとめて仕上げる</button><button id="batch-download-all" class="button" disabled>仕上がりをまとめて保存（ZIP）</button><button id="batch-clear" class="button" disabled>曲リストをクリア</button></div>
         <p id="batch-target"></p><div id="batch-list" class="batch-list" aria-label="一括仕上げの曲一覧"></div><p id="batch-status" aria-live="polite">ここに追加した曲は、単体のA/BとSTEMリストを置き換えません。</p>
         <p class="comparison-footnote">結果は1曲ずつA/B試聴できます。保存形式・曲情報・ジャケットは下の「音声の保存形式」を使います。無音・クリッピングなどの問題がある曲は個別に保留し、ほかの曲を続けます。</p>
+      </details>
+
+      <details id="separation-panel" class="auto-panel separation-panel" aria-labelledby="separation-heading">
+        <summary class="section-heading workspace-summary"><h2 id="separation-heading">曲をボーカルや楽器に分ける <span>AI STEM SEPARATION · PC専用</span></h2></summary>
+        <p>PC用の機能です。完成曲やドラム音源から素材を取り出して、1つずつ聴いたり、ミックスを調整したりできます。分離しただけでは現在のOriginal・A/Bを変更しません。</p>
+        <div id="separation-dropzone" class="stem-dropzone">
+          <strong id="separation-input-title">分離する完成曲を1曲ドロップ</strong><p>WAV / FLAC。読み込んだOriginalをそのまま使うこともできます。</p>
+          <label class="button file-label">分離する音源を選ぶ<input id="separation-input" type="file" accept=".wav,.flac,audio/wav,audio/flac" aria-label="AIで分離する完成曲を選択" aria-describedby="separation-mode-description separation-resource-note"></label>
+          <button id="separation-use-source" type="button" class="button" disabled>現在のOriginalを使う</button>
+        </div>
+        <p id="separation-source-name">分離する曲を選ぶか、上のOriginalに曲を読み込んでください。</p>
+        <div class="finish-controls"><label for="separation-mode">取り出す素材<select id="separation-mode" aria-describedby="separation-mode-description separation-resource-note"><option value="four" selected>ボーカル・ドラム・ベース・その他（4素材）</option><option value="two">ボーカル＋伴奏（2素材）</option><option value="detailed">曲＋ドラムの各パーツ（9素材）</option><option value="drums">ドラム音源の各パーツ（6素材）</option></select></label></div>
+        <p id="separation-mode-description">完成曲からボーカル・ドラム・ベース・その他を取り出します。ドラムは1素材です。</p>
+        <div class="dsp-actions"><button id="separation-run" type="button" class="button primary" disabled>AIで素材に分ける</button><button id="separation-stage" type="button" class="button" disabled>分離素材をSTEMリストに入れる</button><button id="separation-clear" type="button" class="button" disabled>分離結果をクリア</button></div>
+        <p id="separation-status" aria-live="polite">分離後は素材ごとに試聴・WAV保存できます。STEMリストに入れた後、「ミックスを作る」で合成できます。</p>
+        <div id="separation-results" class="batch-list" aria-label="AIで分離した素材"></div>
+        <p id="separation-resource-note" class="comparison-footnote">初回はAIモデル約13MBと実行プログラムを取得します。空きメモリは約1.5GB以上が目安です。</p>
+        <p class="comparison-footnote">処理はこのPC内で行い、音声を送信しません。メモリ8GB以上のPCを推奨します。長い曲では時間がかかります。スマホでは分離済み素材の読み込みなどを利用できます。</p>
+        <p class="comparison-footnote">素材名はAIによる推定です。音漏れやにじみが残ることがあります。ドラムの各パーツは、キック・スネア・ハイハット・タム・パーカッションと、未割り当て成分の「残りのドラム」です。シンバル・ライド・クラッシュの個別分離には対応していません。</p>
       </details>
 
       <section class="auto-panel" aria-labelledby="stems-heading">

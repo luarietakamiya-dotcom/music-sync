@@ -1,4 +1,4 @@
-type WorkerKind = 'analysis' | 'processing' | 'export' | 'project' | 'batch' | 'batch-export';
+type WorkerKind = 'analysis' | 'processing' | 'export' | 'project' | 'batch' | 'batch-export' | 'separation';
 const unavailable = '処理プログラムを読み込めませんでした。原音は保持しています。接続を確認し、画面を再読み込みしてください。';
 /** Resolve each job against the current deployment, never a cached asset name.
  * Protocol changes require a reload rather than mixing incompatible messages. */

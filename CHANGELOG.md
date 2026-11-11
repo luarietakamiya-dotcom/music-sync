@@ -1,6 +1,25 @@
 # Changelog
 
-## Unreleased
+## 0.16.0 — PC STEM and drum-part separation
+
+- Pin the development glob matcher to the patched 11.0.1 release for
+  GHSA-g3hv-75wg-m249, with targeted overrides for ESLint and TypeScript-ESLint.
+
+- Add local, cancellable, GPU-assisted SCNet music separation and a compact
+  five-head Mega53 drum model, with same-origin assets, fixed hashes and author license notices.
+- Offer four/two music outputs, six drum parts including the unassigned remainder,
+  and a two-stage nine-material result without mixing the parent Drums twice.
+- Add reusable bounded Core segmentation/rendering and stereo-linked DSP ratio
+  masks; retain original phase/pan and keep source files and prior A/B unchanged.
+- Add individual part audition/WAV saving, explicit STEM staging, retained file
+  ownership, disk preflight and PC-only guards. Preserve ordinary mobile features.
+- Preserve each separated material’s original recording across portable-project
+  save, restoration, rebuilding and subsequent saves; deduplicate shared originals.
+- Close bounded OPFS writes before inference so cancellation removes provisional
+  files even while native WASM inference is being terminated.
+- Validate actual model inference, reconstruction and cancellation; document
+  synthetic-test, quantization, short-context and instrument-identification limits.
+
 
 - Publish the browser workspace on HTTPS GitHub Pages with a checked build,
   pinned deployment actions and only the app distribution and OSS notices.

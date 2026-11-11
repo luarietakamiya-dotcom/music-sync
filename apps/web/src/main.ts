@@ -1,4 +1,6 @@
 import './style.css';
+import {bindSeparationWorkspace} from './separation-workspace';
+import type {SeparatedFiles} from './separation-client';
 import { bindReferenceWorkspace } from './reference-workspace';
 import { bindBatchWorkspace, type BatchPreview } from './batch-workspace';
 import type { ReferenceProfile } from '@music-sync/core';
@@ -74,6 +76,15 @@ let stemQueued = false;
 let committedStemStudio: StemStudioSettings | undefined;
 let restoredStemNeedsRebuild = false;
 let committedStemInputs: StemFileEntry[] = [];
+const separatedOrigins=new WeakMap<File,File>();
+const separatedGroups:{result:SeparatedFiles;release:()=>void}[]=[];
+function releaseUnusedSeparatedFiles(){
+  const used=new Set([...stemEntries,...committedStemInputs].map(entry=>entry.file));
+  for(const source of Object.values(sources)){if(source?.file)used.add(source.file);if(source?.originalFile)used.add(source.originalFile);}
+  for(let index=separatedGroups.length-1;index>=0;index--)if(!used.has(separatedGroups[index].result.original)&&!separatedGroups[index].result.tracks.some(track=>used.has(track.file))){
+    separatedGroups[index].release();separatedGroups.splice(index,1);
+  }
+}
 let committedStemOptions: { signature: string; reference?: File } | undefined;
 function stemInputOptions() {
   // These controls belong to the STEM workspace; finishing controls are reset separately.
@@ -290,7 +301,7 @@ function setBusy(value: boolean): void {
   element<HTMLButtonElement>('project-save').disabled = value || !sources.a;
   element<HTMLInputElement>('project-open').disabled = value;
   element<HTMLInputElement>('project-name').disabled = value;
-  busy = value; referenceWorkspace.refresh();batchWorkspace.setBlocked(value);
+  busy = value; referenceWorkspace.refresh();batchWorkspace.setBlocked(value);separationWorkspace.refresh();
   cancelButton.hidden = !value; progress.hidden = !value;
   easyFinishButton.disabled = value || !sources.a;
   outputProfile.disabled = value;
@@ -501,6 +512,7 @@ window.addEventListener('drop', event => event.preventDefault());
 bindImport(input, element('dropzone'), 'a'); bindImport(inputB, element('card-b'), 'b');
 
 function renderStemList(): void {
+  releaseUnusedSeparatedFiles();
   const rows = stemEntries.map(entry => {
     const row = document.createElement('div'); row.className = 'stem-track'; row.dataset.trackId = entry.id;
     const name = document.createElement('strong'); name.textContent = entry.file.name;
@@ -658,7 +670,8 @@ async function assembleStems(entries: StemFileEntry[], mode: StemMode, onCommitt
     committedStemInputs = pending.map(entry => ({...entry}));
     committedStemOptions = appliedStemOptions;
     committedStemStudio = appliedStudio; restoredStemNeedsRebuild=false;
-    sources.a = { ...(data.file ? { file: data.file } : { audio: data.audio }), result: data.analysis, stemMix: data.report, name: `${mode === 'vocal-instrumental' ? 'Vocal + Instrumental' : 'STEM Mix'} · ${pending.length} tracks.wav` };
+    const origin=pending.length&&pending.every(entry=>separatedOrigins.get(entry.file)===separatedOrigins.get(pending[0].file))?separatedOrigins.get(pending[0].file):undefined;
+    sources.a = { ...(origin?{originalFile:origin}:{}), ...(data.file ? { file: data.file } : { audio: data.audio }), result: data.analysis, stemMix: data.report, name: `${mode === 'vocal-instrumental' ? 'Vocal + Instrumental' : 'STEM Mix'} · ${pending.length} tracks.wav` };
     delete sources.b; selected = 'a'; plan = undefined; matched = false; finishReport = undefined; colorReport = undefined;
     element('finish-details').textContent = ''; element('master-outcome').textContent = '';
     element('preferences-result').textContent = '合成したAに、選択中の仕上がり調整を適用できます。';
@@ -700,7 +713,7 @@ stemZone.addEventListener('dragover', e => { e.preventDefault(); stemZone.classL
 stemZone.addEventListener('dragleave', () => stemZone.classList.remove('drag-over'));
 stemZone.addEventListener('drop', e => { e.preventDefault(); e.stopPropagation(); stemZone.classList.remove('drag-over'); const files = Array.from(e.dataTransfer?.files ?? []); if (files.length) void addStemFiles(files); });
 element('stem-render').addEventListener('click', () => { if (!busy) void assembleStems(stemEntries, stemMode.value as StemMode); });
-element('stem-clear').addEventListener('click', () => { if (!busy) { element<HTMLInputElement>('stem-reference').value = ''; stemEntries = []; renderStemList(); element('stem-status').textContent = '素材リストをクリアしました。現在のA/Bは保持しています。新しい素材を追加できます。'; } });
+element('stem-clear').addEventListener('click', () => { if (!busy) { element<HTMLInputElement>('stem-reference').value = ''; stemEntries = []; restoredStemNeedsRebuild=false; renderStemList(); element('stem-status').textContent = '素材リストをクリアしました。現在のA/Bは保持しています。新しい素材を追加できます。'; } });
 stemMode.addEventListener('change', () => { stemModeExplicit = true; element('stem-pair-inputs').hidden = stemMode.value !== 'vocal-instrumental'; element('stem-status').textContent = '素材の組み合わせを変更しました。読み込み済みの役割を確認して、ミックスを作り直してください。'; });
 element('stem-vocal-support').addEventListener('change', () => { element('stem-status').textContent = '歌声の補助を変更しました。「ミックスを作り直す」で反映します。現在のA/Bは保持しています。'; });
 element('stem-multitrack-auto').addEventListener('change', () => { element('stem-status').textContent = '自動ミックスの設定を変更しました。「ミックスを作り直す」で反映します。'; });
@@ -1015,7 +1028,9 @@ async function inspectSessionAudio(input:SessionInspectionInput,options:{signal?
 const savedExplanationIds=['reference-result','finish-explanation','finish-details','finish-applied-summary','preferences-result','live-result','sound-color-result','master-outcome'];
 function captureSession():SessionCaptureInput {
   validateSessionControls(sessionControls());
-  return {name:element<HTMLInputElement>('project-name').value,sources,stems:stemEntries,committedStemInputs,committedStemStudio,committedStemOptions,
+  const stemOrigins=new Map<File,File>();
+  for(const entry of [...stemEntries,...committedStemInputs]){const original=separatedOrigins.get(entry.file);if(original)stemOrigins.set(entry.file,original);}
+  return {name:element<HTMLInputElement>('project-name').value,sources,stems:stemEntries,committedStemInputs,committedStemStudio,committedStemOptions,stemOrigins,
     autoMode,reference:element<HTMLInputElement>('stem-reference').files?.[0],controls:sessionControls(),exportSettings:exportSettings.state(),artwork:exportSettings.artwork(),
     selected,matched,position:player?.positionSeconds??0,acceptedFinishSettings,stemModeExplicit,stemMode:stemMode.value as StemMode,
     soundReference:referenceWorkspace.state(),explanations:Object.fromEntries(savedExplanationIds.map(id=>[id,element(id).textContent??'']))};
@@ -1066,6 +1081,7 @@ async function openProjectSession(file:File) {
     stemAudition.set();stemSolo.close();discardAcceptedFile();void mixFile?.discard();mixFile=undefined;
     sources.a=restored.sources.a;delete sources.b;if(restored.sources.b)sources.b=restored.sources.b;
     stemEntries=restored.stems;committedStemInputs=restored.committedStemInputs;
+    restored.stemOrigins?.forEach((original,file)=>separatedOrigins.set(file,original));
     committedStemStudio=restored.committedStemStudio;committedStemOptions=restored.committedStemOptions;
     restoredStemNeedsRebuild=!!committedStemStudio?.restore&&!!sources.a?.stemMix;
     stemNextId=Math.max(stemNextId,...stemEntries.map(entry=>Number(entry.id.replace(/\D/g,''))||0));
@@ -1347,12 +1363,12 @@ for (const id of ['dsp-heading', 'master-heading']) document.querySelector<HTMLA
 new ResizeObserver(paint).observe(canvas);
 
 function revealOptionalWorkspace(hash:string) {
-  const panelId=hash==='#reference-heading'?'reference-panel':hash==='#batch-heading'?'batch-panel':undefined;
+  const panelId=hash==='#reference-heading'?'reference-panel':hash==='#batch-heading'?'batch-panel':hash==='#separation-heading'?'separation-panel':undefined;
   if(!panelId)return;
   element<HTMLDetailsElement>(panelId).open=true;
   requestAnimationFrame(()=>document.getElementById(hash.slice(1))?.scrollIntoView({block:'start'}));
 }
-for(const link of document.querySelectorAll<HTMLAnchorElement>('a[href="#reference-heading"], a[href="#batch-heading"]'))
+for(const link of document.querySelectorAll<HTMLAnchorElement>('a[href="#reference-heading"], a[href="#batch-heading"], a[href="#separation-heading"]'))
   link.addEventListener('click',()=>revealOptionalWorkspace(link.hash));
 window.addEventListener('hashchange',()=>revealOptionalWorkspace(location.hash));
 revealOptionalWorkspace(location.hash);
@@ -1387,7 +1403,44 @@ const batchWorkspace=bindBatchWorkspace({
   preview:previewBatch,download:downloadBlob,
 });
 
-window.addEventListener('pagehide', event => { batchWorkspace.cancel(); sounds.cancel(); sessionAbort?.abort(); if (!event.persisted) { sounds.destroy(); exportSettings.dispose(); referenceWorkspace.dispose(); batchWorkspace.destroy(); } stemSolo.close(); stemAudition.close(); player?.stop(); if (!event.persisted) { stemAudition.set(); void mixFile?.discard(); discardPendingFile(); discardAcceptedFile(); worker?.terminate(); void context?.close(); } });
+const separationWorkspace=bindSeparationWorkspace({
+  busy:()=>busy,source:()=>sources.a?.originalFile??sources.a?.file,
+  pause(){player?.pause();stemSolo.close();stemAudition.close();paint();},
+  begin(){
+    if(busy)throw new Error('ほかの処理が終わってから分離してください。');
+    sessionAbort?.abort();const controller=new AbortController(),id=++generation;sessionAbort=controller;
+    worker?.terminate();worker=undefined;player?.pause();errorBox.hidden=true;setBusy(true);paint();
+    return {signal:controller.signal,
+      progress(fraction,text){if(id===generation&&!controller.signal.aborted){setProgress(fraction);if(text)setStatus(text);}},
+      end(text,error){
+        if(id!==generation||controller.signal.aborted)return;
+        externalJobCancel=undefined;sessionAbort=undefined;setBusy(false);setStatus(text);paint();
+        if(error instanceof DOMException&&error.name==='AbortError'){controller.abort();sounds.cancel();}
+        else if(error)showError(error instanceof Error?error.message:String(error));else sounds.success();
+      },
+    };
+  },
+  async decode(file,signal){
+    await waitForFlacSlot(signal);signal.throwIfAborted();
+    const buffer=await file.arrayBuffer();signal.throwIfAborted();
+    const decoding=decodeFlac(buffer,STEM_LIMITS.maxBusBytes);flacDecodeInFlight=decoding.then(()=>undefined,()=>undefined);
+    const audio=await decoding;signal.throwIfAborted();return audio;
+  },
+  stage(result){
+    if(busy)throw new Error('ほかの処理が終わってから素材を追加してください。');
+    if(result.tracks.length<2||result.tracks.length>STEM_LIMITS.maxTracks||result.tracks.reduce((sum,track)=>sum+track.file.size,0)>longStemInputBytes)
+      throw new Error('STEMリストへ入れられるのは2〜16素材・合計1 GiB以内です。大きい結果は各WAVを保存して使用してください。');
+    const pending=result.tracks.map(track=>({id:'stem-'+(++stemNextId),file:track.file,role:track.role,gainDb:0,pan:0,muted:false}));
+    if(!separatedGroups.some(group=>group.result===result))separatedGroups.push({result,release:result.retain()});
+    result.tracks.forEach(track=>separatedOrigins.set(track.file,result.original));
+    stemEntries=pending;stemMode.value=result.mode;stemModeExplicit=true;restoredStemNeedsRebuild=true;
+    element('stem-pair-inputs').hidden=result.mode!=='vocal-instrumental';renderStemList();
+    element('stem-status').textContent='分離した'+pending.length+'素材をセットしました。現在のA/Bは保持しています。「ミックスを作り直す」で反映します。';
+    setBusy(false);element('stems-heading').scrollIntoView({block:'start'});
+  },
+});
+
+window.addEventListener('pagehide', event => { separationWorkspace.cancel();batchWorkspace.cancel(); sounds.cancel(); sessionAbort?.abort(); if (!event.persisted) { sounds.destroy(); exportSettings.dispose(); referenceWorkspace.dispose(); batchWorkspace.destroy();separationWorkspace.destroy();separatedGroups.splice(0).forEach(group=>group.release()); } stemSolo.close(); stemAudition.close(); player?.stop(); if (!event.persisted) { stemAudition.set(); void mixFile?.discard(); discardPendingFile(); discardAcceptedFile(); worker?.terminate(); void context?.close(); } });
 setBusy(false);
 
 function formatFinishingDetails(report: Omit<AutoFinishResult, 'processed'>): string {

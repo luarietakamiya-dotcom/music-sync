@@ -1,6 +1,6 @@
 {
   "name": "music-sync",
-  "version": "0.15.2",
+  "version": "0.16.0",
   "private": true,
   "type": "module",
   "description": "Open-source audio analysis and mastering toolkit for AI musicians and independent creators",
@@ -30,7 +30,7 @@
     "build": "node scripts/build.mjs",
     "preview": "vite preview --config apps/web/vite.config.ts --host 127.0.0.1",
     "test:e2e": "node scripts/prepare-fixtures.mjs && node scripts/test-e2e.mjs",
-    "example": "node examples/analyze-tone.mjs && node examples/compare-tones.mjs && node examples/process-tone.mjs && node examples/master-tone.mjs && node examples/auto-finish.mjs && node examples/sound-color.mjs && node examples/finish-preferences.mjs && node examples/mix-stems.mjs && node examples/reference-and-batch.mjs",
+    "example": "node examples/analyze-tone.mjs && node examples/compare-tones.mjs && node examples/process-tone.mjs && node examples/master-tone.mjs && node examples/auto-finish.mjs && node examples/sound-color.mjs && node examples/finish-preferences.mjs && node examples/mix-stems.mjs && node examples/reference-and-batch.mjs && node examples/source-separation.mjs",
     "check": "npm run lint && npm run typecheck && npm test && npm run build && npm run example",
     "pack:local": "node scripts/package-release.mjs",
     "release:local": "npm run build && npm run pack:local",
@@ -55,5 +55,16 @@
   "homepage": "https://github.com/luarietakamiya-dotcom/music-sync#readme",
   "bugs": {
     "url": "https://github.com/luarietakamiya-dotcom/music-sync/issues"
+  },
+  "overrides": {
+    "eslint": {
+      "minimatch": "11.0.1"
+    },
+    "@eslint/config-array": {
+      "minimatch": "11.0.1"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.1"
+    }
   }
 }

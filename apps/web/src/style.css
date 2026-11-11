@@ -901,3 +901,5 @@ footer {
   .notification-volume input { flex: 1; width: auto; }
   .topbar-actions { gap: 10px; }
 }
+
+.separation-track audio { max-width: 100%; min-width: 0; }

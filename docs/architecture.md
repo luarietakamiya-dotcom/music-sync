@@ -230,3 +230,28 @@ restore analyzes that original before committing. Batch queues/results remain tr
 The user-requested future audio timeline will need immutable source assets, clip source ranges,
 timeline positions, per-clip mute and non-destructive command history for split/insert/splice.
 This release records that direction only. It does not implement a DAW, timeline or video features.
+
+## Local source separation
+
+Core's `source-separation.ts` plans metadata-only segments and renders bounded
+overlap-add windows through asynchronous `read` / `infer` / `write` callbacks.
+It owns input copies, shape/finite validation, shared weights and abort checks;
+it imports no model runtime or browser API. DSP's `createMixtureMasks`, also
+re-exported by Core, turns learned spectra into stereo-linked ratio masks plus
+an unassigned remainder without modifying source arrays.
+
+Web's `separation-client.ts` owns preflight, immutable Original snapshots and
+provisional OPFS files. Its Worker adapts chunked WAV/native FLAC input and the
+self-hosted SCNet or Mega53/ONNX Runtime provider. Ordinary modes yield four or
+two materials. Detailed mode runs four-material separation followed by drum
+separation and exposes nine materials: vocals, bass, other, five learned drum
+parts and an unassigned drum remainder. It omits the coarse drum parent to avoid
+double-counting. Provider selection attempts hardware WebGPU with CPU fallback;
+separation is PC-only because model working memory remains substantial.
+
+The separation workspace only auditions/downloads results until explicit staging.
+Shared leases retain files after that panel clears while the STEM workspace uses
+them. A/B remains unchanged until the existing explicit mix commit. Original-file
+provenance and raw separated materials flow into portable projects; restoration
+verifies saved audio rather than rerunning inference. See
+[source-separation modes, limits and Core contracts](stem-separation.md).

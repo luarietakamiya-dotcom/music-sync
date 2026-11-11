@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "license": "MIT",
+  "licenseGrant": "https://github.com/ZFTurbo/Music-Source-Separation-Training/issues/245#issuecomment-5834608838",
+  "checkpointRepository": "noblebarkrr/BS-Roformer-MVSep-Mega-53-stems",
+  "checkpointRevision": "0677941f9cdfd891a6bc3336229244e197035327",
+  "sourceRepository": "https://github.com/ZFTurbo/Music-Source-Separation-Training",
+  "sourceRevision": "1d4b3c431b37de696b3795ed2018493aacba946f",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/models/bs_roformer/bs_roformer.py",
+      "bytes": 20494,
+      "sha256": "a6f670325cdb8a7a212914f62602119b23eb888df9bcfe4a85f9be74728b3ef4",
+      "file": "bs_roformer.py"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/models/bs_roformer/attend.py",
+      "bytes": 4410,
+      "sha256": "c7abbc40a3fd20ff7f6001fa9f8ee9ad5df6452272712a5e719b8f8468bf2223",
+      "file": "attend.py"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ZFTurbo/Music-Source-Separation-Training/1d4b3c431b37de696b3795ed2018493aacba946f/LICENSE",
+      "bytes": 1081,
+      "sha256": "3282dc057695ef5b9a64909a7092ca40b2c292c232580fc6ace6e5d665cc0207",
+      "file": "LICENSE"
+    }
+  ],
+  "checkpoints": [
+    {
+      "target": "kick",
+      "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_kick_mvsep.ckpt",
+      "bytes": 77616219,
+      "sha256": "ad914b83f9ef13bedf9608771f4f1a86174e27a84f7f235dc2d1dd91bab85fbc",
+      "config": {
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_kick_mvsep_config.yaml",
+        "bytes": 1562,
+        "sha256": "e234de6e1fd66a2c359bd5fb5d4bb815125e1d6408ee4df581ca297f6f17ff14",
+        "gitBlob": "5dc89a40fe36dd9daa1d898592f259f5a8e0d200"
+      }
+    },
+    {
+      "target": "snare",
+      "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_snare_mvsep.ckpt",
+      "bytes": 77616988,
+      "sha256": "c4cde14867f1311836d4aa07649e39df4df43c4ba98780783fe96cd4fe8293bf",
+      "config": {
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_snare_mvsep_config.yaml",
+        "bytes": 1564,
+        "sha256": "605debf3206fcdc34046e6de72bdf7c66014a0fd400dd8908df3b89774146db9",
+        "gitBlob": "a737b57db39aa47e03046abbc1352a89bed0f5bb"
+      }
+    },
+    {
+      "target": "hh",
+      "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_hh_mvsep.ckpt",
+      "bytes": 77614809,
+      "sha256": "94901a05d358f16b2de4064eec45f0947bb28bf239040a3fe79e2ae7fadd2984",
+      "config": {
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_hh_mvsep_config.yaml",
+        "bytes": 1558,
+        "sha256": "d6d712604e80060938c23c38da202d768d29d4d37a3ec4f2459706cbf15193ca",
+        "gitBlob": "0dd40f5c73aa91c26e53a2a967e44de9b939e07c"
+      }
+    },
+    {
+      "target": "toms",
+      "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_toms_mvsep.ckpt",
+      "bytes": 77616219,
+      "sha256": "ceb45bbc16419363bb842484dadcc786a9ca290c4553c9eced0e98dc8f0f2458",
+      "config": {
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_toms_mvsep_config.yaml",
+        "bytes": 1562,
+        "sha256": "174f4a1307d96e6a7167ed441eadd4625f877f766da10ef70aba5e7cbcf40786",
+        "gitBlob": "c2a7ac406caac6218004b92fe70f38aa223169c6"
+      }
+    },
+    {
+      "target": "percussion",
+      "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_percussion_mvsep.ckpt",
+      "bytes": 77620513,
+      "sha256": "82187665185d51e6050b4d6afaf45e7acafd85d1eefffd86c47ac0aa601e089f",
+      "config": {
+        "url": "https://huggingface.co/noblebarkrr/BS-Roformer-MVSep-Mega-53-stems/resolve/0677941f9cdfd891a6bc3336229244e197035327/v1/bs_mega_53stem_percussion_mvsep_config.yaml",
+        "bytes": 1574,
+        "sha256": "583bfe3cfae1db6a8e38205aa61d12f7c96df99c0f8568a69b9a9eb9dc715838",
+        "gitBlob": "1d1315da94e06c0640f827ec7b36a9c88d9fb96e"
+      }
+    }
+  ],
+  "sharedTrunkSha256": "d3cc49570f2cf204f056ddb7ea03fbedf29b27ac06b05d1af6b8bd4c26494fcb",
+  "sharedTrunkTensorCount": 451,
+  "shippedArtifact": {
+    "file": "mega53-drums-2044dee8.int8.onnx",
+    "bytes": 91762503,
+    "sha256": "2044dee8a8756b92bc92ae14a0069d744bc67457ba3a4f2a592f414a17eaa8b2",
+    "conversionOutputName": "five.int8.webgpu.onnx"
+  }
+}

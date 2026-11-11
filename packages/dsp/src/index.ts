@@ -103,3 +103,5 @@ export function estimateTruePeak(samples: Float32Array): number {
 
 export { createReferenceProcessor } from './reference-stream.js';
 export type { ReferenceDspPlan, ReferenceStreamProcessor } from './reference-stream.js';
+
+export {createMixtureMasks,type SeparationMaskShape} from './separation-masks.js';

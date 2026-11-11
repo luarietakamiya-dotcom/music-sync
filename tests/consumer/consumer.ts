@@ -57,3 +57,34 @@ void albumPlan;
 autoMixMaster(input,'AUTO',{reference:{profile:input,strength:.65}});
 // @ts-expect-error Batch loudness accepts measured reports, not bare PCM.
 planBatchLoudness([{id:'one',analysis:input}]);
+
+import {planSeparation,renderSeparation,SEPARATION_LIMITS,createMixtureMasks,
+  type SeparationModel,type SeparationInput,type SeparationPlan,type SeparationRenderer,
+  type SeparationProgress,type SeparationSummary,type SeparationMaskShape} from '@music-sync/core';
+import {createMixtureMasks as dspMixtureMasks,type SeparationMaskShape as DspMaskShape} from '@music-sync/dsp';
+const separationModel:SeparationModel={id:'consumer',kind:'drums',targets:['kick','remainder'],segmentSeconds:2,overlap:.5};
+const separationInput:SeparationInput={sampleRate:48000,channels:1,frames:48000};
+const separationPlan:Readonly<SeparationPlan>=planSeparation(separationInput,separationModel);
+declare const separationRead:(start:number,frames:number)=>Promise<AudioData>;
+declare const separationInfer:(audio:AudioData)=>Promise<Record<string,AudioData>>;
+declare const separationWrite:(target:string,audio:AudioData)=>Promise<void>;
+const separationRenderer:SeparationRenderer={read:separationRead,infer:separationInfer,write:separationWrite,
+  signal:AbortSignal.timeout(10000),progress:({fraction,text}:SeparationProgress)=>{void [fraction,text];}};
+const separationResult:Promise<SeparationSummary>=renderSeparation(separationPlan,separationRenderer);
+const maskShape:DspMaskShape={channels:2,sources:5,bins:1025,frames:259};
+const coreMaskShape:SeparationMaskShape=maskShape;
+declare const mixtureSpectrum:Float32Array;
+declare const estimatedSpectra:Float32Array;
+const maskedSpectra:Float32Array=createMixtureMasks(mixtureSpectrum,estimatedSpectra,coreMaskShape);
+const dspMaskedSpectra:Float32Array=dspMixtureMasks(mixtureSpectrum,estimatedSpectra,maskShape);
+void [separationResult,maskedSpectra,dspMaskedSpectra,SEPARATION_LIMITS.maxTargets];
+// @ts-expect-error Separation metadata supports only mono or stereo.
+planSeparation({...separationInput,channels:3},separationModel);
+// @ts-expect-error Model kind is a bounded contract, not a UI mode or arbitrary name.
+planSeparation(separationInput,{...separationModel,kind:'detailed'});
+// @ts-expect-error A source reader must return asynchronous PCM, not bare PCM.
+renderSeparation(separationPlan,{...separationRenderer,read:()=>input});
+// @ts-expect-error Validated plan metadata is read-only.
+separationPlan.input.frames=24000;
+// @ts-expect-error Spectrum buffers must be Float32Array, not number arrays.
+createMixtureMasks([0,1],estimatedSpectra,maskShape);

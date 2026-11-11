@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import * as core from '@music-sync/core';
+import {createMixtureMasks} from '@music-sync/dsp';
 
-const expected = ['REFERENCE_BANDS','BATCH_LOUDNESS_LIMITS','analyzeReference','profileFromMeasurements','validateReferenceProfile','validateReferenceSelection','referenceDistance','planReferenceCorrection','evaluateReferenceQuality','applyReferenceFinishing','planBatchLoudness','createFinishingDifferenceMeter', 'createLongPreferences', 'StreamingAudioAnalyzer', 'createLongMix', 'longMasterGain', 'checkLongCandidate', 'floatWavHeader', 'writeFloatSamples', 'COMPARISON_POLICY', 'LIMITS', 'MASTERING_POLICY', 'analyzeAudio', 'capabilities', 'createComparisonPlan',
+const expected = ['planSeparation','renderSeparation','SEPARATION_LIMITS','createMixtureMasks','REFERENCE_BANDS','BATCH_LOUDNESS_LIMITS','analyzeReference','profileFromMeasurements','validateReferenceProfile','validateReferenceSelection','referenceDistance','planReferenceCorrection','evaluateReferenceQuality','applyReferenceFinishing','planBatchLoudness','createFinishingDifferenceMeter', 'createLongPreferences', 'StreamingAudioAnalyzer', 'createLongMix', 'longMasterGain', 'checkLongCandidate', 'floatWavHeader', 'writeFloatSamples', 'COMPARISON_POLICY', 'LIMITS', 'MASTERING_POLICY', 'analyzeAudio', 'capabilities', 'createComparisonPlan',
   'defaultProcessingChain', 'encodeFloatWav', 'masterAudio', 'planMastering', 'processAudio', 'singleSourceGainDb',
   'validateAudio', 'validateMasteringOptions', 'validateProcessingChain', 'AUTO_MODES', 'AUTO_ENGINE_LIMITS',
   'autoMixMaster', 'planMixCorrection', 'detectProblems', 'evaluateAutoQuality', 'analyzeAdaptiveFeatures', 'analyzePerceptualFeatures', 'PerceptualAnalyzer', 'PERCEPTUAL_BANDS', 'detectPerceptualProblems', 'evaluatePerceptualQuality', 'createBlindComparison',
@@ -94,3 +95,56 @@ assert.equal(album.tracks.filter(track=>track.status==='ready').length,2);
 assert.ok(album.tracks.every(track=>track.gainDb<=3&&track.expectedTruePeakDbtp<=-1+1e-6));
 assert.deepEqual(referencePcm,referenceOriginal);
 console.log('Installed reference profile and safe batch-loudness API passed.');
+
+// Public installed-package orchestration, not neural inference: two proportional
+// copies exercise mono expansion, overlapping windows and exact final length.
+const separationRate=8000,separationFrames=20003;
+const separationPcm=Float32Array.from({length:separationFrames},(_,frame)=>.2*Math.sin(2*Math.PI*337*frame/separationRate));
+const separationOriginal=separationPcm.slice();
+const separationPlan=core.planSeparation({sampleRate:separationRate,channels:1,frames:separationFrames},{
+  id:'installed-consumer',kind:'music',targets:['first','rest'],segmentSeconds:2,overlap:.5,
+});
+const separationOutputs=Object.fromEntries(separationPlan.targets.map(target=>[target,[new Float32Array(separationFrames),new Float32Array(separationFrames)]]));
+const separationWritten={first:0,rest:0};
+const separationRenderer={
+  async read(start,count){return {sampleRate:separationRate,channels:[separationPcm.subarray(start,start+count)]};},
+  async infer(audio){
+    assert.equal(audio.channels.length,2);assert.equal(audio.channels[0].length,separationPlan.segmentFrames);
+    return Object.fromEntries(separationPlan.targets.map(target=>[target,{
+      sampleRate:audio.sampleRate,channels:audio.channels.map(channel=>Float32Array.from(channel,value=>value*(target==='first'?.25:.75))),
+    }]));
+  },
+  async write(target,audio){
+    assert.ok(audio.channels[0].length<=separationPlan.segmentFrames);
+    for(let channel=0;channel<2;channel++)separationOutputs[target][channel].set(audio.channels[channel],separationWritten[target]);
+    separationWritten[target]+=audio.channels[0].length;
+  },
+};
+const separationSummary=await core.renderSeparation(separationPlan,separationRenderer);
+assert.equal(separationSummary.frames,separationFrames);
+assert.equal(separationSummary.segments,separationPlan.starts.length);
+assert.deepEqual(separationWritten,{first:separationFrames,rest:separationFrames});
+assert.equal(separationPlan.outputBytes,separationFrames*8*2);
+assert.ok(Object.isFrozen(separationPlan)&&Object.isFrozen(separationPlan.targets));
+assert.equal(core.SEPARATION_LIMITS.maxPcmBytes,512*1024**2);
+for(let channel=0;channel<2;channel++)for(let frame=0;frame<separationFrames;frame++)
+  assert.ok(Math.abs(separationOutputs.first[channel][frame]+separationOutputs.rest[channel][frame]-separationPcm[frame])<1e-7);
+assert.deepEqual(separationPcm,separationOriginal);
+let cancelledRead=false;
+await assert.rejects(core.renderSeparation(separationPlan,{
+  ...separationRenderer,signal:AbortSignal.abort(),async read(){cancelledRead=true;throw new Error('Must not read after cancellation.');},
+}),{name:'AbortError'});
+assert.equal(cancelledRead,false);
+
+// DSP's public export and Core's compatibility re-export share one pure helper.
+assert.equal(core.createMixtureMasks,createMixtureMasks);
+const mixture=Float32Array.of(2,1,1,-.5),estimates=Float32Array.from([...mixture.map(x=>x*.2),...mixture.map(x=>x*.3)]);
+const mixtureBefore=mixture.slice(),estimatesBefore=estimates.slice();
+const masks=createMixtureMasks(mixture,estimates,{channels:2,sources:2,bins:1,frames:1});
+assert.equal(masks.length,12);
+for(let plane=0;plane<4;plane++)assert.ok(Math.abs(masks[plane]+masks[plane+4]+masks[plane+8]-mixture[plane])<1e-6);
+assert.ok(masks[8]>0); // Unassigned energy is retained rather than called an instrument.
+assert.deepEqual(mixture,mixtureBefore);assert.deepEqual(estimates,estimatesBefore);
+assert.throws(()=>createMixtureMasks(Float32Array.of(NaN,0),new Float32Array(2),{channels:1,sources:1,bins:1,frames:1}),RangeError);
+await assert.rejects(import('@music-sync/dsp/dist/index.js'),{code:'ERR_PACKAGE_PATH_NOT_EXPORTED'});
+console.log('Installed bounded-separation and mixture-mask public APIs passed (deterministic callbacks only).');

@@ -67,3 +67,7 @@ export type { StemAudition } from './stem-audition.js';
 export { prepareStemRestoration, renderStemRestoration } from './stem-restoration.js';
 export type { StemRestorationSettings, StemRestorationOptions } from './stem-restoration.js';
 export { renderFileStems, type StemStudioSettings } from './file-stems.js';
+export { planSeparation, renderSeparation, SEPARATION_LIMITS } from './source-separation.js';
+export type { SeparationModel, SeparationInput, SeparationPlan, SeparationProgress, SeparationRenderer, SeparationSummary } from './source-separation.js';
+
+export {createMixtureMasks,type SeparationMaskShape} from '@music-sync/dsp';

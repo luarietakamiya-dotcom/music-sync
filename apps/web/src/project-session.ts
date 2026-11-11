@@ -16,6 +16,8 @@ export interface SessionSettings {
 export interface SessionCaptureInput extends SessionSettings {
   name?:string;createdAt?:string;sources:Partial<Record<'a'|'b',SessionSource>>;
   stems:StemFileEntry[];committedStemInputs:StemFileEntry[];committedStemStudio?:StemStudioSettings;
+  /** Raw mixed recordings for separated materials, keyed by exact material File identity. */
+  stemOrigins?:ReadonlyMap<File,File>;
   committedStemOptions?:{signature:string;reference?:File};reference?:File;soundReference?:{file:File;strength:number;enabled:boolean};artwork?:File;
 }
 export type ProjectInspectionInput = {kind:'planar';sampleRate:number;frames:number;planes:File[]} | {kind:'file';file:File};
@@ -28,8 +30,8 @@ export interface SessionRestoreOptions {
   /** Host-specific control IDs and option values must be checked before touching UI state. */
   validateSettings?(settings:SessionSettings):void;
 }
-interface SavedStem {id:string;asset:string;role:StemDescriptor['role'];gainDb:number;pan:number;muted:boolean;vocalRole?:StemDescriptor['vocalRole'];restorationEnabled?:boolean}
-interface SavedMix {mode:StemMode;tracks:Omit<SavedStem,'asset'>[];attenuationDb:number}
+interface SavedStem {id:string;asset:string;original?:string;role:StemDescriptor['role'];gainDb:number;pan:number;muted:boolean;vocalRole?:StemDescriptor['vocalRole'];restorationEnabled?:boolean}
+interface SavedMix {mode:StemMode;tracks:Omit<SavedStem,'asset'|'original'>[];attenuationDb:number}
 interface SavedSource {name:string;data:{kind:'file';asset:string}|{kind:'planar';sampleRate:number;frames:number;planes:string[]};original?:string;mix?:SavedMix;processing?:SessionSource['processing']}
 interface SavedSession {schemaVersion:1;settings:SessionSettings;sources:Partial<Record<'a'|'b',SavedSource>>;stems:SavedStem[];committed:SavedStem[];studio?:StemStudioSettings;options?:{signature:string;reference?:string};reference?:string;soundReference?:{asset:string;strength:number;enabled:boolean};artwork?:string}
 const memoryLimit=96*1024**2;
@@ -78,9 +80,9 @@ function studio(value:unknown):StemStudioSettings|undefined {
   return value as unknown as StemStudioSettings;
 }
 function track(value:unknown,withAsset:boolean):SavedStem {
-  if(!object(value)||!keys(value,['id',...(withAsset?['asset']:[]),'role','gainDb','pan','muted','vocalRole','restorationEnabled'])||
+  if(!object(value)||!keys(value,['id',...(withAsset?['asset','original']:[]),'role','gainDb','pan','muted','vocalRole','restorationEnabled'])||
     !text(value.id,100)||!Object.hasOwn(STEM_ROLES,value.role as string)||!number(value.gainDb,-24,6)||!number(value.pan,-1,1)||
-    typeof value.muted!=='boolean'||(withAsset&&!text(value.asset,64))||
+    typeof value.muted!=='boolean'||(withAsset&&(!text(value.asset,64)||(value.original!==undefined&&!text(value.original,64))))||
     (value.vocalRole!==undefined&&(value.role!=='vocal'||!['lead','backing'].includes(value.vocalRole as string)))||
     (value.restorationEnabled!==undefined&&typeof value.restorationEnabled!=='boolean'))reject('素材の役割・音量設定が不正です。');
   return value as unknown as SavedStem;
@@ -111,7 +113,10 @@ export function captureProjectSession(input:SessionCaptureInput):{manifest:Proje
     const id='asset_'+assets.length;known.set(file,id);assets.push({id,file});descriptors.push({id,path:`assets/${id}.bin`,name,mimeType,size:file.size});return id;
   }
   function audioFile(file:File){if(!(file instanceof File)||!file.size||!/\.(wav|flac)$/i.test(file.name))reject('素材はWAV/FLACで保存してください。');return add(file,file.name,/\.flac$/i.test(file.name)?'audio/flac':'audio/wav');}
-  const encodeTrack=(entry:StemFileEntry):SavedStem=>({...metadata(entry),asset:audioFile(entry.file)});
+  const encodeTrack=(entry:StemFileEntry):SavedStem=>{
+    const original=input.stemOrigins?.get(entry.file);
+    return {...metadata(entry),asset:audioFile(entry.file),...(original===undefined?{}:{original:audioFile(original)})};
+  };
   const state:SavedSession={schemaVersion:1,settings:settings({autoMode:input.autoMode,controls:input.controls,exportSettings:input.exportSettings,
     selected:input.selected,matched:input.matched,position:input.position,acceptedFinishSettings:input.acceptedFinishSettings,
     stemModeExplicit:input.stemModeExplicit,stemMode:input.stemMode,explanations:input.explanations}),sources:{},
@@ -146,7 +151,7 @@ export function captureProjectSession(input:SessionCaptureInput):{manifest:Proje
 }
 
 /** Validate first, then hydrate into an isolated result. Callers commit only after this resolves. */
-export async function restoreProjectSession(imported:{manifest:ProjectManifest;assets:Map<string,File>},options:SessionRestoreOptions):Promise<SessionCaptureInput&{name:string}> {
+export async function restoreProjectSession(imported:{manifest:ProjectManifest;assets:Map<string,File>},options:SessionRestoreOptions):Promise<SessionCaptureInput&{name:string;stemOrigins:Map<File,File>}> {
   const {signal,inspect,progress}=options;signal?.throwIfAborted();
   const manifest=validateProjectManifest(imported.manifest,signal),raw=manifest.state;
   if(!keys(raw,['schemaVersion','settings','sources','stems','committed','studio','options','reference','soundReference','artwork'])||raw.schemaVersion!==1||!object(raw.sources)||
@@ -163,8 +168,17 @@ export async function restoreProjectSession(imported:{manifest:ProjectManifest;a
       (type==='image'&&(!file.size||file.size>2*1024**2)))reject('保存素材の形式が不正です。');
     used.add(id);return file;
   };
-  const staged=stems.map(entry=>({...metadata(entry),file:asset(entry.asset,'audio')}));
-  const applied=committed.map(entry=>({...metadata(entry),file:asset(entry.asset,'audio')}));
+  const stemOrigins=new Map<File,File>();
+  function restoreTrack(entry:SavedStem):StemFileEntry{
+    const file=asset(entry.asset,'audio');
+    if(entry.original!==undefined){
+      const original=asset(entry.original,'audio'),previous=stemOrigins.get(file);
+      if(previous&&previous!==original)reject('同じ分離素材の原曲が一致しません。');
+      stemOrigins.set(file,original);
+    }
+    return {...metadata(entry),file};
+  }
+  const staged=stems.map(restoreTrack),applied=committed.map(restoreTrack);
   let savedOptions:{signature:string;reference?:File}|undefined;
   if(raw.options!==undefined){if(!object(raw.options)||!keys(raw.options,['signature','reference'])||!text(raw.options.signature,32768))reject();
     savedOptions={signature:raw.options.signature,...(raw.options.reference===undefined?{}:{reference:asset(raw.options.reference,'audio')})};}
@@ -202,7 +216,7 @@ export async function restoreProjectSession(imported:{manifest:ProjectManifest;a
   if(bytes>192*1024**2||used.size!==manifest.assets.length||imported.assets.size!==manifest.assets.length)reject('保存素材の合計または一覧が一致しません。');
   // Every original is checked again; saved analysis numbers never determine processing decisions.
   const checked=new Map<File,AnalysisResult>();let jobs=0,done=0;
-  const fileList=[...new Set([...staged,...applied].map(item=>item.file).concat(Object.values(savedSources).flatMap(item=>item?.original?[item.original]:[]),savedOptions?.reference?[savedOptions.reference]:[],reference?[reference]:[]))];
+  const fileList=[...new Set([...staged,...applied].map(item=>item.file).concat([...stemOrigins.values()],Object.values(savedSources).flatMap(item=>item?.original?[item.original]:[]),savedOptions?.reference?[savedOptions.reference]:[],reference?[reference]:[]))];
   jobs=Object.keys(savedSources).length+fileList.length;
   const report=(fraction:number,label:string)=>progress?.((done+fraction)/Math.max(1,jobs),label);
   async function check(input:ProjectInspectionInput,retainAudio:boolean){signal?.throwIfAborted();
@@ -235,6 +249,6 @@ export async function restoreProjectSession(imported:{manifest:ProjectManifest;a
   if(sources.a&&sources.b)createComparisonPlan(sources.a.result,sources.b.result);else singleSourceGainDb(sources.a!.result);
   const active=sources[savedSettings.selected];const position=active?Math.min(savedSettings.position,active.result.durationSeconds):0;
   signal?.throwIfAborted();progress?.(1,'プロジェクトを復元する準備ができました。');
-  return {...savedSettings,name:manifest.name,createdAt:manifest.createdAt,sources,stems:staged,committedStemInputs:applied,
+  return {...savedSettings,name:manifest.name,createdAt:manifest.createdAt,sources,stems:staged,committedStemInputs:applied,stemOrigins,
     committedStemStudio:savedStudio,committedStemOptions:savedOptions,reference,soundReference,artwork,position};
 }

@@ -39,6 +39,7 @@ it('captures PCM planes, original materials, pending/committed edits, artwork/se
  expect(restored.sources.a!.stemMix!.plan.tracks[1].gainDb).toBe(-1);
  expect(restored.exportSettings).toEqual(input.exportSettings);expect(restored.artwork!.name).toBe('表紙.png');
  expect(restored.selected).toBe('b');expect(restored.position).toBe(0.05);expect(restored.controls).toEqual(input.controls);
+ expect(restored.stemOrigins).toEqual(new Map()); // Schema-v1 sessions without per-material provenance stay compatible.
 });
 
 it('checks host settings and archive/schema references before any audio hydration',async()=>{
@@ -147,4 +148,111 @@ it('rejects positive or out-of-range STEM attenuation before saving or hydrating
  const imported=await archive();((imported.manifest.state.sources as {a:{mix:{attenuationDb:number}}}).a.mix).attenuationDb=2;let calls=0;
  await expect(restoreProjectSession(imported,{async inspect(value,options){calls++;return inspect(value,options);}})).rejects.toThrow('保存STEMレポート');
  expect(calls).toBe(0);
+});
+
+it('preserves independent staged-song origins while A/B and a different committed mix remain unchanged',async()=>{
+ const input=fixture(),oldOriginal=input.sources.a!.originalFile!,newOriginal=new File([encodeFloatWav(audio(.21))],'independent-song.wav',{type:'audio/wav'});
+ const pending=input.stems.map((entry,index)=>({...entry,id:'pending-'+index,
+  // Identical names must not confuse a pending material with the committed one.
+  file:new File([encodeFloatWav(audio(.03*(index+1)))],entry.file.name,{type:'audio/wav'})}));
+ input.stems=pending;input.stemOrigins=new Map([
+  ...pending.map(entry=>[entry.file,newOriginal] as const),
+  ...input.committedStemInputs.map(entry=>[entry.file,oldOriginal] as const),
+ ]);
+ const captured=captureProjectSession(input),saved=captured.manifest.state as unknown as {stems:{original:string}[];committed:{original:string}[]};
+ expect(captured.assets.filter(asset=>asset.file===newOriginal)).toHaveLength(1);
+ expect(saved.stems[0].original).toBe(saved.stems[1].original);
+ expect(saved.stems[0].original).not.toBe(saved.committed[0].original);
+ const inspectedFiles:File[]=[];
+ const restored=await restoreProjectSession(await archive(input),{async inspect(value,options){
+  if(value.kind==='file')inspectedFiles.push(value.file);return inspect(value,options);
+ }});
+ const restoredOriginal=restored.stemOrigins.get(restored.stems[0].file)!;
+ expect(restored.sources.a!.name).toBe('原音A');expect(restored.sources.b!.name).toBe('仕上がりB');
+ expect(restored.sources.a!.audio!.channels).toEqual(input.sources.a!.audio!.channels);
+ expect(restoredOriginal.name).toBe('independent-song.wav');
+ expect(restored.stemOrigins.get(restored.stems[1].file)).toBe(restoredOriginal);
+ expect(restored.stemOrigins.get(restored.committedStemInputs[0].file)).toBe(restored.sources.a!.originalFile);
+ expect(restored.stemOrigins.get(restored.committedStemInputs[1].file)).toBe(restored.sources.a!.originalFile);
+ expect(restored.stems[0].file.name).toBe(restored.committedStemInputs[0].file.name);
+ expect(restored.stems[0].file).not.toBe(restored.committedStemInputs[0].file);
+ expect(restored.stemOrigins.size).toBe(4);
+ expect(inspectedFiles.filter(file=>file===restoredOriginal)).toHaveLength(1);
+ expect(new Uint8Array(await restoredOriginal.arrayBuffer())).toEqual(new Uint8Array(await newOriginal.arrayBuffer()));
+});
+
+it('retains per-material provenance through restore, a real STEM rebuild and a second save/restore',async()=>{
+ const input=fixture(),original=new File([encodeFloatWav(audio(.19))],'full-source.wav',{type:'audio/wav'});
+ delete input.sources.a!.stemMix;input.committedStemInputs=[];input.committedStemStudio=undefined;input.committedStemOptions=undefined;
+ input.stemOrigins=new Map(input.stems.map(entry=>[entry.file,original]));
+ const restored=await restoreProjectSession(await archive(input),{inspect});
+ const rawBytes=await Promise.all(restored.stems.map(entry=>entry.file.arrayBuffer()));
+ const tracks=await Promise.all(restored.stems.map(async entry=>{
+  const material=decodeWav(await entry.file.arrayBuffer());
+  return {audio:material,descriptor:{id:entry.id,name:entry.file.name,role:entry.role,gainDb:entry.gainDb,pan:entry.pan,
+   muted:entry.muted,sampleRate:material.sampleRate,channels:material.channels.length,frames:material.channels[0].length}};
+ }));
+ const mixed=mixStems(tracks,restored.stemMode),restoredOriginal=restored.stemOrigins.get(restored.stems[0].file)!;
+ restored.sources={a:{audio:mixed.audio,result:mixed.analysis,name:'Rebuilt A',stemMix:mixed.report,originalFile:restoredOriginal}};
+ restored.committedStemInputs=restored.stems.map(entry=>({...entry}));restored.selected='a';restored.matched=false;
+ const captured=captureProjectSession(restored),saved=captured.manifest.state as unknown as {
+  sources:{a:{original:string}};stems:{original:string}[];committed:{original:string}[];
+ };
+ expect(saved.stems.every(entry=>entry.original===saved.sources.a.original)).toBe(true);
+ expect(saved.committed.every(entry=>entry.original===saved.sources.a.original)).toBe(true);
+ expect(captured.assets.filter(asset=>asset.file===restoredOriginal)).toHaveLength(1);
+ const reopened=await restoreProjectSession(await archive(restored),{inspect});
+ expect(reopened.sources.a!.name).toBe('Rebuilt A');expect(reopened.sources.b).toBeUndefined();
+ expect(reopened.sources.a!.originalFile!.name).toBe('full-source.wav');expect(reopened.stemOrigins.size).toBe(2);
+ for(let index=0;index<reopened.stems.length;index++){
+  expect(reopened.stemOrigins.get(reopened.stems[index].file)).toBe(reopened.sources.a!.originalFile);
+  expect(reopened.committedStemInputs[index].file).toBe(reopened.stems[index].file);
+  expect(new Uint8Array(await reopened.stems[index].file.arrayBuffer())).toEqual(new Uint8Array(rawBytes[index]));
+ }
+ expect(new Uint8Array(await reopened.sources.a!.originalFile!.arrayBuffer())).toEqual(new Uint8Array(await original.arrayBuffer()));
+});
+
+it('uses exact material identity and excludes unrelated origin-map entries from the archive',()=>{
+ const input=fixture(),unrelated=new File([encodeFloatWav(audio())],input.stems[0].file.name,{type:'audio/wav'});
+ const privateOriginal=new File([encodeFloatWav(audio())],'unrelated-private-recording.wav',{type:'audio/wav'});
+ input.stemOrigins=new Map([[unrelated,privateOriginal]]);
+ const captured=captureProjectSession(input),saved=captured.manifest.state as unknown as {stems:{original?:string}[];committed:{original?:string}[]};
+ expect(captured.manifest.assets).toHaveLength(7);
+ expect(captured.manifest.assets.some(asset=>asset.name===privateOriginal.name)).toBe(false);
+ expect([...saved.stems,...saved.committed].every(entry=>entry.original===undefined)).toBe(true);
+});
+
+it('rejects missing, malformed or non-audio origin references before any audio hydration',async()=>{
+ for(const target of ['missing','cover','plane','empty','number'] as const){
+  const input=fixture();input.stemOrigins=new Map([[input.stems[0].file,input.sources.a!.originalFile!]]);
+  const imported=await archive(input),saved=imported.manifest.state as unknown as {stems:{original:unknown}[];sources:{a:{data:{planes:string[]}}}};
+  saved.stems[0].original=target==='cover'?imported.manifest.assets.find(asset=>asset.mimeType==='image/png')!.id:
+   target==='plane'?saved.sources.a.data.planes[0]:target==='empty'?'':target==='number'?42:'absent_asset';
+  let calls=0;
+  await expect(restoreProjectSession(imported,{async inspect(value,options){calls++;return inspect(value,options);}})).rejects.toThrow();
+  expect(calls).toBe(0);
+ }
+});
+
+it('rejects conflicting origins for one shared staged/committed material before hydration',async()=>{
+ const input=fixture(),original=new File([encodeFloatWav(audio(.12))],'source.wav',{type:'audio/wav'});
+ input.stemOrigins=new Map([[input.stems[0].file,original]]);
+ const imported=await archive(input),saved=imported.manifest.state as unknown as {stems:{asset:string}[];committed:{original:string}[]};
+ saved.committed[0].original=saved.stems[1].asset;let calls=0;
+ await expect(restoreProjectSession(imported,{async inspect(value,options){calls++;return inspect(value,options);}})).rejects.toThrow('原曲が一致');
+ expect(calls).toBe(0);
+});
+
+it('validates origin files on capture and re-analyzes purported audio rather than trusting its extension',async()=>{
+ for(const invalid of [new File([],'empty.wav',{type:'audio/wav'}),new File(['text'],'notes.txt',{type:'text/plain'})]){
+  const input=fixture();input.stemOrigins=new Map([[input.stems[0].file,invalid]]);
+  expect(()=>captureProjectSession(input)).toThrow('WAV/FLAC');
+ }
+ const input=fixture(),before=input.sources.a!.audio!.channels[0].slice();
+ input.stemOrigins=new Map([[input.stems[0].file,new File(['not an audio recording'],'forged.wav',{type:'audio/wav'})]]);
+ let checkedOrigin=false;
+ await expect(restoreProjectSession(await archive(input),{async inspect(value,options){
+  if(value.kind==='file'&&value.file.name==='forged.wav')checkedOrigin=true;return inspect(value,options);
+ }})).rejects.toThrow();
+ expect(checkedOrigin).toBe(true);expect(input.sources.a!.audio!.channels[0]).toEqual(before);
 });

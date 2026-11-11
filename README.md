@@ -14,7 +14,7 @@ uploaded to GitHub Pages. Local development remains available through the
 [setup below](#quick-start). The **Publish Web App** workflow builds and checks
 the app on main, then deploys only `apps/web/dist` to GitHub Pages.
 
-**Status: v0.15.2 — Reference and album finishing.** Local analysis, A/B comparison, loudness matching,
+**Status: v0.16.0 — Local AI STEM and drum-part separation (PC).** Local analysis, A/B comparison, loudness matching,
 manual DSP, experimental adaptive finishing, portable projects and WAV/MP3 export
 are implemented. The existing impact.67 desktop application is preserved outside this
 new workspace; it is not rewritten, replaced or redistributed here.
@@ -22,6 +22,25 @@ new workspace; it is not rewritten, replaced or redistributed here.
 **Development checkout:** Single WAV files up to 20 minutes / 512 MiB can now be
 finished locally in chunks using AUTO, IMPACT or LIVE. Choose an output target,
 compare the measured candidate with Original and export WAV or MP3. [Long-audio migration and next steps](docs/long-audio.md).
+
+## Separate a song into STEMs (PC only)
+
+Open **STEM分離 / PC** to choose four music STEMs, vocals plus accompaniment,
+all music with detailed drums (nine materials), or an existing drum recording
+into six parts. The learned drum targets are kick, snare, hi-hat, toms and
+percussion; the sixth is unassigned remaining drums. Ride and crash are not
+individually identified. Listen to each result, save its Float32 WAV, or explicitly
+stage it in the existing STEM workspace and build a mix for mastering.
+
+All inference runs locally in a dedicated Worker. Self-hosted models are downloaded
+only after you start: about 13 MB for SCNet and another 92 MB for drum separation,
+plus the ONNX runtime. A supported hardware GPU is selected automatically, with a
+CPU fallback; CPU drum separation can take much longer. Phones and tablets do not
+start inference or download these assets. Other mobile workflows remain available.
+Original files and the current A/B pair are retained. Cancellation or failed
+separation cannot adopt partial outputs. This is experimental estimation, with
+possible bleed and no promise of professional quality. See [architecture, model
+licenses, limits, quality boundaries and the reusable Core API](docs/stem-separation.md).
 
 ## Beginner finish and save
 

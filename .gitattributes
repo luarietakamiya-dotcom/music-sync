@@ -8,3 +8,6 @@
 
 # Preserve third-party source and license files byte-for-byte.
 apps/web/public/vendor/** -text -whitespace
+
+*.onnx binary
+*.wasm binary
